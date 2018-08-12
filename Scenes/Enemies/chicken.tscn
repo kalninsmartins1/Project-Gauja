@@ -1,13 +1,83 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Art/Models/chickenV2.dae" type="PackedScene" id=1]
-[ext_resource path="res://Art/Models/Chicken.material" type="Material" id=2]
+[ext_resource path="res://Art/Models/Chicken/chickenV2.dae" type="PackedScene" id=1]
+[ext_resource path="res://Art/Models/Chicken/Material_001.material" type="Material" id=2]
 
-[node name="Scene Root" index="0" instance=ExtResource( 1 )]
+[sub_resource type="CapsuleShape" id=1]
+
+radius = 1.0
+height = 1.0
+
+[node name="Scene Root" instance=ExtResource( 1 )]
+
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="RigidBody" type="RigidBody" parent="." index="0"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = false
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+linear_velocity = Vector3( 0, 0, 0 )
+linear_damp = -1.0
+angular_velocity = Vector3( 0, 0, 0 )
+angular_damp = -1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody" index="0"]
+
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 4.6765, 0 )
+shape = SubResource( 1 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="Armature" parent="." index="1"]
+
+editor/display_folded = true
 
 [node name="Chicken" parent="Armature/Skeleton" index="0"]
 
 material/0 = ExtResource( 2 )
 _sections_unfolded = [ "material" ]
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="." index="5"]
+
+playback_process_mode = 1
+master_player = NodePath("../AnimationPlayer")
+base_path = NodePath("..")
+active = false
+data = {
+"active": false,
+"connections": [ "anim", "out", 0 ],
+"master": NodePath("../AnimationPlayer"),
+"nodes": [ {
+"filter": [  ],
+"from": "Idle",
+"id": "anim",
+"position": Vector2( 85, 78 ),
+"type": "animation"
+}, {
+"id": "out",
+"position": Vector2( 446, 72 ),
+"type": "output"
+} ]
+}
 
 
