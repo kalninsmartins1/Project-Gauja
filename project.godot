@@ -14,6 +14,10 @@ config/name="Gauja"
 run/main_scene="res://Scenes/world.tscn"
 config/icon="res://Art/Sprites/icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "net.kivano.fsm" )
+
 [gdnative]
 
 singletons=[  ]

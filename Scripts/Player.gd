@@ -1,21 +1,16 @@
 extends KinematicBody
 
-#var Utils = preload("res://Scripts/Utility/Utils.gd")
-
 # Member variables
-const ANIM_IDLE = 0;
-const ANIM_RUN = 1;
-const ANIM_SWITCH_NAME = "animSwitch";
+var _gameConsts = preload("res://Scripts/Utility/GameConsts.gd")
+export var _maxSpeed = 10
+var _animationTree;
 
-export var maxSpeed = 10
-var animationTree;
-
-func isMoving(direction):
-	return direction.magnitude > 0;
+func _isMoving(direction):
+	return direction.length_squared() > 0;
 
 func _ready():
-	animationTree = get_node("AnimationTreePlayer");
-	animationTree.set_active(true)
+	_animationTree = get_node(_gameConsts.ANIMTION_TREE_PLAYER);
+	_animationTree.set_active(true)
 
 func _physics_process(delta):	
 	var direction = Vector3() # Where does the player intend to walk to
@@ -30,22 +25,22 @@ func _physics_process(delta):
 		direction += Vector3(-1, 0, 0)
 	if (Input.is_action_pressed("move_right")):
 		direction += Vector3(1, 0, 0)
+		
+	var currentAnim = _animationTree.transition_node_get_current(_gameConsts.ANIM_TRANSITION_NODE)
 	
-	var isMoving = direction.length_squared() > 0
-	var currentAnim = animationTree.transition_node_get_current(ANIM_SWITCH_NAME)
-	
-	if(isMoving):		
+	if(_isMoving(direction)):		
 		# Face the movement direction
 		var up = Vector3(0, 1, 0)
 		look_at(translation - direction, up)
 	
 		# Move player in direction and collide
-		move_and_collide(direction.normalized() * maxSpeed * delta)
-		if(currentAnim != ANIM_RUN):	
-			animationTree.transition_node_set_current(ANIM_SWITCH_NAME, ANIM_RUN)
-	elif(currentAnim != ANIM_IDLE):
+		move_and_collide(direction.normalized() * _maxSpeed * delta)
+		
+		if(currentAnim != _gameConsts.ANIM_WALK_ID):	
+			_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_WALK_ID)
+	elif(currentAnim != _gameConsts.ANIM_IDLE_ID):
 		# Play animation	
-		animationTree.transition_node_set_current(ANIM_SWITCH_NAME, ANIM_IDLE)
+		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_IDLE_ID)
 	
 	
 	
