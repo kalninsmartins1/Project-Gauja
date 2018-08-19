@@ -19,11 +19,11 @@ func getLogicRoot(): return logicRoot; #defined in parent class
 #########                 Implement those below ancestor                 #########
 ##################################################################################
 #you can transmit parameters if fsm is initialized manually
-func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5=null): 
+func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5=null):	
 	pass
 
 #when entering state, usually you will want to reset internal state here somehow
-func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
+func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):	
 	pass
 
 #when updating state, paramx can be used only if updating fsm manually
