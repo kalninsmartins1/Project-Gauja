@@ -27,7 +27,8 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 	pass
 
 #when updating state, paramx can be used only if updating fsm manually
-func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):	
+func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):		
+	# Just pass time for now
 	pass
 
 #when exiting state

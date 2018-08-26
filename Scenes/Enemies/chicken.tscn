@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/Enemies/FSM/states/Idle/Idle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Enemies/FSM/states/Wonder/Wonder.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -3873,17 +3873,17 @@ tracks/40/imported = true
 tracks/40/enabled = true
 tracks/40/keys = PoolRealArray( 0, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1, 2.25, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1 )
 
-[node name="RigidBody" type="RigidBody"]
+[node name="RigidBody" type="RigidBody" index="0"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
 collision_mask = 1
-mode = 0
+mode = 2
 mass = 1.0
 friction = 1.0
 bounce = 0.0
-gravity_scale = 1.0
+gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = false
 contacts_reported = 0
@@ -4229,20 +4229,28 @@ onlyActiveStateOnTheScene = false
 initManually = false
 updateMode = 1
 receiceSignalsOnly4ActiveStatesAndTransitions = true
-enableDebug = false
+enableDebug = true
 "Initial state:" = ""
 "Create new:/Subdirectory for FSM nodes:" = "FSM"
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"Idle": Vector2( 688, 142 ),
-"Idle_": Vector2( 688, 142 ),
-"ToWonder": Vector2( 720, 332 ),
-"Wonder": Vector2( 579, 500 ),
-"Wonder_": Vector2( 579, 500 )
+"Idle": Vector2( 489, 177 ),
+"Idle_": Vector2( 489, 177 ),
+"Idle__": Vector2( 506, 181 ),
+"ToIdle": Vector2( 746, 326 ),
+"ToIdle_": Vector2( 746, 326 ),
+"ToWonder": Vector2( 307, 291 ),
+"ToWonder_": Vector2( 307, 291 ),
+"ToWonder__": Vector2( 307, 291 ),
+"Wonder": Vector2( 498, 515 ),
+"Wonder_": Vector2( 498, 515 ),
+"Wonder__": Vector2( 579, 500 )
 }
 
 [node name="States" type="Spatial" parent="FSM3D" index="0"]
+
+editor/display_folded = true
 
 [node name="Idle" parent="FSM3D/States" index="0" instance=ExtResource( 6 )]
 
@@ -4250,11 +4258,16 @@ GraphData = {
 
 [node name="Transitions" type="Spatial" parent="FSM3D" index="1"]
 
-[node name="ToWonder" type="Node" parent="FSM3D/Transitions" index="0" instance=ExtResource( 8 )]
+editor/display_folded = true
 
-script = ExtResource( 9 )
+[node name="ToWonder" parent="FSM3D/Transitions" index="0" instance=ExtResource( 8 )]
+
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Wonder")
-intervalBetweenChecks = -1.0
+
+[node name="ToIdle" parent="FSM3D/Transitions" index="1" instance=ExtResource( 9 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/Wonder") ]
+path2TargetState = NodePath("../../States/Idle")
 
 

@@ -11,7 +11,8 @@ extends "res://addons/net.kivano.fsm/content/FSMTransition.gd";
 ##################################################################################
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
 ######################### var myvar setget myvar_set,myvar_get ###################
-var _timeInState = 0.0
+
+var _enemy = null
 
 ######################################
 ####### Getters
@@ -21,17 +22,13 @@ func getLogicRoot(): return logicRoot; #access to logic root of FSM (usually fsm
 ######################################
 ####### Implement those below ########
 func transitionInit(inParam1=null, inParam2=null, inParam3=null, inParam4=null, inParam5=null): 
-	# only for called once
+	_enemy = getLogicRoot()
 	pass
 
 func prepare(inNewStateID, inArg0 = null, inArg1 = null, inArg2 = null): 
 	#you can optionally implement this to reset transition when related state has been activated
-	_timeInState = 0.0
 	pass
 
 func transitionCondition(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=null, inParam4=null): 
 	
-	_timeInState = _timeInState + inDeltaTime
-	var isReadyToSwitch = _timeInState > 3.0
-	
-	return isReadyToSwitch;
+	return !_enemy.isMoving() # Finished moving so stand and look around
