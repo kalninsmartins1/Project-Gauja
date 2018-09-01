@@ -3873,13 +3873,13 @@ tracks/40/imported = true
 tracks/40/enabled = true
 tracks/40/keys = PoolRealArray( 0, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1, 2.25, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1 )
 
-[node name="RigidBody" type="RigidBody" index="0"]
+[node name="RigidBody" type="RigidBody"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
 collision_mask = 1
-mode = 2
+mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.0
@@ -4219,6 +4219,7 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="FSM3D" type="Spatial" parent="." index="4"]
 
+editor/display_folded = true
 script = ExtResource( 4 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
@@ -4269,5 +4270,14 @@ path2TargetState = NodePath("../../States/Wonder")
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Wonder") ]
 path2TargetState = NodePath("../../States/Idle")
+
+[node name="Tween" type="Tween" parent="." index="5"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 

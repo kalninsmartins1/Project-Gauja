@@ -1,6 +1,6 @@
 extends Node
 
-static func getAngleBetweenVectors(a, b):
+static func getAngleDegreesBetweenVectors(a, b):
 	var dot = a.dot(b)
 	var magnitudeA = a.length()
 	var magnitudeB = b.length()
