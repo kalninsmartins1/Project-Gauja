@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=1]
 [ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=2]
@@ -7,8 +7,18 @@
 [ext_resource path="res://addons/net.kivano.fsm/assets/ico3d.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Enemies/FSM/states/Idle/Idle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Enemies/FSM/states/Wonder/Wonder.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Battle/Battle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToTarget/MoveToTarget.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToTarget/MoveToTarget.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattle/ToBattle.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.gd" type="Script" id=19]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -3873,14 +3883,14 @@ tracks/40/imported = true
 tracks/40/enabled = true
 tracks/40/keys = PoolRealArray( 0, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1, 2.25, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1 )
 
-[node name="RigidBody" type="RigidBody"]
+[node name="RigidBody" type="RigidBody" index="0"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
 collision_mask = 1
-mode = 0
-mass = 1.0
+mode = 2
+mass = 3.06122
 friction = 1.0
 bounce = 0.0
 gravity_scale = 0.0
@@ -3904,10 +3914,9 @@ _sections_unfolded = [ "Axis Lock", "Transform" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="0"]
 
-transform = Transform( 0.5, 0, 0, 0, -2.18557e-008, -0.5, 0, 0.5, -2.18557e-008, 0, 0.660014, 0 )
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-008, -0.5, 0, 0.5, -2.18557e-008, 0, 0.739182, 0 )
 shape = SubResource( 1 )
 disabled = false
-_sections_unfolded = [ "Transform" ]
 
 [node name="ScaledAramature" type="Spatial" parent="." index="1"]
 
@@ -4163,12 +4172,14 @@ base_path = NodePath("..")
 active = true
 data = {
 "active": true,
-"connections": [ "anim", "transition", 0, "anim 2", "transition", 1, "transition", "out", 0 ],
+"connections": [ "anim", "transition", 0, "anim 2", "transition", 1, "anim 3", "transition", 2, "transition", "out", 0 ],
 "master": NodePath("../AnimationPlayer"),
 "nodes": [ {
 "id": "transition",
-"position": Vector2( 420, 42 ),
+"position": Vector2( 519, 12 ),
 "transitions": [ {
+"auto_advance": false
+}, {
 "auto_advance": false
 }, {
 "auto_advance": false
@@ -4179,17 +4190,23 @@ data = {
 "filter": [  ],
 "from": "Idle",
 "id": "anim",
-"position": Vector2( 242, 25 ),
+"position": Vector2( 171, 5 ),
 "type": "animation"
 }, {
 "id": "out",
-"position": Vector2( 589, 57 ),
+"position": Vector2( 711, 5 ),
 "type": "output"
+}, {
+"filter": [  ],
+"from": "Pecking2",
+"id": "anim 3",
+"position": Vector2( 174, 146 ),
+"type": "animation"
 }, {
 "filter": [  ],
 "from": "Walk",
 "id": "anim 2",
-"position": Vector2( 237, 140 ),
+"position": Vector2( 51, 64 ),
 "type": "animation"
 } ]
 }
@@ -4217,9 +4234,8 @@ anims/Walk = SubResource( 16 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="FSM3D" type="Spatial" parent="." index="4"]
+[node name="StateMachine" type="Spatial" parent="." index="4"]
 
-editor/display_folded = true
 script = ExtResource( 4 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
@@ -4236,40 +4252,80 @@ enableDebug = true
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
+"Attack": Vector2( 792, 707 ),
+"Attack_": Vector2( 792, 707 ),
+"Attack__": Vector2( 792, 707 ),
+"Battle": Vector2( 1072, 540 ),
+"Battle_": Vector2( 1072, 540 ),
+"Battle__": Vector2( 1072, 540 ),
 "Idle": Vector2( 489, 177 ),
 "Idle_": Vector2( 489, 177 ),
-"Idle__": Vector2( 506, 181 ),
-"ToIdle": Vector2( 746, 326 ),
-"ToIdle_": Vector2( 746, 326 ),
+"Idle__": Vector2( 489, 177 ),
+"MoveToTarget": Vector2( 1323, 693 ),
+"MoveToTarget_": Vector2( 1218, 763 ),
+"MoveToTarget__": Vector2( 1218, 763 ),
+"ToAttack": Vector2( 1062, 784 ),
+"ToBattle": Vector2( 1033, 328 ),
+"ToBattle_": Vector2( 1033, 328 ),
+"ToBattle__": Vector2( 1033, 328 ),
+"ToIdle": Vector2( 567, 316 ),
+"ToIdle_": Vector2( 567, 316 ),
+"ToIdle__": Vector2( 567, 316 ),
+"ToMoveToTarget": Vector2( 1329, 559 ),
 "ToWonder": Vector2( 307, 291 ),
 "ToWonder_": Vector2( 307, 291 ),
 "ToWonder__": Vector2( 307, 291 ),
-"Wonder": Vector2( 498, 515 ),
-"Wonder_": Vector2( 498, 515 ),
-"Wonder__": Vector2( 579, 500 )
+"Wonder": Vector2( 490, 481 ),
+"Wonder_": Vector2( 490, 481 ),
+"Wonder__": Vector2( 490, 481 )
 }
 
-[node name="States" type="Spatial" parent="FSM3D" index="0"]
+[node name="States" type="Spatial" parent="StateMachine" index="0"]
 
-editor/display_folded = true
+[node name="Idle" parent="StateMachine/States" index="0" instance=ExtResource( 6 )]
 
-[node name="Idle" parent="FSM3D/States" index="0" instance=ExtResource( 6 )]
+[node name="Wonder" parent="StateMachine/States" index="1" instance=ExtResource( 7 )]
 
-[node name="Wonder" parent="FSM3D/States" index="1" instance=ExtResource( 7 )]
+[node name="Battle" parent="StateMachine/States" index="2" instance=ExtResource( 8 )]
 
-[node name="Transitions" type="Spatial" parent="FSM3D" index="1"]
+[node name="MoveToTarget" type="Node" parent="StateMachine/States" index="3" instance=ExtResource( 9 )]
 
-editor/display_folded = true
+script = ExtResource( 10 )
 
-[node name="ToWonder" parent="FSM3D/Transitions" index="0" instance=ExtResource( 8 )]
+[node name="Attack" type="Node" parent="StateMachine/States" index="4" instance=ExtResource( 11 )]
+
+script = ExtResource( 12 )
+
+[node name="Transitions" type="Spatial" parent="StateMachine" index="1"]
+
+[node name="ToWonder" parent="StateMachine/Transitions" index="0" instance=ExtResource( 13 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Wonder")
 
-[node name="ToIdle" parent="FSM3D/Transitions" index="1" instance=ExtResource( 9 )]
+[node name="ToIdle" parent="StateMachine/Transitions" index="1" instance=ExtResource( 14 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Wonder") ]
 path2TargetState = NodePath("../../States/Idle")
+
+[node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 15 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Wonder"), NodePath("../../States/Attack") ]
+path2TargetState = NodePath("../../States/Battle")
+
+[node name="ToMoveToTarget" type="Node" parent="StateMachine/Transitions" index="3" instance=ExtResource( 16 )]
+
+script = ExtResource( 17 )
+path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
+path2TargetState = NodePath("../../States/MoveToTarget")
+intervalBetweenChecks = -1.0
+
+[node name="ToAttack" type="Node" parent="StateMachine/Transitions" index="4" instance=ExtResource( 18 )]
+
+script = ExtResource( 19 )
+path2SourceStates = [ NodePath(""), NodePath("../../States/MoveToTarget") ]
+path2TargetState = NodePath("../../States/Attack")
+intervalBetweenChecks = -1.0
 
 [node name="Tween" type="Tween" parent="." index="5"]
 

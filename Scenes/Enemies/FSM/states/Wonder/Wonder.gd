@@ -56,7 +56,7 @@ func exit(toState=null):
 ##################################################################################
 #########                         Inner Methods                          #########
 ##################################################################################
-func _getRandomPosition():	
+func _getRandomPosition():
 	var radius = _enemy.getActiveRadius()
 	var newX = _basePosition.x + radius * cos(rand_range(0, 2 * PI))
 	var newZ = _basePosition.z + radius * sin(rand_range(0, 2 * PI))
