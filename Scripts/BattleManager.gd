@@ -18,6 +18,8 @@ func initiateBattle(var player, var enemy):
 	_player = player
 	_player.battleStarted(enemy)
 	_enemy = enemy
+	_enemy.connect("onAttackFinished", self, "_enemyAttackFinished");
+	
 	_currentTurn = _getRandomTurn()
 	_skillSelectionPanel.show()
 	pass
@@ -25,9 +27,13 @@ func initiateBattle(var player, var enemy):
 func finishTurn():
 	if(_currentTurn == Turn.PLAYER):
 		_currentTurn = Turn.ENEMY
-		_enemy.setReadyToAttack(true)
+		_enemy.setHasTurn(true)
 	else:
 		_currentTurn = Turn.PLAYER
+	pass
+
+func _enemyAttackFinished():
+	finishTurn()
 	pass
 
 func _getRandomTurn():

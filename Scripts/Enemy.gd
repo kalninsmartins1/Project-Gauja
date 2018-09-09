@@ -20,44 +20,61 @@ var _battleManager = null
 var _currentAngle = 0
 var _isTweenActive = false
 var _isInBattle = false
-var _isReadyToAttack = false
+var _hasTurn = false
+var _isCurrentlyAttacking = false
+var _battlePosition = null
 
 # Public Interface
+	
+	# Signals
+
+signal onAttackFinished
+
+	# Functions
+
+func isCurrentlyAttacking():
+	return _isCurrentlyAttacking
+
+func getBattlePosition():
+	return _battlePosition
 
 func getPlayer():
-	return _player
-	pass
+	return _player	
 
-func isReadyToAttack():
-	return _isReadyToAttack
-	pass
+func hasTurn():
+	return _hasTurn
 
 func getActiveRadius():
-	return _activeRadius
-	pass
+	return _activeRadius	
 
 func getAttackAnimLength():
 	var animName = _animationTree.node_get_input_source(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
 	var animation = _animationTree.animation_node_get_animation(animName)
-	return animation.length()
-	pass
+	return animation.length
 
 func isMoving():
-	return _isMoving
-	pass
+	return _isMoving	
 
 func isInBattle():
-	return _isInBattle
+	return _isInBattle	
+
+func setIsCurrentlyAttacking(value):
+	_isCurrentlyAttacking = value
 	pass
 
-func setReadyToAttack(value):
-	_isReadyToAttack = value
+func setHasTurn(value):
+	_hasTurn = value
 	pass
 
 func setDestination(position):
 	_curPath = _navigationManager.get_simple_path(translation, position)
 	_isMoving = true
 	_curIndex = 0
+	pass
+
+func onAttackFinished():
+	emit_signal("onAttackFinished")
+	_hasTurn = false
 	pass
 
 func playAttackAnim():
@@ -84,6 +101,7 @@ func _physics_process(delta):
 		_playIdleAnimation()
 		_setupRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
 		_battleManager.initiateBattle(_player, self)
+		_battlePosition = translation
 
 	# Make sure we are really not moving
 	if(!_isMoving):

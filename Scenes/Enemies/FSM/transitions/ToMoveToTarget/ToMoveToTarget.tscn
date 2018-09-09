@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.gd" type="Script" id=1]
 
-[node name="ToMoveToTarget" type="Node"]
+[node name="ToMoveToTarget" type="Node" index="0"]
 
 script = ExtResource( 1 )
 path2SourceStates = [ NodePath("") ]

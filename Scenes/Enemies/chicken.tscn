@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=1]
 [ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=2]
@@ -9,16 +9,15 @@
 [ext_resource path="res://Scenes/Enemies/FSM/states/Wonder/Wonder.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Enemies/FSM/states/Battle/Battle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Enemies/FSM/states/MoveToTarget/MoveToTarget.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToTarget/MoveToTarget.gd" type="Script" id=10]
-[ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.gd" type="Script" id=12]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattle/ToBattle.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.gd" type="Script" id=17]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.gd" type="Script" id=19]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToBattlePos/MoveToBattlePos.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattle/ToBattle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToBattlePosition/ToMoveToBattlePosition.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattleFromAttack/ToBattleFromAttack.tscn" type="PackedScene" id=18]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -4198,15 +4197,15 @@ data = {
 "type": "output"
 }, {
 "filter": [  ],
-"from": "Pecking2",
-"id": "anim 3",
-"position": Vector2( 174, 146 ),
-"type": "animation"
-}, {
-"filter": [  ],
 "from": "Walk",
 "id": "anim 2",
 "position": Vector2( 51, 64 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Pecking2",
+"id": "anim 3",
+"position": Vector2( 174, 146 ),
 "type": "animation"
 } ]
 }
@@ -4252,26 +4251,38 @@ enableDebug = true
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"Attack": Vector2( 792, 707 ),
-"Attack_": Vector2( 792, 707 ),
-"Attack__": Vector2( 792, 707 ),
-"Battle": Vector2( 1072, 540 ),
-"Battle_": Vector2( 1072, 540 ),
+"Attack": Vector2( 1040, 887 ),
+"Attack_": Vector2( 1040, 887 ),
+"Attack__": Vector2( 930, 830 ),
+"Battle": Vector2( 1024, 543 ),
+"Battle_": Vector2( 1024, 543 ),
 "Battle__": Vector2( 1072, 540 ),
 "Idle": Vector2( 489, 177 ),
 "Idle_": Vector2( 489, 177 ),
 "Idle__": Vector2( 489, 177 ),
-"MoveToTarget": Vector2( 1323, 693 ),
-"MoveToTarget_": Vector2( 1218, 763 ),
-"MoveToTarget__": Vector2( 1218, 763 ),
-"ToAttack": Vector2( 1062, 784 ),
+"MoveToBattlePos": Vector2( 711, 708 ),
+"MoveToBattlePos_": Vector2( 711, 708 ),
+"MoveToBattlePos__": Vector2( 696, 654 ),
+"MoveToTarget": Vector2( 1332, 716 ),
+"MoveToTarget_": Vector2( 1332, 716 ),
+"MoveToTarget__": Vector2( 1323, 693 ),
+"ToAttack": Vector2( 1321, 889 ),
+"ToAttack_": Vector2( 1321, 889 ),
+"ToAttack__": Vector2( 1204, 828 ),
 "ToBattle": Vector2( 1033, 328 ),
+"ToBattleFromAttack": Vector2( 728, 527 ),
+"ToBattleFromAttack_": Vector2( 728, 527 ),
 "ToBattle_": Vector2( 1033, 328 ),
 "ToBattle__": Vector2( 1033, 328 ),
 "ToIdle": Vector2( 567, 316 ),
 "ToIdle_": Vector2( 567, 316 ),
 "ToIdle__": Vector2( 567, 316 ),
+"ToMoveToBattlePosition": Vector2( 709, 883 ),
+"ToMoveToBattlePosition_": Vector2( 709, 883 ),
+"ToMoveToBattlePosition__": Vector2( 541, 777 ),
 "ToMoveToTarget": Vector2( 1329, 559 ),
+"ToMoveToTarget_": Vector2( 1329, 559 ),
+"ToMoveToTarget__": Vector2( 1329, 559 ),
 "ToWonder": Vector2( 307, 291 ),
 "ToWonder_": Vector2( 307, 291 ),
 "ToWonder__": Vector2( 307, 291 ),
@@ -4288,44 +4299,50 @@ GraphData = {
 
 [node name="Battle" parent="StateMachine/States" index="2" instance=ExtResource( 8 )]
 
-[node name="MoveToTarget" type="Node" parent="StateMachine/States" index="3" instance=ExtResource( 9 )]
+[node name="MoveToTarget" parent="StateMachine/States" index="3" instance=ExtResource( 9 )]
 
-script = ExtResource( 10 )
+[node name="Attack" parent="StateMachine/States" index="4" instance=ExtResource( 10 )]
 
-[node name="Attack" type="Node" parent="StateMachine/States" index="4" instance=ExtResource( 11 )]
-
-script = ExtResource( 12 )
+[node name="MoveToBattlePos" parent="StateMachine/States" index="5" instance=ExtResource( 11 )]
 
 [node name="Transitions" type="Spatial" parent="StateMachine" index="1"]
 
-[node name="ToWonder" parent="StateMachine/Transitions" index="0" instance=ExtResource( 13 )]
+editor/display_folded = true
+
+[node name="ToWonder" parent="StateMachine/Transitions" index="0" instance=ExtResource( 12 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Wonder")
 
-[node name="ToIdle" parent="StateMachine/Transitions" index="1" instance=ExtResource( 14 )]
+[node name="ToIdle" parent="StateMachine/Transitions" index="1" instance=ExtResource( 13 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Wonder") ]
 path2TargetState = NodePath("../../States/Idle")
 
-[node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 15 )]
+[node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 14 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Wonder"), NodePath("../../States/Attack") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Wonder") ]
 path2TargetState = NodePath("../../States/Battle")
 
-[node name="ToMoveToTarget" type="Node" parent="StateMachine/Transitions" index="3" instance=ExtResource( 16 )]
+[node name="ToMoveToTarget" parent="StateMachine/Transitions" index="3" instance=ExtResource( 15 )]
 
-script = ExtResource( 17 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
 path2TargetState = NodePath("../../States/MoveToTarget")
-intervalBetweenChecks = -1.0
 
-[node name="ToAttack" type="Node" parent="StateMachine/Transitions" index="4" instance=ExtResource( 18 )]
+[node name="ToAttack" parent="StateMachine/Transitions" index="4" instance=ExtResource( 16 )]
 
-script = ExtResource( 19 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/MoveToTarget") ]
 path2TargetState = NodePath("../../States/Attack")
-intervalBetweenChecks = -1.0
+
+[node name="ToMoveToBattlePosition" parent="StateMachine/Transitions" index="5" instance=ExtResource( 17 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/Attack") ]
+path2TargetState = NodePath("../../States/MoveToBattlePos")
+
+[node name="ToBattleFromAttack" parent="StateMachine/Transitions" index="6" instance=ExtResource( 18 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/MoveToBattlePos") ]
+path2TargetState = NodePath("../../States/Battle")
 
 [node name="Tween" type="Tween" parent="." index="5"]
 

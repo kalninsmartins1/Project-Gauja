@@ -30,9 +30,9 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 
 	# Move to player Move closer state
 	var player = _enemy.getPlayer()
-	var toEnemy = player.translation - _enemy.translation
-	var attackPosition = player.translation + toEnemy * 2.0
-	_enemy.setDestionation(attackPosition)
+	var toEnemy = _enemy.translation - player.translation
+	var attackPosition = player.translation + toEnemy * 0.5
+	_enemy.setDestination(attackPosition)
 	pass
 
 #when updating state, paramx can be used only if updating fsm manually
@@ -40,7 +40,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 	pass
 
 #when exiting state
-func exit(toState=null):
+func exit(toState=null):	
 	pass
 
 ##################################################################################
