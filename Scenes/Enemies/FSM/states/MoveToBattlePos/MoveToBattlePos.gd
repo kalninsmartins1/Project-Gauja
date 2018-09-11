@@ -36,6 +36,11 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 
 #when exiting state
 func exit(toState=null):
+	var playerPos = _enemy.getPlayer().translation
+	var enemyPos = _enemy.translation
+	var toPlayer = playerPos - enemyPos
+	
+	_enemy.startRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
 	_enemy.onAttackFinished()
 	pass
 

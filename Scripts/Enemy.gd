@@ -76,6 +76,19 @@ func onAttackFinished():
 	emit_signal("onAttackFinished")
 	_hasTurn = false
 	pass
+	
+func startRotationTween(var toTargetNormalized):
+	var targetAngle = -Vector2(0, 1).angle_to(toTargetNormalized)
+	var angleDiff = abs(abs(_currentAngle) - abs(targetAngle))
+	
+	if(angleDiff > 0):
+		var time = angleDiff/_rotationSpeed
+		_tweener.interpolate_property(self, "rotation", Vector3(0, _currentAngle, 0), Vector3(0, targetAngle, 0), time, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		_tweener.interpolate_callback(self, time, "_tweenFinished")
+		_tweener.start()
+		_currentAngle = targetAngle
+		_isTweenActive = true
+	pass
 
 func playAttackAnim():
 	_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
@@ -99,7 +112,7 @@ func _physics_process(delta):
 		_isInBattle = true
 		_isMoving = false
 		_playIdleAnimation()
-		_setupRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
+		startRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
 		_battleManager.initiateBattle(_player, self)
 		_battlePosition = translation
 
@@ -125,7 +138,7 @@ func _integrate_forces(state):
 
 				# Rotate in direction of movement
 				if(!_isTweenActive):
-					_setupRotationTween(toTargetNormalized)
+					startRotationTween(toTargetNormalized)
 
 				# Play Animation
 				_playMovingAnimation()
@@ -140,20 +153,6 @@ func _integrate_forces(state):
 		else:
 			_isMoving = false
 			state.set_linear_velocity(Vector3(0, 0, 0))
-	pass
-
-func _setupRotationTween(var toTargetNormalized):
-
-	var targetAngle = -Vector2(0, 1).angle_to(toTargetNormalized)
-	var angleDiff = abs(abs(_currentAngle) - abs(targetAngle))
-
-	if(angleDiff > 0):
-		var time = angleDiff/_rotationSpeed
-		_tweener.interpolate_property(self, "rotation", Vector3(0, _currentAngle, 0), Vector3(0, targetAngle, 0), time, Tween.TRANS_LINEAR, Tween.EASE_IN)
-		_tweener.interpolate_callback(self, time, "_tweenFinished")
-		_tweener.start()
-		_currentAngle = targetAngle
-		_isTweenActive = true
 	pass
 
 func _tweenFinished():

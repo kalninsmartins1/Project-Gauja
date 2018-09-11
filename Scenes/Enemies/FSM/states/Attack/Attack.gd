@@ -28,8 +28,7 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 	pass
 
 #when entering state, usually you will want to reset internal state here somehow
-func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
-	print("Hello!")
+func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):	
 	_curTimePassed = 0
 	_attackAnimLength = _enemy.getAttackAnimLength()
 	_enemy.playAttackAnim()
@@ -41,7 +40,6 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 
 	_curTimePassed += deltaTime
 	if(_curTimePassed >= _attackAnimLength):
-		print("exit attack !")
 		_enemy.setIsCurrentlyAttacking(false)
 	pass
 
