@@ -37,7 +37,7 @@ func _enemyAttackFinished():
 	pass
 
 func _getRandomTurn():
-	var turn = randi() % 2 # Random value 1 or 2
+	var turn = randi() % 2 # Random value 0 or 1
 	return turn
 	pass
 

@@ -13,16 +13,19 @@ var _navigationManager = null
 var _player = null
 var _tweener = null
 var _curPath = null
-var _curIndex = 0
-var _isMoving = false
 var _animationTree = null
 var _battleManager = null
+var _battlePosition = null
+
+var _curIndex = 0
 var _currentAngle = 0
+
+var _isMoving = false
 var _isTweenActive = false
 var _isInBattle = false
 var _hasTurn = false
 var _isCurrentlyAttacking = false
-var _battlePosition = null
+var _isTakingDamage = false
 
 # Public Interface
 	
@@ -34,6 +37,9 @@ signal onAttackFinished
 
 func isCurrentlyAttacking():
 	return _isCurrentlyAttacking
+	
+func isTakingDamage():
+	return _isTakingDamage
 
 func getBattlePosition():
 	return _battlePosition
@@ -57,6 +63,10 @@ func isMoving():
 
 func isInBattle():
 	return _isInBattle	
+
+func setIsTakingDamage(value):
+	_isTakingDamage = value
+	pass
 
 func setIsCurrentlyAttacking(value):
 	_isCurrentlyAttacking = value
@@ -187,4 +197,9 @@ func _setupAnimations():
 	_animationTree = get_node(_gameConsts.ANIMTION_TREE_PLAYER)
 	_animationTree.set_active(true)
 	_playIdleAnimation()
+	pass
+
+func _on_Chicken_body_entered(body):
+	if(body.name == "fireball"):
+		_isTakingDamage = true
 	pass

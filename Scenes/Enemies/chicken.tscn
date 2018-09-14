@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=1]
 [ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=2]
@@ -11,13 +11,15 @@
 [ext_resource path="res://Scenes/Enemies/FSM/states/MoveToTarget/MoveToTarget.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Enemies/FSM/states/MoveToBattlePos/MoveToBattlePos.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattle/ToBattle.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToBattlePosition/ToMoveToBattlePosition.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattleFromAttack/ToBattleFromAttack.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/FSM/states/TakeDamage/TakeDamage.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattle/ToBattle.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToBattlePosition/ToMoveToBattlePosition.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattleFromAttack/ToBattleFromAttack.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToTakeDamage/ToTakeDamage.tscn" type="PackedScene" id=20]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -4253,25 +4255,28 @@ enableDebug = true
 GraphData = {
 "Attack": Vector2( 1040, 887 ),
 "Attack_": Vector2( 1040, 887 ),
-"Attack__": Vector2( 930, 830 ),
+"Attack__": Vector2( 1040, 887 ),
 "Battle": Vector2( 1024, 543 ),
 "Battle_": Vector2( 1024, 543 ),
-"Battle__": Vector2( 1072, 540 ),
+"Battle__": Vector2( 1024, 543 ),
 "Idle": Vector2( 489, 177 ),
 "Idle_": Vector2( 489, 177 ),
 "Idle__": Vector2( 489, 177 ),
 "MoveToBattlePos": Vector2( 711, 708 ),
 "MoveToBattlePos_": Vector2( 711, 708 ),
-"MoveToBattlePos__": Vector2( 696, 654 ),
-"MoveToTarget": Vector2( 1332, 716 ),
-"MoveToTarget_": Vector2( 1332, 716 ),
-"MoveToTarget__": Vector2( 1323, 693 ),
+"MoveToBattlePos__": Vector2( 711, 708 ),
+"MoveToTarget": Vector2( 1527, 893 ),
+"MoveToTarget_": Vector2( 1527, 893 ),
+"MoveToTarget__": Vector2( 1332, 716 ),
+"TakeDamage": Vector2( 1547, 540 ),
+"TakeDamage_": Vector2( 1547, 540 ),
 "ToAttack": Vector2( 1321, 889 ),
 "ToAttack_": Vector2( 1321, 889 ),
-"ToAttack__": Vector2( 1204, 828 ),
+"ToAttack__": Vector2( 1321, 889 ),
 "ToBattle": Vector2( 1033, 328 ),
 "ToBattleFromAttack": Vector2( 728, 527 ),
 "ToBattleFromAttack_": Vector2( 728, 527 ),
+"ToBattleFromAttack__": Vector2( 728, 527 ),
 "ToBattle_": Vector2( 1033, 328 ),
 "ToBattle__": Vector2( 1033, 328 ),
 "ToIdle": Vector2( 567, 316 ),
@@ -4279,10 +4284,12 @@ GraphData = {
 "ToIdle__": Vector2( 567, 316 ),
 "ToMoveToBattlePosition": Vector2( 709, 883 ),
 "ToMoveToBattlePosition_": Vector2( 709, 883 ),
-"ToMoveToBattlePosition__": Vector2( 541, 777 ),
-"ToMoveToTarget": Vector2( 1329, 559 ),
-"ToMoveToTarget_": Vector2( 1329, 559 ),
+"ToMoveToBattlePosition__": Vector2( 709, 883 ),
+"ToMoveToTarget": Vector2( 1537, 733 ),
+"ToMoveToTarget_": Vector2( 1537, 733 ),
 "ToMoveToTarget__": Vector2( 1329, 559 ),
+"ToTakeDamage": Vector2( 1281, 547 ),
+"ToTakeDamage_": Vector2( 1281, 547 ),
 "ToWonder": Vector2( 307, 291 ),
 "ToWonder_": Vector2( 307, 291 ),
 "ToWonder__": Vector2( 307, 291 ),
@@ -4305,44 +4312,51 @@ GraphData = {
 
 [node name="MoveToBattlePos" parent="StateMachine/States" index="5" instance=ExtResource( 11 )]
 
+[node name="TakeDamage" parent="StateMachine/States" index="6" instance=ExtResource( 12 )]
+
+_damageTakingTime = 2.0
+
 [node name="Transitions" type="Spatial" parent="StateMachine" index="1"]
 
-editor/display_folded = true
-
-[node name="ToWonder" parent="StateMachine/Transitions" index="0" instance=ExtResource( 12 )]
+[node name="ToWonder" parent="StateMachine/Transitions" index="0" instance=ExtResource( 13 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Wonder")
 
-[node name="ToIdle" parent="StateMachine/Transitions" index="1" instance=ExtResource( 13 )]
+[node name="ToIdle" parent="StateMachine/Transitions" index="1" instance=ExtResource( 14 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Wonder") ]
 path2TargetState = NodePath("../../States/Idle")
 
-[node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 14 )]
+[node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 15 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Wonder") ]
 path2TargetState = NodePath("../../States/Battle")
 
-[node name="ToMoveToTarget" parent="StateMachine/Transitions" index="3" instance=ExtResource( 15 )]
+[node name="ToMoveToTarget" parent="StateMachine/Transitions" index="3" instance=ExtResource( 16 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/TakeDamage") ]
 path2TargetState = NodePath("../../States/MoveToTarget")
 
-[node name="ToAttack" parent="StateMachine/Transitions" index="4" instance=ExtResource( 16 )]
+[node name="ToAttack" parent="StateMachine/Transitions" index="4" instance=ExtResource( 17 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/MoveToTarget") ]
 path2TargetState = NodePath("../../States/Attack")
 
-[node name="ToMoveToBattlePosition" parent="StateMachine/Transitions" index="5" instance=ExtResource( 17 )]
+[node name="ToMoveToBattlePosition" parent="StateMachine/Transitions" index="5" instance=ExtResource( 18 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Attack") ]
 path2TargetState = NodePath("../../States/MoveToBattlePos")
 
-[node name="ToBattleFromAttack" parent="StateMachine/Transitions" index="6" instance=ExtResource( 18 )]
+[node name="ToBattleFromAttack" parent="StateMachine/Transitions" index="6" instance=ExtResource( 19 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/MoveToBattlePos") ]
 path2TargetState = NodePath("../../States/Battle")
+
+[node name="ToTakeDamage" parent="StateMachine/Transitions" index="7" instance=ExtResource( 20 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
+path2TargetState = NodePath("../../States/TakeDamage")
 
 [node name="Tween" type="Tween" parent="." index="5"]
 
