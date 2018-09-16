@@ -3,11 +3,23 @@ extends KinematicBody
 # Member variables
 export var _maxSpeed = 10
 export var _shootSpeed = 20
+export var _manaConsumptionForFireball = 20
+export var _manaReloadSpeed = 20
+
 var _gameConsts = preload("res://Scripts/Utility/GameConsts.gd")
 var _animationTree;
 var _isInBattle = false
 var _upVector = Vector3(0, 1, 0)
+var _health = 100
+var _mana = 100
+var _maxMana = 100
+var _tween = null
 
+# Signals
+signal onHealthChanged
+signal onManaChanged
+
+# Public functions
 func battleStarted(enemy):
 	_isInBattle = true
 	look_at(enemy.translation, _upVector)
@@ -18,9 +30,28 @@ func isInBattle():
 	pass
 
 func attack(target, skill):
-	match(skill):
-		_gameConsts.Skill.FIRE_BALL:
-			_shootFireball(target)
+	if(_hasEnoughMana()):
+		match(skill):
+			_gameConsts.Skill.FIRE_BALL:
+				_shootFireball(target)
+				_consumeMana(_manaConsumptionForFireball)
+	pass
+
+func takeDamage(damage):
+	_health -= damage;
+	if(_health < 0):
+		_health = 0
+	emit_signal("onHealthChanged", _health)
+	pass
+
+func _hasEnoughMana():
+	return _mana >= _manaConsumptionForFireball
+
+func _consumeMana(amount):
+	_mana -= amount
+	if(_mana < 0):
+		_mana = 0
+	emit_signal("onManaChanged", _mana)
 	pass
 
 func _shootFireball(target):
@@ -42,6 +73,7 @@ func _isMoving(direction):
 func _ready():
 	_animationTree = get_node(_gameConsts.ANIMTION_TREE_PLAYER);
 	_animationTree.set_active(true)
+	pass
 
 func _physics_process(delta):
 	var direction = Vector3() # Where does the player intend to walk to
@@ -71,6 +103,17 @@ func _physics_process(delta):
 	elif(currentAnim != _gameConsts.ANIM_IDLE_ID):
 		# Play animation
 		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_IDLE_ID)
+		
+	_handleManaRecharge(delta)
+	pass
+		
+func _handleManaRecharge(deltaTime):
+	if(_mana < _maxMana):
+		_mana += _manaReloadSpeed * deltaTime
+		if(_mana > _maxMana):
+			_mana = _maxMana
+		emit_signal("onManaChanged", _mana)
+	pass
 
 
 

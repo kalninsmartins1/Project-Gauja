@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=1]
 [ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToBattlePosition/ToMoveToBattlePosition.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattleFromAttack/ToBattleFromAttack.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToTakeDamage/ToTakeDamage.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=21]
+[ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=22]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -3884,7 +3886,7 @@ tracks/40/imported = true
 tracks/40/enabled = true
 tracks/40/keys = PoolRealArray( 0, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1, 2.25, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1 )
 
-[node name="RigidBody" type="RigidBody" index="0"]
+[node name="RigidBody" type="RigidBody"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -4199,15 +4201,15 @@ data = {
 "type": "output"
 }, {
 "filter": [  ],
-"from": "Walk",
-"id": "anim 2",
-"position": Vector2( 51, 64 ),
-"type": "animation"
-}, {
-"filter": [  ],
 "from": "Pecking2",
 "id": "anim 3",
 "position": Vector2( 174, 146 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Walk",
+"id": "anim 2",
+"position": Vector2( 51, 64 ),
 "type": "animation"
 } ]
 }
@@ -4237,6 +4239,7 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="StateMachine" type="Spatial" parent="." index="4"]
 
+editor/display_folded = true
 script = ExtResource( 4 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
@@ -4366,5 +4369,37 @@ playback_speed = 1.0
 playback/active = false
 playback/repeat = false
 playback/speed = 1.0
+
+[node name="TextureProgress" type="TextureProgress" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 129.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 100.0
+exp_edit = false
+rounded = false
+texture_under = ExtResource( 21 )
+texture_over = null
+texture_progress = ExtResource( 22 )
+radial_fill_degrees = 360.0
+radial_center_offset = Vector2( 0, 0 )
+nine_patch_stretch = false
+_sections_unfolded = [ "Rect" ]
 
 

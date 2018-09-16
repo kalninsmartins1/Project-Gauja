@@ -18,7 +18,7 @@ func initiateBattle(var player, var enemy):
 	_player = player
 	_player.battleStarted(enemy)
 	_enemy = enemy
-	_enemy.connect("onAttackFinished", self, "_enemyAttackFinished");
+	_enemy.connect("onAttackFinished", self, "_enemyAttackFinished")
 	
 	_currentTurn = _getRandomTurn()
 	_skillSelectionPanel.show()
@@ -42,7 +42,7 @@ func _getRandomTurn():
 	pass
 
 func _ready():
-	_skillSelectionPanel = get_child(0)
+	_skillSelectionPanel = get_node("SkillSelectionPanel")	
 	pass
 
 func _process(delta):

@@ -6,6 +6,7 @@ export var _rotationSpeed = 20.0
 export var _activeRadius = 100.0
 export var _battleRadius = 10
 export var _health = 100.0
+export var _damage = 10.0
 
 # Private vars for this script usage only
 var _gameConsts = preload("res://Scripts/Utility/GameConsts.gd")
@@ -16,6 +17,8 @@ var _curPath = null
 var _animationTree = null
 var _battleManager = null
 var _battlePosition = null
+var _healthBar = null
+var _camera = null
 
 var _curIndex = 0
 var _currentAngle = 0
@@ -81,6 +84,10 @@ func setDestination(position):
 	_isMoving = true
 	_curIndex = 0
 	pass
+	
+func damagePlayer():
+	getPlayer().takeDamage(_damage)
+	pass
 
 func onAttackFinished():
 	emit_signal("onAttackFinished")
@@ -112,6 +119,8 @@ func _ready():
 	_tweener = get_node("Tween")
 	_setupAnimations()
 	set_linear_velocity(Vector3(0, 0, 0))
+	_healthBar = get_node("TextureProgress")
+	_camera = get_node("../Camera")
 	pass
 
 func _physics_process(delta):
@@ -129,6 +138,13 @@ func _physics_process(delta):
 	# Make sure we are really not moving
 	if(!_isMoving):
 		set_linear_velocity(Vector3(0, 0, 0))
+	
+	_handleHealthBarPosition()
+	pass
+
+func _handleHealthBarPosition():
+	
+	_healthBar.rect_position = _camera.unproject_position(translation) - (_healthBar.rect_size/2)
 	pass
 
 # This function gets called in physics update so its better to modify physics stuff here

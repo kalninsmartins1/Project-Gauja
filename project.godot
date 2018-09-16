@@ -16,7 +16,7 @@ config/icon="res://Art/Sprites/icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "net.kivano.fsm" )
+enabled=PoolStringArray( "net.kivano.fsm", "simple_water" )
 
 [gdnative]
 
