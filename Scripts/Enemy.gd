@@ -83,6 +83,7 @@ func setDestination(position):
 	_curPath = _navigationManager.get_simple_path(translation, position)
 	_isMoving = true
 	_curIndex = 0
+	sleeping = false # Make sure enemy is waken up !
 	pass
 	
 func damagePlayer():
@@ -217,5 +218,5 @@ func _setupAnimations():
 
 func _on_Chicken_body_entered(body):
 	if(body.name == "fireball"):
-		_isTakingDamage = true
+		_isTakingDamage = true		
 	pass

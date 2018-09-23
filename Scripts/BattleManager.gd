@@ -10,8 +10,8 @@ var _skillSelectionPanel = null
 
 func onSkillButtonPressed(skillId):
 	if(_currentTurn == Turn.PLAYER):
-		_player.attack(_enemy, skillId)
-		finishTurn()
+		if(_player.attack(_enemy, skillId)):
+			finishTurn()
 	pass
 
 func initiateBattle(var player, var enemy):

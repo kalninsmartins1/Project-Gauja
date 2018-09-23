@@ -30,12 +30,16 @@ func isInBattle():
 	pass
 
 func attack(target, skill):
+	
+	var isAttackSuccessful = false
 	if(_hasEnoughMana()):
 		match(skill):
 			_gameConsts.Skill.FIRE_BALL:
 				_shootFireball(target)
 				_consumeMana(_manaConsumptionForFireball)
-	pass
+				isAttackSuccessful = true
+	
+	return isAttackSuccessful
 
 func takeDamage(damage):
 	_health -= damage;
