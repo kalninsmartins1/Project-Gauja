@@ -35,6 +35,7 @@ var _isTakingDamage = false
 	# Signals
 
 signal onAttackFinished
+signal onHealthChanged
 
 	# Functions
 
@@ -112,7 +113,7 @@ func playAttackAnim():
 	_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
 	pass
 
-# Private stuff
+# Private interface
 func _ready():
 	_navigationManager = get_node("../Navigation")
 	_player = get_node("../Player")
@@ -216,7 +217,18 @@ func _setupAnimations():
 	_playIdleAnimation()
 	pass
 
+func _takeDamage(damage):
+	_health -= damage
+	if(_health < 0):
+		_health = 0
+	emit_signal("onHealthChanged", _health)
+	
+	if(_health == 0):
+		queue_free()
+	pass
+	
 func _on_Chicken_body_entered(body):
 	if(body.name == "fireball"):
-		_isTakingDamage = true		
+		_isTakingDamage = true
+		_takeDamage(body.getDamage())
 	pass

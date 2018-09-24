@@ -2,8 +2,6 @@ extends KinematicBody
 
 # Member variables
 export var _maxSpeed = 10
-export var _shootSpeed = 20
-export var _manaConsumptionForFireball = 20
 export var _manaReloadSpeed = 20
 
 var _gameConsts = preload("res://Scripts/Utility/GameConsts.gd")
@@ -29,16 +27,12 @@ func isInBattle():
 	return _isInBattle
 	pass
 
-func attack(target, skill):
-	
+func attack(target, skill):	
 	var isAttackSuccessful = false
-	if(_hasEnoughMana()):
-		match(skill):
-			_gameConsts.Skill.FIRE_BALL:
-				_shootFireball(target)
-				_consumeMana(_manaConsumptionForFireball)
-				isAttackSuccessful = true
-	
+	match(skill):
+		_gameConsts.Skill.FIRE_BALL:
+			isAttackSuccessful = _shootFireball(target)
+			
 	return isAttackSuccessful
 
 func takeDamage(damage):
@@ -48,28 +42,30 @@ func takeDamage(damage):
 	emit_signal("onHealthChanged", _health)
 	pass
 
-func _hasEnoughMana():
-	return _mana >= _manaConsumptionForFireball
-
 func _consumeMana(amount):
-	_mana -= amount
-	if(_mana < 0):
-		_mana = 0
-	emit_signal("onManaChanged", _mana)
-	pass
+	var hasEnoughMana = amount < _mana
+	if(hasEnoughMana):
+		_mana -= amount
+		_mana = clamp(_mana, 0, _maxMana)
+		emit_signal("onManaChanged", _mana)
+	return hasEnoughMana
 
 func _shootFireball(target):
-	_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
-
 	var fireball = preload("res://Scenes/fireball.scn").instance()
-	var shootPosition = get_node("Armature/shootPosition").get_global_transform()
-	fireball.set_transform(shootPosition.orthonormalized())
-	get_parent().add_child(fireball)
-
-	var toTarget = target.translation - shootPosition.origin
-	fireball.set_linear_velocity(toTarget.normalized() * _shootSpeed)
-	fireball.add_collision_exception_with(self)
-	pass
+	var hasEnoughMana = _consumeMana(fireball.getManaConsumption())	
+	
+	if(hasEnoughMana):
+		
+		var shootPosition = get_node("Armature/shootPosition").get_global_transform()
+		fireball.set_transform(shootPosition.orthonormalized())
+		get_parent().add_child(fireball)
+	
+		var toTarget = target.translation - shootPosition.origin
+		fireball.set_linear_velocity(toTarget.normalized() * fireball.getShootSpeed())
+		fireball.add_collision_exception_with(self)
+		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
+		
+	return hasEnoughMana
 
 func _isMoving(direction):
 	return direction.length_squared() > 0;

@@ -2,17 +2,11 @@ extends PanelContainer
 
 export var _animateSpeed = 10
 
+var _utils = preload("res://Scripts/Utility/Utils.gd")
 var _healthBar = null
 var _manaBar = null
 var _player = null
 var _tween = null
-
-func _getAnimationDuration(valueDiff):
-	var duration = 0
-	if(_animateSpeed > 0):
-		duration = abs(valueDiff)/_animateSpeed
-	
-	return duration
 
 func _ready():
 	_player = get_parent()
@@ -27,17 +21,11 @@ func _ready():
 func _onPlayerHealthChanged(newValue):
 	
 	# Animate the health bar
-	var duration = _getAnimationDuration(_healthBar.value - newValue)
-	_tween.stop(_healthBar)
-	_tween.interpolate_property(_healthBar, "value", _healthBar.value, newValue, duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_tween.start()
+	_utils.startProgressBarAnimation(_healthBar, _tween, _animateSpeed, newValue)
 	pass
 	
 func _onPlayerManaChanged(newValue):
 	
 	# Animate the mana bar
-	var duration = _getAnimationDuration(_manaBar.value - newValue)
-	_tween.stop(_manaBar)
-	_tween.interpolate_property(_manaBar, "value", _manaBar.value, newValue, duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_tween.start()
+	_utils.startProgressBarAnimation(_manaBar, _tween, _animateSpeed, newValue)
 	pass

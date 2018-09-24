@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=1]
 [ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToTakeDamage/ToTakeDamage.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=21]
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=22]
+[ext_resource path="res://Scripts/UI/EnemyUI.gd" type="Script" id=23]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -4239,6 +4240,7 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="StateMachine" type="Spatial" parent="." index="4"]
 
+editor/display_folded = true
 script = ExtResource( 4 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
@@ -4399,6 +4401,8 @@ texture_progress = ExtResource( 22 )
 radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
+script = ExtResource( 23 )
 _sections_unfolded = [ "Rect" ]
+_animationSpeed = 10
 
 

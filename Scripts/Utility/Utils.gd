@@ -10,6 +10,19 @@ static func getAngleDegreesBetweenVectors(a, b):
 		var cosAngleRad = dot/(magnitudeA*magnitudeB)
 		var angleRad = acos(cosAngleRad)
 		angleDegrees = rad2deg(angleRad)
-	pass
-	
 	return angleDegrees
+	
+static func getAnimationDuration(animationSpeed, deltaValue):
+	var duration = 0
+	if(animationSpeed > 0):
+		duration = abs(deltaValue)/animationSpeed
+	
+	return duration
+	
+static func startProgressBarAnimation(progressBar, tweener, animSpeed, newValue):
+	
+	var duration = getAnimationDuration(animSpeed, progressBar.value - newValue)
+	tweener.stop(progressBar)
+	tweener.interpolate_property(progressBar, "value", progressBar.value, newValue, duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tweener.start()
+	pass
