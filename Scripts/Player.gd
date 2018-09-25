@@ -22,6 +22,10 @@ func battleStarted(enemy):
 	_isInBattle = true
 	look_at(enemy.translation, _upVector)
 	pass
+	
+func battleEnded():
+	_isInBattle = false
+	pass
 
 func isInBattle():
 	return _isInBattle
