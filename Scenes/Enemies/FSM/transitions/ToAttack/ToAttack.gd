@@ -32,4 +32,4 @@ func prepare(inNewStateID, inArg0 = null, inArg1 = null, inArg2 = null):
 
 func transitionCondition(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=null, inParam4=null):
 
-	return !_enemy.isMoving();
+	return !_enemy.isMoving()

@@ -9,15 +9,31 @@ var _animationTree;
 var _isInBattle = false
 var _upVector = Vector3(0, 1, 0)
 var _health = 100
+var _maxHealth = 100
 var _mana = 100
 var _maxMana = 100
 var _tween = null
+var _respawnPosition = null
 
 # Signals
 signal onHealthChanged
 signal onManaChanged
 
 # Public functions
+func isInBattle():
+	return _isInBattle
+	pass
+	
+func setRespawnPosition(position):
+	_respawnPosition = position
+	pass
+
+func attack(target, skill):
+	match(skill):
+		_gameConsts.Skill.FIRE_BALL:
+			_shootFireball(target)
+	pass
+	
 func battleStarted(enemy):
 	_isInBattle = true
 	look_at(enemy.translation, _upVector)
@@ -27,23 +43,13 @@ func battleEnded():
 	_isInBattle = false
 	pass
 
-func isInBattle():
-	return _isInBattle
-	pass
-
-func attack(target, skill):	
-	var isAttackSuccessful = false
-	match(skill):
-		_gameConsts.Skill.FIRE_BALL:
-			isAttackSuccessful = _shootFireball(target)
-			
-	return isAttackSuccessful
-
 func takeDamage(damage):
-	_health -= damage;
-	if(_health < 0):
-		_health = 0
+	_health -= damage
+	clamp(_health, 0, _maxHealth)	
 	emit_signal("onHealthChanged", _health)
+	
+	if(_health == 0):
+		_respawn()
 	pass
 
 func _consumeMana(amount):
@@ -67,12 +73,20 @@ func _shootFireball(target):
 		var toTarget = target.translation - shootPosition.origin
 		fireball.set_linear_velocity(toTarget.normalized() * fireball.getShootSpeed())
 		fireball.add_collision_exception_with(self)
-		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
-		
-	return hasEnoughMana
+		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)		
+	pass
 
 func _isMoving(direction):
-	return direction.length_squared() > 0;
+	return direction.length_squared() > 0
+	
+func _respawn():
+	translation = _respawnPosition
+	_health = _maxHealth
+	_mana = _maxMana
+	
+	emit_signal("onHealthChanged", _health)
+	emit_signal("onManaChanged", _mana)
+	pass
 
 func _ready():
 	_animationTree = get_node(_gameConsts.ANIMTION_TREE_PLAYER);

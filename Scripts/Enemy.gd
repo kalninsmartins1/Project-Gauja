@@ -86,7 +86,11 @@ func setDestination(position):
 	_curIndex = 0
 	sleeping = false # Make sure enemy is waken up !
 	pass
-	
+
+func battleEnded():
+	_isInBattle = false
+	pass
+
 func damagePlayer():
 	getPlayer().takeDamage(_damage)
 	pass
@@ -138,7 +142,7 @@ func _physics_process(delta):
 		_battlePosition = translation
 
 	# Make sure we are really not moving
-	if(!_isMoving):
+	if(!_isMoving or _isTakingDamage):
 		set_linear_velocity(Vector3(0, 0, 0))
 	
 	_handleHealthBarPosition()
@@ -151,7 +155,7 @@ func _handleHealthBarPosition():
 
 # This function gets called in physics update so its better to modify physics stuff here
 func _integrate_forces(state):
-	if(_isMoving):
+	if(_isMoving and !_isTakingDamage):
 		if(_curPath.size() > 0 ):
 			var target = _curPath[_curIndex]
 			var toTargetInSpace = target - translation

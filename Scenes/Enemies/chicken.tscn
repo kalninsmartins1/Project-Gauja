@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=1]
 [ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=2]
@@ -20,9 +20,11 @@
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToBattlePosition/ToMoveToBattlePosition.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattleFromAttack/ToBattleFromAttack.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Enemies/FSM/transitions/ToTakeDamage/ToTakeDamage.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=21]
-[ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=22]
-[ext_resource path="res://Scripts/UI/EnemyUI.gd" type="Script" id=23]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonderFromBattle/ToWonderFromBattle.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonderFromBattle/ToWonderFromBattle.gd" type="Script" id=22]
+[ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=23]
+[ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=24]
+[ext_resource path="res://Scripts/UI/EnemyUI.gd" type="Script" id=25]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -4202,15 +4204,15 @@ data = {
 "type": "output"
 }, {
 "filter": [  ],
-"from": "Pecking2",
-"id": "anim 3",
-"position": Vector2( 174, 146 ),
-"type": "animation"
-}, {
-"filter": [  ],
 "from": "Walk",
 "id": "anim 2",
 "position": Vector2( 51, 64 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Pecking2",
+"id": "anim 3",
+"position": Vector2( 174, 146 ),
 "type": "animation"
 } ]
 }
@@ -4257,48 +4259,50 @@ enableDebug = true
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"Attack": Vector2( 1040, 887 ),
-"Attack_": Vector2( 1040, 887 ),
+"Attack": Vector2( 980, 889 ),
+"Attack_": Vector2( 980, 889 ),
 "Attack__": Vector2( 1040, 887 ),
-"Battle": Vector2( 1024, 543 ),
-"Battle_": Vector2( 1024, 543 ),
+"Battle": Vector2( 1113, 537 ),
+"Battle_": Vector2( 1113, 537 ),
 "Battle__": Vector2( 1024, 543 ),
 "Idle": Vector2( 489, 177 ),
 "Idle_": Vector2( 489, 177 ),
 "Idle__": Vector2( 489, 177 ),
-"MoveToBattlePos": Vector2( 711, 708 ),
-"MoveToBattlePos_": Vector2( 711, 708 ),
+"MoveToBattlePos": Vector2( 709, 723 ),
+"MoveToBattlePos_": Vector2( 709, 723 ),
 "MoveToBattlePos__": Vector2( 711, 708 ),
 "MoveToTarget": Vector2( 1527, 893 ),
 "MoveToTarget_": Vector2( 1527, 893 ),
 "MoveToTarget__": Vector2( 1332, 716 ),
-"TakeDamage": Vector2( 1547, 540 ),
-"TakeDamage_": Vector2( 1547, 540 ),
-"ToAttack": Vector2( 1321, 889 ),
-"ToAttack_": Vector2( 1321, 889 ),
+"TakeDamage": Vector2( 1406, 336 ),
+"TakeDamage_": Vector2( 1406, 336 ),
+"ToAttack": Vector2( 1262, 881 ),
+"ToAttack_": Vector2( 1262, 881 ),
 "ToAttack__": Vector2( 1321, 889 ),
-"ToBattle": Vector2( 1033, 328 ),
-"ToBattleFromAttack": Vector2( 728, 527 ),
-"ToBattleFromAttack_": Vector2( 728, 527 ),
+"ToBattle": Vector2( 1005, 230 ),
+"ToBattleFromAttack": Vector2( 707, 557 ),
+"ToBattleFromAttack_": Vector2( 707, 557 ),
 "ToBattleFromAttack__": Vector2( 728, 527 ),
-"ToBattle_": Vector2( 1033, 328 ),
+"ToBattle_": Vector2( 1005, 230 ),
 "ToBattle__": Vector2( 1033, 328 ),
-"ToIdle": Vector2( 567, 316 ),
-"ToIdle_": Vector2( 567, 316 ),
+"ToIdle": Vector2( 530, 337 ),
+"ToIdle_": Vector2( 530, 337 ),
 "ToIdle__": Vector2( 567, 316 ),
-"ToMoveToBattlePosition": Vector2( 709, 883 ),
-"ToMoveToBattlePosition_": Vector2( 709, 883 ),
+"ToMoveToBattlePosition": Vector2( 702, 884 ),
+"ToMoveToBattlePosition_": Vector2( 702, 884 ),
 "ToMoveToBattlePosition__": Vector2( 709, 883 ),
-"ToMoveToTarget": Vector2( 1537, 733 ),
+"ToMoveToTarget": Vector2( 1221, 702 ),
 "ToMoveToTarget_": Vector2( 1537, 733 ),
 "ToMoveToTarget__": Vector2( 1329, 559 ),
-"ToTakeDamage": Vector2( 1281, 547 ),
-"ToTakeDamage_": Vector2( 1281, 547 ),
+"ToTakeDamage": Vector2( 1410, 506 ),
+"ToTakeDamage_": Vector2( 1410, 506 ),
 "ToWonder": Vector2( 307, 291 ),
+"ToWonderFromBattle": Vector2( 807, 437 ),
+"ToWonderFromBattle_": Vector2( 844, 410 ),
 "ToWonder_": Vector2( 307, 291 ),
 "ToWonder__": Vector2( 307, 291 ),
-"Wonder": Vector2( 490, 481 ),
-"Wonder_": Vector2( 490, 481 ),
+"Wonder": Vector2( 532, 427 ),
+"Wonder_": Vector2( 532, 427 ),
 "Wonder__": Vector2( 490, 481 )
 }
 
@@ -4334,12 +4338,12 @@ path2TargetState = NodePath("../../States/Idle")
 
 [node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 15 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Wonder") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Wonder"), NodePath("../../States/TakeDamage") ]
 path2TargetState = NodePath("../../States/Battle")
 
 [node name="ToMoveToTarget" parent="StateMachine/Transitions" index="3" instance=ExtResource( 16 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/TakeDamage") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
 path2TargetState = NodePath("../../States/MoveToTarget")
 
 [node name="ToAttack" parent="StateMachine/Transitions" index="4" instance=ExtResource( 17 )]
@@ -4359,8 +4363,15 @@ path2TargetState = NodePath("../../States/Battle")
 
 [node name="ToTakeDamage" parent="StateMachine/Transitions" index="7" instance=ExtResource( 20 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/Battle"), NodePath("../../States/MoveToTarget") ]
 path2TargetState = NodePath("../../States/TakeDamage")
+
+[node name="ToWonderFromBattle" type="Node" parent="StateMachine/Transitions" index="8" instance=ExtResource( 21 )]
+
+script = ExtResource( 22 )
+path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
+path2TargetState = NodePath("../../States/Wonder")
+intervalBetweenChecks = -1.0
 
 [node name="Tween" type="Tween" parent="." index="5"]
 
@@ -4395,13 +4406,13 @@ page = 0.0
 value = 100.0
 exp_edit = false
 rounded = false
-texture_under = ExtResource( 21 )
+texture_under = ExtResource( 23 )
 texture_over = null
-texture_progress = ExtResource( 22 )
+texture_progress = ExtResource( 24 )
 radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
-script = ExtResource( 23 )
+script = ExtResource( 25 )
 _sections_unfolded = [ "Rect" ]
 _animationSpeed = 10
 
