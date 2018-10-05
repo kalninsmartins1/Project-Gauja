@@ -6,6 +6,9 @@ extends RigidBody
 export var _damage = 20
 export var _manaConsumption = 20
 export var _shootSpeed = 20
+var _isTreeExited = false
+
+signal onDestroyed
 
 func getDamage():
 	return _damage
@@ -16,3 +19,6 @@ func getManaConsumption():
 func getShootSpeed():
 	return _shootSpeed
 	
+func _on_fireball_tree_exited():	
+	emit_signal("onDestroyed")	
+	pass 

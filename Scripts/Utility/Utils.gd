@@ -18,6 +18,9 @@ static func getAnimationDuration(animationSpeed, deltaValue):
 		duration = abs(deltaValue)/animationSpeed
 	
 	return duration
+
+static func isChanceHit(chance):	
+	return rand_range(0.0, 1.0) <= chance
 	
 static func startProgressBarAnimation(progressBar, tweener, animSpeed, newValue):
 	

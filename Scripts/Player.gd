@@ -14,12 +14,20 @@ var _mana = 100
 var _maxMana = 100
 var _tween = null
 var _respawnPosition = null
+var _itemDatabase = null
+var _isAttackFinished = true
 
 # Signals
 signal onHealthChanged
 signal onManaChanged
+signal onLootReceived
+signal onAttackFinished
 
 # Public functions
+
+func getItemDatabase():
+	return _itemDatabase
+
 func isInBattle():
 	return _isInBattle
 	pass
@@ -29,9 +37,11 @@ func setRespawnPosition(position):
 	pass
 
 func attack(target, skill):
-	match(skill):
-		_gameConsts.Skill.FIRE_BALL:
-			_shootFireball(target)
+	
+	if(_isAttackFinished):		
+		match(skill):
+			_gameConsts.Skill.FIRE_BALL:
+				_shootFireball(target)
 	pass
 	
 func battleStarted(enemy):
@@ -39,8 +49,10 @@ func battleStarted(enemy):
 	look_at(enemy.translation, _upVector)
 	pass
 	
-func battleEnded():
+func battleEnded(loot):
 	_isInBattle = false
+	if(loot != null):
+		emit_signal("onLootReceived", loot)
 	pass
 
 func takeDamage(damage):
@@ -63,17 +75,22 @@ func _consumeMana(amount):
 func _shootFireball(target):
 	var fireball = preload("res://Scenes/fireball.scn").instance()
 	var hasEnoughMana = _consumeMana(fireball.getManaConsumption())	
-	
-	if(hasEnoughMana):
-		
+	if(hasEnoughMana):		
 		var shootPosition = get_node("Armature/shootPosition").get_global_transform()
 		fireball.set_transform(shootPosition.orthonormalized())
+		fireball.connect("onDestroyed", self, "_onAttackFinished")
 		get_parent().add_child(fireball)
 	
 		var toTarget = target.translation - shootPosition.origin
 		fireball.set_linear_velocity(toTarget.normalized() * fireball.getShootSpeed())
 		fireball.add_collision_exception_with(self)
 		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)		
+		_isAttackFinished = false
+	pass
+
+func _onAttackFinished():
+	emit_signal("onAttackFinished")
+	_isAttackFinished = true
 	pass
 
 func _isMoving(direction):
@@ -89,8 +106,10 @@ func _respawn():
 	pass
 
 func _ready():
-	_animationTree = get_node(_gameConsts.ANIMTION_TREE_PLAYER);
+	_animationTree = get_node(_gameConsts.ANIMTION_TREE_PLAYER)
 	_animationTree.set_active(true)
+	
+	_itemDatabase = get_node("../ItemDatabase")
 	pass
 
 func _physics_process(delta):
@@ -132,6 +151,7 @@ func _handleManaRecharge(deltaTime):
 			_mana = _maxMana
 		emit_signal("onManaChanged", _mana)
 	pass
+
 
 
 

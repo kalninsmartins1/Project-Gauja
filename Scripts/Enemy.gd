@@ -1,6 +1,7 @@
 extends RigidBody
 
 # Export vars
+export(Array, Array) var _lootTable
 export var _moveSpeed = 20.0
 export var _rotationSpeed = 20.0
 export var _activeRadius = 100.0
@@ -39,6 +40,9 @@ signal onHealthChanged
 
 	# Functions
 
+func getLootTable():
+	return _lootTable
+
 func isCurrentlyAttacking():
 	return _isCurrentlyAttacking
 	
@@ -66,7 +70,10 @@ func isMoving():
 	return _isMoving	
 
 func isInBattle():
-	return _isInBattle	
+	return _isInBattle
+	
+func isAlive():
+	return _health > 0
 
 func setIsTakingDamage(value):
 	_isTakingDamage = value
@@ -133,7 +140,7 @@ func _physics_process(delta):
 
 	var toPlayer = _player.translation - translation
 
-	if(!_isInBattle and toPlayer.length_squared() <= _battleRadius*_battleRadius):
+	if(isAlive() and !_isInBattle and toPlayer.length_squared() <= _battleRadius*_battleRadius):
 		_isInBattle = true
 		_isMoving = false
 		_playIdleAnimation()

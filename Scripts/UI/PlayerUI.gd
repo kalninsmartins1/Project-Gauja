@@ -8,6 +8,9 @@ var _manaBar = null
 var _player = null
 var _tween = null
 
+func getPlayer():
+	return _player
+
 func _ready():
 	_player = get_parent()
 	_healthBar = get_node("Profile/GridContainer/GridContainer/Health")
