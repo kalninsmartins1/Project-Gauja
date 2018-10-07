@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Art/Sprites/UI/Items/MeleeWeapon1H/FamilySword.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Items/WeaponItem.gd" type="Script" id=2]
+[ext_resource path="res://Art/Sprites/UI/Items/Armor/ArielDressArmor.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Items/ProtectiveItem.gd" type="Script" id=2]
 
-[node name="TextureRect" type="TextureRect" index="0"]
+[node name="TextureRect" type="TextureRect"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -22,8 +22,8 @@ texture = ExtResource( 1 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
-itemType = 1
-_damage = 20
+_sections_unfolded = [ "Grow Direction", "Rect" ]
+_itemType = 4
+_defense = 10
 
 

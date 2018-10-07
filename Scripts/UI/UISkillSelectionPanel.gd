@@ -26,8 +26,3 @@ func _ready():
 	_battleManager = get_parent()
 	_animationPlayer = get_node("AnimationPlayer")
 	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

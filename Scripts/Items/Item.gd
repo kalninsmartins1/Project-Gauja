@@ -1,4 +1,7 @@
 extends TextureRect
 
-enum ItemType { Potion, Weapon, Helmet, Armor, Gloves, Boots }
-export(ItemType) var itemType
+enum ItemType { NONE, POTION, WEAPON, HELMET, ARMOR, GLOVES, BOOTS }
+export(ItemType) var _itemType
+
+func getItemType():
+	return _itemType

@@ -7,9 +7,10 @@ func _ready():
 	_skillPanel = get_parent()
 	pass
 
+# TODO: This looks very strange, need to give this a better thought
 func _process(delta):
-	if(Input.is_action_pressed("skill1") and _slotId == 0):
+	if(Input.is_action_pressed("skill_0") and _slotId == 0):
 		_skillPanel.onSkillButtonPressed(_slotId)
-	elif(Input.is_action_pressed("skill2") and _slotId == 1):
+	elif(Input.is_action_pressed("skill_1") and _slotId == 1):
 		_skillPanel.onSkillButtonPressed(_slotId)
 	pass

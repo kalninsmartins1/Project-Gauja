@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scenes/player.scn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/UI/PlayerUI.gd" type="Script" id=2]
@@ -7,27 +7,31 @@
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=5]
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/manaFill.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/UI/LootPopup.gd" type="Script" id=7]
-[ext_resource path="res://Res/environment.tres" type="Environment" id=8]
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=9]
-[ext_resource path="res://Art/Models/Environment/Well/Well.dae" type="PackedScene" id=10]
-[ext_resource path="res://Scripts/SafeArea.gd" type="Script" id=11]
-[ext_resource path="res://Res/tiles.res" type="MeshLibrary" id=12]
-[ext_resource path="res://Scenes/Enemies/chicken.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=14]
-[ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenArmor.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenHP.tscn" type="PackedScene" id=16]
-[ext_resource path="res://assets/maujoe.basic_water_material/models/terrain.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/maujoe.basic_water_material/Water.tscn" type="PackedScene" id=18]
-[ext_resource path="res://assets/maujoe.basic_water_material/materials/basic_water_material.material" type="Material" id=19]
-[ext_resource path="res://Scripts/BattleManager.gd" type="Script" id=20]
-[ext_resource path="res://Scripts/UI/UISkillSelectionPanel.gd" type="Script" id=21]
-[ext_resource path="res://Art/Sprites/UI/SkillIcons/meteor.png" type="Texture" id=22]
-[ext_resource path="res://Scripts/UI/UISkillButton.gd" type="Script" id=23]
-[ext_resource path="res://Scripts/Items/ItemDatabase.gd" type="Script" id=24]
-[ext_resource path="res://Scenes/Items/Armors/ArialDress.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Items/Weapons/FamilySword.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Scenes/Items/Potions/HPPotion1.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Scenes/Items/Potions/MPPotion1.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scripts/UI/InventoryPopup.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/UI/InventorySlot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Art/Sprites/UI/Items/emptySlot.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/Items/Inventory/CharacterSlot.gd" type="Script" id=11]
+[ext_resource path="res://Res/environment.tres" type="Environment" id=12]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=13]
+[ext_resource path="res://Art/Models/Environment/Well/Well.dae" type="PackedScene" id=14]
+[ext_resource path="res://Scripts/SafeArea.gd" type="Script" id=15]
+[ext_resource path="res://Res/tiles.res" type="MeshLibrary" id=16]
+[ext_resource path="res://Scenes/Enemies/chicken.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=18]
+[ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenArmor.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenHP.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/maujoe.basic_water_material/models/terrain.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/maujoe.basic_water_material/Water.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/maujoe.basic_water_material/materials/basic_water_material.material" type="Material" id=23]
+[ext_resource path="res://Scripts/BattleManager.gd" type="Script" id=24]
+[ext_resource path="res://Scripts/UI/UISkillSelectionPanel.gd" type="Script" id=25]
+[ext_resource path="res://Art/Sprites/UI/SkillIcons/meteor.png" type="Texture" id=26]
+[ext_resource path="res://Scripts/UI/UISkillButton.gd" type="Script" id=27]
+[ext_resource path="res://Scripts/Items/ItemDatabase.gd" type="Script" id=28]
+[ext_resource path="res://Scenes/Items/Definitions/Armors/ArialDress.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Items/Definitions/Weapons/FamilySword.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Items/Definitions/Potions/HPPotion1.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scenes/Items/Definitions/Potions/MPPotion1.tscn" type="PackedScene" id=32]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -130,7 +134,7 @@ subdivide_depth = 0
 
 [sub_resource type="PlaneMesh" id=8]
 
-material = ExtResource( 19 )
+material = ExtResource( 23 )
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 size = Vector2( 29, 29 )
 subdivide_width = 0
@@ -462,12 +466,241 @@ size_flags_vertical = 1
 columns = 4
 _sections_unfolded = [ "Size Flags" ]
 
+[node name="InventoryPopup" type="WindowDialog" parent="Player/PlayerUI" index="4"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -169.0
+margin_top = -146.0
+margin_right = 193.0
+margin_bottom = 143.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+window_title = "Inventory"
+resizable = false
+script = ExtResource( 8 )
+_sections_unfolded = [ "Rect" ]
+_slotTemplate = ExtResource( 9 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/PlayerUI/InventoryPopup" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="Character" type="Container" parent="Player/PlayerUI/InventoryPopup/HBoxContainer" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 200.0
+margin_bottom = 289.0
+rect_min_size = Vector2( 200, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="Helmet" type="TextureRect" parent="Player/PlayerUI/InventoryPopup/HBoxContainer/Character" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 75.0
+margin_top = 9.0
+margin_right = 123.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 48, 48 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 0
+script = ExtResource( 11 )
+_sections_unfolded = [ "Rect" ]
+_requiredItemType = 2
+
+[node name="Armor" type="TextureRect" parent="Player/PlayerUI/InventoryPopup/HBoxContainer/Character" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 75.0
+margin_top = 80.0
+margin_right = 123.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 48, 48 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 0
+script = ExtResource( 11 )
+_sections_unfolded = [ "Rect" ]
+_requiredItemType = 3
+
+[node name="Gloves" type="TextureRect" parent="Player/PlayerUI/InventoryPopup/HBoxContainer/Character" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 14.0
+margin_top = 148.0
+margin_right = 62.0
+margin_bottom = 196.0
+rect_min_size = Vector2( 48, 48 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 0
+script = ExtResource( 11 )
+_sections_unfolded = [ "Rect" ]
+_requiredItemType = 4
+
+[node name="Weapon" type="TextureRect" parent="Player/PlayerUI/InventoryPopup/HBoxContainer/Character" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 139.0
+margin_top = 149.0
+margin_right = 187.0
+margin_bottom = 197.0
+rect_min_size = Vector2( 48, 48 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 0
+script = ExtResource( 11 )
+_sections_unfolded = [ "Rect" ]
+_requiredItemType = 1
+
+[node name="Boots" type="TextureRect" parent="Player/PlayerUI/InventoryPopup/HBoxContainer/Character" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 74.0
+margin_top = 225.0
+margin_right = 122.0
+margin_bottom = 273.0
+rect_min_size = Vector2( 48, 48 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 0
+script = ExtResource( 11 )
+_sections_unfolded = [ "Rect" ]
+_requiredItemType = 5
+
+[node name="Inventory" type="Container" parent="Player/PlayerUI/InventoryPopup/HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 204.0
+margin_right = 362.0
+margin_bottom = 289.0
+rect_min_size = Vector2( 150, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Player/PlayerUI/InventoryPopup/HBoxContainer/Inventory" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -7.0
+margin_top = 4.0
+margin_bottom = -2.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+scroll_horizontal_enabled = true
+scroll_horizontal = 0
+scroll_vertical_enabled = true
+scroll_vertical = 0
+scroll_deadzone = 0
+
+[node name="GridContainer" type="GridContainer" parent="Player/PlayerUI/InventoryPopup/HBoxContainer/Inventory/ScrollContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+columns = 3
+
 [node name="Camera" type="Camera" parent="." index="1"]
 
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 2.2, 15.3016, 22.8337 )
 keep_aspect = 1
 cull_mask = 1048575
-environment = ExtResource( 8 )
+environment = ExtResource( 12 )
 h_offset = 0.0
 v_offset = 0.0
 doppler_tracking = 0
@@ -477,7 +710,7 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
-script = ExtResource( 9 )
+script = ExtResource( 13 )
 _sections_unfolded = [ "Transform" ]
 distance = 15
 height = 18
@@ -485,9 +718,9 @@ height = 18
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
 
 editor/display_folded = true
-environment = ExtResource( 8 )
+environment = ExtResource( 12 )
 
-[node name="Well" parent="WorldEnvironment" index="0" instance=ExtResource( 10 )]
+[node name="Well" parent="WorldEnvironment" index="0" instance=ExtResource( 14 )]
 
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.13762, 0.882813, 28.1878 )
@@ -550,7 +783,7 @@ reverb_bus_enable = false
 reverb_bus_name = "Master"
 reverb_bus_amount = 0.0
 reverb_bus_uniformity = 0.0
-script = ExtResource( 11 )
+script = ExtResource( 15 )
 
 [node name="CollisionShape" type="CollisionShape" parent="WorldEnvironment/Well/SafeArea" index="0"]
 
@@ -559,7 +792,7 @@ disabled = false
 
 [node name="GridMap" type="GridMap" parent="WorldEnvironment" index="1"]
 
-theme = ExtResource( 12 )
+theme = ExtResource( 16 )
 cell_size = Vector3( 2, 2, 2 )
 cell_octant_size = 8
 cell_center_x = true
@@ -569,21 +802,21 @@ cell_scale = 1.0
 collision_layer = 1
 collision_mask = 1
 data = {
-"cells": PoolIntArray( 0, 0, 7, 1, 0, 7, 2, 0, 7, 3, 0, 7, 4, 0, 7, 5, 0, 7, 6, 0, 7, 7, 0, 7, 65523, 0, 7, 65524, 0, 7, 65525, 0, 7, 65526, 0, 7, 65527, 0, 7, 65528, 0, 7, 65529, 0, 7, 65530, 0, 7, 65531, 0, 7, 65532, 0, 7, 65533, 0, 7, 65534, 0, 7, 65535, 0, 7, 0, 1, 7, 1, 1, 7, 2, 1, 7, 3, 1, 7, 4, 1, 7, 5, 1, 7, 65523, 1, 7, 65524, 1, 7, 65525, 1, 7, 65526, 1, 7, 65527, 1, 7, 65528, 1, 7, 65529, 1, 7, 65530, 1, 7, 65531, 1, 7, 65532, 1, 7, 65533, 1, 7, 65534, 1, 7, 65535, 1, 7, 0, 2, 1073741831, 1, 2, 7, 2, 2, 7, 3, 2, 7, 4, 2, 7, 5, 2, 7, 65523, 2, 7, 65524, 2, -536870905, 65525, 2, 12, 65526, 2, 7, 65527, 2, 7, 65528, 2, 1073741831, 65529, 2, 7, 65530, 2, 7, 65531, 2, 536870919, 65532, 2, 1073741831, 65533, 2, 7, 65534, 2, 1073741831, 65535, 2, 1073741831, 131061, 2, 13, 0, 3, 7, 1, 3, 7, 2, 3, 1073741831, 3, 3, 1073741831, 4, 3, 1073741831, 5, 3, 1073741831, 65523, 3, 1073741831, 65524, 3, 7, 65525, 3, 1073741831, 65526, 3, 7, 65527, 3, 7, 65528, 3, 1073741831, 65529, 3, 1073741831, 65530, 3, 1073741831, 65531, 3, 1073741831, 65532, 3, 7, 65533, 3, 7, 65534, 3, 7, 65535, 3, 7, 0, 4, 7, 1, 4, 7, 2, 4, 7, 3, 4, 7, 4, 4, 7, 5, 4, 7, 65523, 4, 7, 65524, 4, 7, 65525, 4, 7, 65526, 4, 7, 65527, 4, 7, 65528, 4, 7, 65529, 4, 1073741831, 65530, 4, 1073741831, 65531, 4, 1073741831, 65532, 4, 1073741831, 65533, 4, 1073741831, 65534, 4, 1073741831, 65535, 4, 1073741831, 0, 5, 1073741831, 1, 5, 1073741831, 2, 5, 1073741831, 3, 5, 1073741831, 4, 5, 1073741831, 5, 5, 1073741831, 65523, 5, 1073741831, 65524, 5, 1073741831, 65525, 5, 1073741831, 65526, 5, 1073741831, 65527, 5, 1073741831, 65528, 5, 1073741831, 65529, 5, 1073741831, 65530, 5, 1073741831, 65531, 5, 1073741831, 65532, 5, 1073741831, 65533, 5, 1073741831, 65534, 5, 1073741831, 65535, 5, 1073741831, 0, 6, 1073741831, 1, 6, 1073741831, 2, 6, 1073741831, 3, 6, 1073741831, 4, 6, 1073741831, 5, 6, 1073741831, 65523, 6, 1073741831, 65524, 6, 1073741831, 65525, 6, 1073741831, 65526, 6, 1073741831, 65527, 6, 1073741831, 65528, 6, 1073741831, 65529, 6, 1073741831, 65530, 6, 1073741831, 65531, 6, 1073741831, 65532, 6, 1073741831, 65533, 6, 1073741831, 65534, 6, 1073741831, 65535, 6, 1073741831, 0, 7, 1073741831, 1, 7, 1073741831, 2, 7, 1073741831, 3, 7, 1073741831, 4, 7, 1073741831, 65523, 7, 1073741831, 65524, 7, 1073741831, 65525, 7, 1073741831, 65526, 7, 1073741831, 65527, 7, 1073741831, 65528, 7, 1073741831, 65529, 7, 1073741831, 65530, 7, 1073741831, 65531, 7, 1073741831, 65532, 7, 1073741831, 65533, 7, 1073741831, 65534, 7, 1073741831, 65535, 7, 1073741831, 0, 8, 1073741831, 1, 8, 1073741831, 2, 8, 1073741831, 3, 8, 1073741831, 4, 8, 1073741831, 65523, 8, 1073741831, 65524, 8, 1073741831, 65525, 8, 1073741831, 65526, 8, 1073741831, 65527, 8, 1073741831, 65528, 8, 1073741831, 65529, 8, 1073741831, 65530, 8, 1073741831, 65531, 8, 1073741831, 65532, 8, 1073741831, 65533, 8, 1073741831, 65534, 8, 1073741831, 65535, 8, 1073741831, 0, 9, 1073741831, 1, 9, 1073741831, 2, 9, 1073741831, 3, 9, 1073741831, 4, 9, 1073741831, 65523, 9, 1073741831, 65524, 9, 1073741831, 65525, 9, 1073741831, 65526, 9, 1073741831, 65527, 9, 1073741831, 65528, 9, 1073741831, 65529, 9, 1073741831, 65530, 9, 1073741831, 65531, 9, 1073741831, 65532, 9, 1073741831, 65533, 9, 1073741831, 65534, 9, 1073741831, 65535, 9, 1073741831, 0, 10, 1073741831, 1, 10, 1073741831, 2, 10, 1073741831, 3, 10, 1073741831, 4, 10, 1073741831, 65523, 10, 1073741831, 65524, 10, 1073741831, 65525, 10, 1073741831, 65526, 10, 1073741831, 65527, 10, 1073741831, 65528, 10, 1073741831, 65529, 10, 1073741831, 65530, 10, 1073741831, 65531, 10, 1073741831, 65532, 10, 1073741831, 65533, 10, 1073741831, 65534, 10, 1073741831, 65535, 10, 1073741831, 0, 11, 1073741831, 1, 11, 1073741831, 2, 11, 1073741831, 3, 11, 1073741831, 4, 11, 1073741831, 65523, 11, 1073741831, 65524, 11, 1073741831, 65525, 11, 1073741831, 65526, 11, 1073741831, 65527, 11, 1073741831, 65528, 11, 1073741831, 65529, 11, 1073741831, 65530, 11, 1073741831, 65531, 11, 1073741831, 65532, 11, 1073741831, 65533, 11, 1073741831, 65534, 11, 1073741831, 65535, 11, 1073741831, 0, 12, 7, 1, 12, 1073741831, 2, 12, 1073741831, 3, 12, 1073741831, 4, 12, 1073741831, 65523, 12, 1073741831, 65524, 12, 1073741831, 65525, 12, 1073741831, 65526, 12, 1073741831, 65527, 12, 1073741831, 65528, 12, 1073741831, 65529, 12, 1073741831, 65530, 12, 1073741831, 65531, 12, 1073741831, 65532, 12, 1073741831, 65533, 12, 1073741831, 65534, 12, 1073741831, 65535, 12, 1073741831, 0, 13, 1073741831, 1, 13, 1073741831, 2, 13, 1073741831, 3, 13, 7, 4, 13, 1073741831, 65523, 13, 1073741831, 65524, 13, 1073741831, 65525, 13, 1073741831, 65526, 13, 1073741831, 65527, 13, 1073741831, 65528, 13, 1073741831, 65529, 13, 1073741831, 65530, 13, 1073741831, 65531, 13, 1073741831, 65532, 13, 1073741831, 65533, 13, 1073741831, 65534, 13, 1073741831, 65535, 13, 1073741831, 0, 14, 7, 1, 14, 1073741831, 2, 14, 1073741831, 3, 14, 7, 4, 14, 7, 65523, 14, 1073741831, 65524, 14, 1073741831, 65525, 14, 1073741831, 65526, 14, 7, 65527, 14, 7, 65528, 14, 7, 65529, 14, 1073741831, 65530, 14, 1073741831, 65531, 14, 1073741831, 65532, 14, 1073741831, 65533, 14, 1073741831, 65534, 14, 1073741831, 65535, 14, 1073741831, 0, 15, 1073741831, 1, 15, 1073741831, 2, 15, 1073741831, 3, 15, 1073741831, 4, 15, 1073741831, 65523, 15, 1073741831, 65524, 15, 1073741831, 65525, 15, 1073741831, 65526, 15, 1073741831, 65527, 15, 1073741831, 65528, 15, 1073741831, 65529, 15, 1073741831, 65530, 15, 1073741831, 65531, 15, 1073741831, 65532, 15, 1073741831, 65533, 15, 1073741831, 65534, 15, 1073741831, 65535, 15, 1073741831, 0, 16, 1073741831, 1, 16, 1073741831, 2, 16, 1073741831, 3, 16, 1073741831, 4, 16, 1073741831, 65523, 16, 1073741831, 65524, 16, 1073741831, 65525, 16, 1073741831, 65526, 16, 1073741831, 65527, 16, 1073741831, 65528, 16, 1073741831, 65529, 16, 1073741831, 65530, 16, 1073741831, 65531, 16, 1073741831, 65532, 16, 1073741831, 65533, 16, 1073741831, 65534, 16, 1073741831, 65535, 16, 1073741831, 0, 65525, 1073741831, 65533, 65525, 1073741831, 65534, 65525, 1073741831, 65535, 65525, 1073741831, 0, 65526, 1073741831, 1, 65526, 1073741831, 2, 65526, 1073741831, 3, 65526, 1073741831, 65523, 65526, 1073741831, 65524, 65526, 1073741831, 65525, 65526, 1073741831, 65526, 65526, 1073741831, 65527, 65526, 1073741831, 65528, 65526, 1073741831, 65529, 65526, 1073741831, 65530, 65526, 1073741831, 65531, 65526, 1073741831, 65532, 65526, 1073741831, 65533, 65526, 1073741831, 65534, 65526, 1073741831, 65535, 65526, 1073741831, 0, 65527, 1073741831, 1, 65527, 1073741831, 2, 65527, 1073741831, 3, 65527, 1073741831, 4, 65527, 1073741831, 65523, 65527, 1073741831, 65524, 65527, 1073741831, 65525, 65527, 1073741831, 65526, 65527, 1073741831, 65527, 65527, 1073741831, 65528, 65527, 1073741831, 65529, 65527, 1073741831, 65530, 65527, 1073741831, 65531, 65527, 1073741831, 65532, 65527, 1073741831, 65533, 65527, 1073741831, 65534, 65527, 1073741831, 65535, 65527, 1073741831, 0, 65528, 1073741831, 1, 65528, 1073741831, 2, 65528, 1073741831, 3, 65528, 1073741831, 4, 65528, 1073741831, 65523, 65528, 1073741831, 65524, 65528, 1073741831, 65525, 65528, 1073741831, 65526, 65528, 1073741831, 65527, 65528, 1073741831, 65528, 65528, 1073741831, 65529, 65528, 1073741831, 65530, 65528, 1073741831, 65531, 65528, 1073741831, 65532, 65528, 1073741831, 65533, 65528, 1073741831, 65534, 65528, 1073741831, 65535, 65528, 1073741831, 0, 65529, 1073741831, 1, 65529, 1073741831, 2, 65529, 1073741831, 3, 65529, 1073741831, 4, 65529, 1073741831, 65523, 65529, 1073741831, 65524, 65529, 1073741831, 65525, 65529, 1073741831, 65526, 65529, 1073741831, 65527, 65529, 1073741831, 65528, 65529, 1073741831, 65529, 65529, 1073741831, 65530, 65529, 1073741831, 65531, 65529, 1073741831, 65532, 65529, 1073741831, 65533, 65529, 1073741831, 65534, 65529, 1073741831, 65535, 65529, 1073741831, 0, 65530, 1073741831, 1, 65530, 1073741831, 2, 65530, 1073741831, 3, 65530, 1073741831, 4, 65530, 1073741831, 65523, 65530, 1073741831, 65524, 65530, 1073741831, 65525, 65530, 1073741831, 65526, 65530, 1073741831, 65527, 65530, 1073741831, 65528, 65530, 1073741831, 65529, 65530, 1073741831, 65530, 65530, 1073741831, 65531, 65530, 1073741831, 65532, 65530, 1073741831, 65533, 65530, 1073741831, 65534, 65530, 1073741831, 65535, 65530, 1073741831, 0, 65531, 1073741831, 1, 65531, 1073741831, 2, 65531, 1073741831, 3, 65531, 1073741831, 4, 65531, 1073741831, 5, 65531, 1073741831, 17, 65531, 1073741831, 18, 65531, 1073741831, 19, 65531, 1073741831, 65523, 65531, 1073741831, 65524, 65531, 1073741831, 65525, 65531, 1073741831, 65526, 65531, 1073741831, 65527, 65531, 1073741831, 65528, 65531, 1073741831, 65529, 65531, 1073741831, 65530, 65531, 1073741831, 65531, 65531, 1073741831, 65532, 65531, 1073741831, 65533, 65531, 1073741831, 65534, 65531, 1073741831, 65535, 65531, 1073741831, 0, 65532, 1073741831, 1, 65532, 1073741831, 2, 65532, 1073741831, 3, 65532, 1073741831, 4, 65532, 1073741831, 5, 65532, 1073741831, 14, 65532, 1073741831, 16, 65532, 1073741831, 17, 65532, 1073741831, 65523, 65532, 1073741831, 65524, 65532, 1073741831, 65525, 65532, 1073741831, 65526, 65532, 1073741831, 65527, 65532, 1073741831, 65528, 65532, 1073741831, 65529, 65532, 1073741831, 65530, 65532, 1073741831, 65531, 65532, 1073741831, 65532, 65532, 1073741831, 65533, 65532, 1073741831, 65534, 65532, 1073741831, 65535, 65532, 1073741831, 0, 65533, 1073741831, 1, 65533, 1073741831, 2, 65533, 1073741831, 3, 65533, 1073741831, 4, 65533, 1073741831, 5, 65533, 1073741831, 12, 65533, 1073741831, 13, 65533, 1073741831, 14, 65533, 1073741831, 65523, 65533, 1073741831, 65524, 65533, 1073741831, 65525, 65533, 1073741831, 65526, 65533, 1073741831, 65527, 65533, 1073741831, 65528, 65533, 1073741831, 65529, 65533, 1073741831, 65530, 65533, 1073741831, 65531, 65533, 1073741831, 65532, 65533, 1073741831, 65533, 65533, 1073741831, 65534, 65533, 1073741831, 65535, 65533, 1073741831, 0, 65534, 1073741831, 1, 65534, 1073741831, 2, 65534, 1073741831, 3, 65534, 1073741831, 4, 65534, 1073741831, 5, 65534, 1073741831, 65523, 65534, 1073741831, 65524, 65534, 1073741831, 65525, 65534, 1073741831, 65526, 65534, 1073741831, 65527, 65534, 1073741831, 65528, 65534, 1073741831, 65529, 65534, 1073741831, 65530, 65534, 1073741831, 65531, 65534, 1073741831, 65532, 65534, 1073741831, 65533, 65534, 1073741831, 65534, 65534, 1073741831, 65535, 65534, 1073741831, 0, 65535, 1073741831, 1, 65535, 1073741831, 2, 65535, 1073741831, 3, 65535, 1073741831, 4, 65535, 1073741831, 5, 65535, 1073741831, 6, 65535, 1073741831, 7, 65535, 1073741831, 8, 65535, 1073741831, 9, 65535, 1073741831, 10, 65535, 1073741831, 11, 65535, 1073741831, 12, 65535, 1073741831, 13, 65535, 1073741831, 65523, 65535, 1073741831, 65524, 65535, 1073741831, 65525, 65535, 1073741835, 65526, 65535, 1073741831, 65527, 65535, 1073741831, 65528, 65535, 1073741831, 65529, 65535, 1073741831, 65530, 65535, 1073741831, 65531, 65535, 1073741831, 65532, 65535, 1073741831, 65533, 65535, 1073741831, 65534, 65535, 1073741831, 65535, 65535, 1073741831, 131061, 65535, 1073741837 )
+"cells": PoolIntArray( 0, 0, 7, 1, 0, 7, 2, 0, 7, 3, 0, 7, 4, 0, 7, 5, 0, 7, 6, 0, 7, 7, 0, 7, 65523, 0, 7, 65524, 0, 7, 65525, 0, 7, 65526, 0, 7, 65527, 0, 7, 65528, 0, 7, 65529, 0, 7, 65530, 0, 7, 65531, 0, 7, 65532, 0, 7, 65533, 0, 7, 65534, 0, 7, 65535, 0, 7, 0, 1, 7, 1, 1, 7, 2, 1, 7, 3, 1, 7, 4, 1, 7, 5, 1, 7, 65523, 1, 7, 65524, 1, 7, 65525, 1, 7, 65526, 1, 7, 65527, 1, 7, 65528, 1, 7, 65529, 1, 7, 65530, 1, 7, 65531, 1, 7, 65532, 1, 7, 65533, 1, 7, 65534, 1, 7, 65535, 1, 7, 0, 2, 7, 1, 2, 7, 2, 2, 7, 3, 2, 7, 4, 2, 7, 5, 2, 7, 65523, 2, 7, 65524, 2, 7, 65525, 2, 12, 65526, 2, 7, 65527, 2, 7, 65528, 2, 7, 65529, 2, 7, 65530, 2, 7, 65531, 2, 7, 65532, 2, 7, 65533, 2, 7, 65534, 2, 7, 65535, 2, 7, 131061, 2, 13, 0, 3, 7, 1, 3, 7, 2, 3, 7, 3, 3, 7, 4, 3, 7, 5, 3, 7, 65523, 3, 7, 65524, 3, 7, 65525, 3, 7, 65526, 3, 7, 65527, 3, 7, 65528, 3, 7, 65529, 3, 7, 65530, 3, 7, 65531, 3, 7, 65532, 3, 7, 65533, 3, 7, 65534, 3, 7, 65535, 3, 7, 0, 4, 7, 1, 4, 7, 2, 4, 7, 3, 4, 7, 4, 4, 7, 5, 4, 7, 65523, 4, 7, 65524, 4, 7, 65525, 4, 7, 65526, 4, 7, 65527, 4, 7, 65528, 4, 7, 65529, 4, 7, 65530, 4, 7, 65531, 4, 7, 65532, 4, 7, 65533, 4, 7, 65534, 4, 7, 65535, 4, 7, 0, 5, 7, 1, 5, 7, 2, 5, 7, 3, 5, 7, 4, 5, 7, 5, 5, 7, 65523, 5, 7, 65524, 5, 7, 65525, 5, 7, 65526, 5, 7, 65527, 5, 7, 65528, 5, 7, 65529, 5, 7, 65530, 5, 7, 65531, 5, 7, 65532, 5, 7, 65533, 5, 7, 65534, 5, 7, 65535, 5, 7, 0, 6, 7, 1, 6, 7, 2, 6, 7, 3, 6, 7, 4, 6, 7, 5, 6, 7, 65523, 6, 7, 65524, 6, 7, 65525, 6, 7, 65526, 6, 7, 65527, 6, 7, 65528, 6, 7, 65529, 6, 7, 65530, 6, 7, 65531, 6, 7, 65532, 6, 7, 65533, 6, 7, 65534, 6, 7, 65535, 6, 7, 0, 7, 7, 1, 7, 7, 2, 7, 7, 3, 7, 7, 4, 7, 7, 65523, 7, 7, 65524, 7, 7, 65525, 7, 7, 65526, 7, 7, 65527, 7, 7, 65528, 7, 7, 65529, 7, 7, 65530, 7, 7, 65531, 7, 7, 65532, 7, 7, 65533, 7, 7, 65534, 7, 7, 65535, 7, 7, 0, 8, 7, 1, 8, 7, 2, 8, 7, 3, 8, 7, 4, 8, 7, 65523, 8, 7, 65524, 8, 7, 65525, 8, 7, 65526, 8, 7, 65527, 8, 7, 65528, 8, 7, 65529, 8, 7, 65530, 8, 7, 65531, 8, 7, 65532, 8, 7, 65533, 8, 7, 65534, 8, 7, 65535, 8, 7, 0, 9, 7, 1, 9, 7, 2, 9, 7, 3, 9, 7, 4, 9, 7, 65523, 9, 7, 65524, 9, 7, 65525, 9, 7, 65526, 9, 7, 65527, 9, 7, 65528, 9, 7, 65529, 9, 7, 65530, 9, 7, 65531, 9, 7, 65532, 9, 7, 65533, 9, 7, 65534, 9, 7, 65535, 9, 7, 0, 10, 7, 1, 10, 7, 2, 10, 7, 3, 10, 7, 4, 10, 7, 65523, 10, 7, 65524, 10, 7, 65525, 10, 7, 65526, 10, 7, 65527, 10, 7, 65528, 10, 7, 65529, 10, 7, 65530, 10, 7, 65531, 10, 7, 65532, 10, 7, 65533, 10, 7, 65534, 10, 7, 65535, 10, 7, 0, 11, 7, 1, 11, 7, 2, 11, 7, 3, 11, 7, 4, 11, 7, 65523, 11, 7, 65524, 11, 7, 65525, 11, 7, 65526, 11, 7, 65527, 11, 7, 65528, 11, 7, 65529, 11, 7, 65530, 11, 7, 65531, 11, 7, 65532, 11, 7, 65533, 11, 7, 65534, 11, 7, 65535, 11, 7, 0, 12, 7, 1, 12, 7, 2, 12, 7, 3, 12, 7, 4, 12, 7, 65523, 12, 7, 65524, 12, 7, 65525, 12, 7, 65526, 12, 7, 65527, 12, 7, 65528, 12, 7, 65529, 12, 7, 65530, 12, 7, 65531, 12, 7, 65532, 12, 7, 65533, 12, 7, 65534, 12, 7, 65535, 12, 7, 0, 13, 7, 1, 13, 7, 2, 13, 7, 3, 13, 7, 4, 13, 7, 65523, 13, 7, 65524, 13, 7, 65525, 13, 7, 65526, 13, 7, 65527, 13, 7, 65528, 13, 7, 65529, 13, 7, 65530, 13, 7, 65531, 13, 7, 65532, 13, 7, 65533, 13, 7, 65534, 13, 7, 65535, 13, 7, 0, 14, 7, 1, 14, 7, 2, 14, 7, 3, 14, 7, 4, 14, 7, 65523, 14, 7, 65524, 14, 7, 65525, 14, 7, 65526, 14, 7, 65527, 14, 7, 65528, 14, 7, 65529, 14, 7, 65530, 14, 7, 65531, 14, 7, 65532, 14, 7, 65533, 14, 7, 65534, 14, 7, 65535, 14, 7, 0, 15, 7, 1, 15, 7, 2, 15, 7, 3, 15, 7, 4, 15, 7, 65523, 15, 7, 65524, 15, 7, 65525, 15, 7, 65526, 15, 7, 65527, 15, 7, 65528, 15, 7, 65529, 15, 7, 65530, 15, 7, 65531, 15, 7, 65532, 15, 7, 65533, 15, 7, 65534, 15, 7, 65535, 15, 7, 0, 16, 7, 1, 16, 7, 2, 16, 7, 3, 16, 7, 4, 16, 7, 65523, 16, 7, 65524, 16, 7, 65525, 16, 7, 65526, 16, 7, 65527, 16, 7, 65528, 16, 7, 65529, 16, 7, 65530, 16, 7, 65531, 16, 7, 65532, 16, 7, 65533, 16, 7, 65534, 16, 7, 65535, 16, 7, 0, 65525, 7, 65533, 65525, 7, 65534, 65525, 7, 65535, 65525, 7, 0, 65526, 7, 1, 65526, 7, 2, 65526, 7, 3, 65526, 7, 65523, 65526, 7, 65524, 65526, 7, 65525, 65526, 7, 65526, 65526, 7, 65527, 65526, 7, 65528, 65526, 7, 65529, 65526, 7, 65530, 65526, 7, 65531, 65526, 7, 65532, 65526, 7, 65533, 65526, 7, 65534, 65526, 7, 65535, 65526, 7, 0, 65527, 7, 1, 65527, 7, 2, 65527, 7, 3, 65527, 7, 4, 65527, 7, 65523, 65527, 7, 65524, 65527, 7, 65525, 65527, 7, 65526, 65527, 7, 65527, 65527, 7, 65528, 65527, 7, 65529, 65527, 7, 65530, 65527, 7, 65531, 65527, 7, 65532, 65527, 7, 65533, 65527, 7, 65534, 65527, 7, 65535, 65527, 7, 0, 65528, 7, 1, 65528, 7, 2, 65528, 7, 3, 65528, 7, 4, 65528, 7, 65523, 65528, 7, 65524, 65528, 7, 65525, 65528, 7, 65526, 65528, 7, 65527, 65528, 7, 65528, 65528, 7, 65529, 65528, 7, 65530, 65528, 7, 65531, 65528, 7, 65532, 65528, 7, 65533, 65528, 7, 65534, 65528, 7, 65535, 65528, 7, 0, 65529, 7, 1, 65529, 7, 2, 65529, 7, 3, 65529, 7, 4, 65529, 7, 65523, 65529, 7, 65524, 65529, 7, 65525, 65529, 7, 65526, 65529, 7, 65527, 65529, 7, 65528, 65529, 7, 65529, 65529, 7, 65530, 65529, 7, 65531, 65529, 7, 65532, 65529, 7, 65533, 65529, 7, 65534, 65529, 7, 65535, 65529, 7, 0, 65530, 7, 1, 65530, 7, 2, 65530, 7, 3, 65530, 7, 4, 65530, 7, 65523, 65530, 7, 65524, 65530, 7, 65525, 65530, 7, 65526, 65530, 7, 65527, 65530, 7, 65528, 65530, 7, 65529, 65530, 7, 65530, 65530, 7, 65531, 65530, 7, 65532, 65530, 7, 65533, 65530, 7, 65534, 65530, 7, 65535, 65530, 7, 0, 65531, 7, 1, 65531, 7, 2, 65531, 7, 3, 65531, 7, 4, 65531, 7, 5, 65531, 7, 17, 65531, 7, 18, 65531, 7, 19, 65531, 7, 65523, 65531, 7, 65524, 65531, 7, 65525, 65531, 7, 65526, 65531, 7, 65527, 65531, 7, 65528, 65531, 7, 65529, 65531, 7, 65530, 65531, 7, 65531, 65531, 7, 65532, 65531, 7, 65533, 65531, 7, 65534, 65531, 7, 65535, 65531, 7, 0, 65532, 7, 1, 65532, 7, 2, 65532, 7, 3, 65532, 7, 4, 65532, 7, 5, 65532, 7, 14, 65532, 7, 16, 65532, 7, 17, 65532, 7, 65523, 65532, 7, 65524, 65532, 7, 65525, 65532, 7, 65526, 65532, 7, 65527, 65532, 7, 65528, 65532, 7, 65529, 65532, 7, 65530, 65532, 7, 65531, 65532, 536870919, 65532, 65532, 7, 65533, 65532, 536870919, 65534, 65532, 7, 65535, 65532, 7, 0, 65533, 7, 1, 65533, 536870919, 2, 65533, 7, 3, 65533, 7, 4, 65533, 7, 5, 65533, 7, 12, 65533, -1073741817, 13, 65533, 7, 14, 65533, 7, 65523, 65533, 7, 65524, 65533, 536870919, 65525, 65533, 7, 65526, 65533, 536870919, 65527, 65533, 7, 65528, 65533, 7, 65529, 65533, 7, 65530, 65533, 536870919, 65531, 65533, 7, 65532, 65533, 7, 65533, 65533, 7, 65534, 65533, 7, 65535, 65533, 7, 0, 65534, 7, 1, 65534, 7, 2, 65534, 7, 3, 65534, 7, 4, 65534, 7, 5, 65534, 7, 65523, 65534, 7, 65524, 65534, 7, 65525, 65534, 7, 65526, 65534, 7, 65527, 65534, 7, 65528, 65534, 7, 65529, 65534, 7, 65530, 65534, 7, 65531, 65534, 7, 65532, 65534, 7, 65533, 65534, 7, 65534, 65534, 7, 65535, 65534, 7, 0, 65535, 7, 1, 65535, 536870919, 2, 65535, 7, 3, 65535, -1073741817, 4, 65535, 7, 5, 65535, 536870919, 6, 65535, 7, 7, 65535, 7, 8, 65535, 7, 9, 65535, 536870919, 10, 65535, 7, 11, 65535, 7, 12, 65535, 7, 13, 65535, 1073741831, 65523, 65535, 7, 65524, 65535, 536870919, 65525, 65535, 1073741835, 65526, 65535, -1073741817, 65527, 65535, -1073741817, 65528, 65535, -1073741817, 65529, 65535, 1073741831, 65530, 65535, 1073741831, 65531, 65535, 7, 65532, 65535, -1073741817, 65533, 65535, -1073741817, 65534, 65535, 7, 65535, 65535, 7, 131061, 65535, 536870925 )
 }
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
 
-[node name="Chicken" parent="." index="3" instance=ExtResource( 13 )]
+[node name="Chicken" parent="." index="3" instance=ExtResource( 17 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56898, 0, -3.73839 )
 contacts_reported = 1
 contact_monitor = true
-script = ExtResource( 14 )
+script = ExtResource( 18 )
 _sections_unfolded = [ "Axis Lock", "Linear", "Transform" ]
-_lootTable = [ [ ExtResource( 15 ) ], [ ExtResource( 16 ) ] ]
+_lootTable = [ [ ExtResource( 19 ) ], [ ExtResource( 20 ) ] ]
 _moveSpeed = 5.0
 _rotationSpeed = 3.0
 _activeRadius = 20.0
@@ -621,12 +854,12 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Pond" parent="." index="5" instance=ExtResource( 17 )]
+[node name="Pond" parent="." index="5" instance=ExtResource( 21 )]
 
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.3633, 0.0773125, -3.99331 )
 
-[node name="Water" parent="Pond" index="6" instance=ExtResource( 18 )]
+[node name="Water" parent="Pond" index="6" instance=ExtResource( 22 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22527, -0.545327, -0.404819 )
 mesh = SubResource( 8 )
@@ -635,11 +868,10 @@ _sections_unfolded = [ "Transform", "material" ]
 [node name="BattleManager" type="Node" parent="." index="6"]
 
 editor/display_folded = true
-script = ExtResource( 20 )
+script = ExtResource( 24 )
 
 [node name="SkillSelectionPanel" type="Panel" parent="BattleManager" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -654,7 +886,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 21 )
+script = ExtResource( 25 )
 
 [node name="TextureButton" type="TextureButton" parent="BattleManager/SkillSelectionPanel" index="0"]
 
@@ -675,8 +907,8 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 22 )
-script = ExtResource( 23 )
+texture_normal = ExtResource( 26 )
+script = ExtResource( 27 )
 _slotId = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BattleManager/SkillSelectionPanel" index="1"]
@@ -691,9 +923,9 @@ blend_times = [  ]
 
 [node name="ItemDatabase" type="Node" parent="." index="7"]
 
-script = ExtResource( 24 )
+script = ExtResource( 28 )
 _sections_unfolded = [ "Pause" ]
-_itemDatabase = [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ) ]
+_itemDatabase = [ ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ) ]
 
 [connection signal="body_entered" from="WorldEnvironment/Well/SafeArea" to="WorldEnvironment/Well/SafeArea" method="_on_SafeArea_body_entered"]
 

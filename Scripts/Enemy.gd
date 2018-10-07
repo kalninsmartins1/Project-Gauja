@@ -10,7 +10,6 @@ export var _health = 100.0
 export var _damage = 10.0
 
 # Private vars for this script usage only
-var _gameConsts = preload("res://Scripts/Utility/GameConsts.gd")
 var _navigationManager = null
 var _player = null
 var _tweener = null
@@ -62,7 +61,7 @@ func getActiveRadius():
 	return _activeRadius	
 
 func getAttackAnimLength():
-	var animName = _animationTree.node_get_input_source(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
+	var animName = _animationTree.node_get_input_source(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_ATTACK_ID)
 	var animation = _animationTree.animation_node_get_animation(animName)
 	return animation.length
 
@@ -121,7 +120,7 @@ func startRotationTween(var toTargetNormalized):
 	pass
 
 func playAttackAnim():
-	_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_ATTACK_ID)
+	_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_ATTACK_ID)
 	pass
 
 # Private interface
@@ -199,31 +198,31 @@ func _tweenFinished():
 	pass
 
 func _playIdleAnimation():
-	var currentAnim = _animationTree.transition_node_get_current(_gameConsts.ANIM_TRANSITION_NODE)
-	if(currentAnim != _gameConsts.ANIM_IDLE_ID):
-		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_IDLE_ID)
+	var currentAnim = _animationTree.transition_node_get_current(GameConsts.ANIM_TRANSITION_NODE)
+	if(currentAnim != GameConsts.ANIM_IDLE_ID):
+		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
 
 		# Make the set animation looping
-		var animName = _animationTree.node_get_input_source(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_IDLE_ID)
+		var animName = _animationTree.node_get_input_source(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
 		var animation = _animationTree.animation_node_get_animation(animName)
 		animation.set_loop(true)
 	pass
 
 func _playMovingAnimation():
-	var currentAnim = _animationTree.transition_node_get_current(_gameConsts.ANIM_TRANSITION_NODE)
+	var currentAnim = _animationTree.transition_node_get_current(GameConsts.ANIM_TRANSITION_NODE)
 
 	# Check if not already playing
-	if(currentAnim != _gameConsts.ANIM_WALK_ID):
-		_animationTree.transition_node_set_current(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_WALK_ID)
+	if(currentAnim != GameConsts.ANIM_WALK_ID):
+		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_WALK_ID)
 
 		# Make the set animation looping
-		var animName = _animationTree.node_get_input_source(_gameConsts.ANIM_TRANSITION_NODE, _gameConsts.ANIM_WALK_ID)
+		var animName = _animationTree.node_get_input_source(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_WALK_ID)
 		var animation = _animationTree.animation_node_get_animation(animName)
 		animation.set_loop(true)
 	pass
 
 func _setupAnimations():
-	_animationTree = get_node(_gameConsts.ANIMTION_TREE_PLAYER)
+	_animationTree = get_node(GameConsts.ANIMTION_TREE_PLAYER)
 	_animationTree.set_active(true)
 	_playIdleAnimation()
 	pass
