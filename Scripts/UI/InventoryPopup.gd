@@ -27,4 +27,5 @@ func _onUpdateInventory():
 	for itemId in inventory:
 		var item = itemDetabase.getItem(itemId)
 		_inventorySlots[index].setTemplate(item)
+		index += 1
 	pass
