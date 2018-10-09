@@ -684,7 +684,6 @@ columns = 3
 
 [node name="SkillSelectionPanel" type="Panel" parent="Player/PlayerUI" index="5"]
 
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -782,15 +781,6 @@ expand = true
 script = ExtResource( 14 )
 _sections_unfolded = [ "Rect", "Textures" ]
 _skillId = 3
-
-[node name="Tween" type="Tween" parent="Player/PlayerUI/SkillSelectionPanel" index="3"]
-
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
 
 [node name="Camera" type="Camera" parent="." index="1"]
 

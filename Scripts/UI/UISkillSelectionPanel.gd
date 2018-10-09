@@ -3,7 +3,7 @@ extends Panel
 export var _animDuration = 1.0
 
 onready var _viewport = get_node("/root")
-onready var _tween = get_node("Tween")
+onready var _tween = get_node("../Tween")
 
 var _outPosition = null
 var _inPosition = null
