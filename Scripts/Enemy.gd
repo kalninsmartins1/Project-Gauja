@@ -10,16 +10,16 @@ export var _health = 100.0
 export var _damage = 10.0
 
 # Private vars for this script usage only
-var _navigationManager = null
-var _player = null
-var _tweener = null
-var _curPath = null
-var _animationTree = null
-var _battleManager = null
-var _battlePosition = null
-var _healthBar = null
-var _camera = null
+onready var _navigationManager = get_node("../Navigation")
+onready var _player = get_node("../Player")
+onready var _tweener = get_node("Tween")
+onready var _animationTree = get_node("AnimationTreePlayer")
+onready var _battleManager = get_node("../BattleManager")
+onready var _camera = get_node("../Camera")
+onready var _healthBar = get_node("TextureProgress")
 
+var _curPath = null
+var _battlePosition = null
 var _curIndex = 0
 var _currentAngle = 0
 
@@ -34,7 +34,7 @@ var _isTakingDamage = false
 	
 	# Signals
 
-signal onAttackFinished
+signal onTurnFinished
 signal onHealthChanged
 
 	# Functions
@@ -101,9 +101,8 @@ func damagePlayer():
 	getPlayer().takeDamage(_damage)
 	pass
 
-func onAttackFinished():
-	emit_signal("onAttackFinished")
-	_hasTurn = false
+func attackFinished():
+	emit_signal("onTurnFinished")
 	pass
 	
 func startRotationTween(var toTargetNormalized):
@@ -125,14 +124,8 @@ func playAttackAnim():
 
 # Private interface
 func _ready():
-	_navigationManager = get_node("../Navigation")
-	_player = get_node("../Player")
-	_battleManager = get_node("../BattleManager")
-	_tweener = get_node("Tween")
 	_setupAnimations()
 	set_linear_velocity(Vector3(0, 0, 0))
-	_healthBar = get_node("TextureProgress")
-	_camera = get_node("../Camera")
 	pass
 
 func _physics_process(delta):
@@ -222,7 +215,6 @@ func _playMovingAnimation():
 	pass
 
 func _setupAnimations():
-	_animationTree = get_node(GameConsts.ANIMTION_TREE_PLAYER)
 	_animationTree.set_active(true)
 	_playIdleAnimation()
 	pass

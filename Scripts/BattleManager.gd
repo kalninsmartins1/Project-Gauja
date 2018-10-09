@@ -5,43 +5,42 @@ var _player = null
 var _enemy = null
 var _isBattleActive = false
 var _currentTurn = Turn.PLAYER
-var _skillSelectionPanel = null
-var _utils = preload("res://Scripts/Utility/Utils.gd")
 
-func onSkillButtonPressed(skillId):
-	if(_currentTurn == Turn.PLAYER):
-		_player.attack(_enemy, skillId)
-	pass
+func getTarget():
+	return _enemy
 
 func initiateBattle(var player, var enemy):
 	_player = player
 	_player.battleStarted(enemy)
-	_player.connect("onAttackFinished", self, "_attackFinished")
+	_player.connect("onTurnFinished", self, "_turnFinished")
 	_player.connect("onHealthChanged", self, "_playerHealthChanged")
 	_enemy = enemy
-	_enemy.connect("onAttackFinished", self, "_attackFinished")
+	_enemy.connect("onTurnFinished", self, "_turnFinished")
 	_enemy.connect("onHealthChanged", self, "_enemyHealthChanged")
 	
 	_setCurrentTurn(_getRandomTurn())
-	_skillSelectionPanel.show()
 	_isBattleActive = true
 	pass
 
 func finishTurn():
 	if(_isBattleActive):
 		if(_currentTurn == Turn.PLAYER):
-			_setCurrentTurn(Turn.ENEMY)		
+			_setCurrentTurn(Turn.ENEMY)	
 		else:
 			_setCurrentTurn(Turn.PLAYER)
 	pass
 
 func _setCurrentTurn(turn):
 	_currentTurn = turn
-	if(_currentTurn == Turn.ENEMY):
+	if(_currentTurn == Turn.PLAYER):
+		_enemy.setHasTurn(false)
+		_player.setHasTurn(true)
+	else:
 		_enemy.setHasTurn(true)
+		_player.setHasTurn(false)
 	pass
 
-func _attackFinished():
+func _turnFinished():
 	finishTurn()
 	pass
 
@@ -56,8 +55,7 @@ func _enemyHealthChanged(health):
 	pass
 	
 func _endBattle(var shouldGiveLoot):
-	_skillSelectionPanel.hide()
-	
+
 	var lootArray = null
 	if(shouldGiveLoot):
 		lootArray = _calculateLoot()
@@ -81,11 +79,7 @@ func _calculateLoot():
 			var lootEntry = cell.instance()
 			var probability = lootEntry.getProbability()
 	
-			if(_utils.isChanceHit(probability)):
+			if(Utils.isChanceHit(probability)):
 				loot.append(lootEntry.getItemId())
 				
 	return loot
-
-func _ready():
-	_skillSelectionPanel = get_node("SkillSelectionPanel")	
-	pass

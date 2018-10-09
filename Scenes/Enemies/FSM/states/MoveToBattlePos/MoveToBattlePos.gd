@@ -41,7 +41,7 @@ func exit(toState=null):
 	var toPlayer = playerPos - enemyPos
 	
 	_enemy.startRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
-	_enemy.onAttackFinished()
+	_enemy.attackFinished()
 	pass
 
 ##################################################################################

@@ -3,10 +3,10 @@
 [ext_resource path="res://Scripts/Items/ItemProbability.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Items/Definitions/Armors/ArialDress.tscn" type="PackedScene" id=2]
 
-[node name="ItemProbability" type="Node" index="0"]
+[node name="ItemProbability" type="Node"]
 
 script = ExtResource( 1 )
 _item = ExtResource( 2 )
-_probabilityNormalized = 0.5
+_probabilityNormalized = 1.0
 
 
