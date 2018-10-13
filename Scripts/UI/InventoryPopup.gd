@@ -15,8 +15,11 @@ var _characterSlots = []
 var _activeInventorySlot = null
 
 func getActiveItem():
-	return _activeInventorySlot.getItem()
-
+	var item = null
+	if _activeInventorySlot != null:
+		item = _activeInventorySlot.getItem()
+	return item
+	
 func _ready():	
 	_player.connect("onInventoryChanged", self, "_onUpdateInventory")
 	_inventoryItemContainer = get_node("HBoxContainer/Inventory/ScrollContainer/GridContainer")
