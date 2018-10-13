@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MilitiamanShield.png-55f242f0b2d4360ff7ce33a5f1ec12e0.stex"
+path="res://.import/ScoutShortBow.png-39ea771a3ce924e0e5b0c212af4a1b70.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/UI/Items/Shields/MilitiamanShield.png"
-dest_files=[ "res://.import/MilitiamanShield.png-55f242f0b2d4360ff7ce33a5f1ec12e0.stex" ]
+source_file="res://Art/Sprites/UI/Items/Bows/ScoutShortBow.png"
+dest_files=[ "res://.import/ScoutShortBow.png-39ea771a3ce924e0e5b0c212af4a1b70.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WoodenBuckler.png-fd4318e4b0a2928a70da9e441a533b2e.stex"
+path="res://.import/GuardArmor [Paint].png-b8eb5ff334366ca38d84698ffb45032d.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/UI/Items/Shields/WoodenBuckler.png"
-dest_files=[ "res://.import/WoodenBuckler.png-fd4318e4b0a2928a70da9e441a533b2e.stex" ]
+source_file="res://Art/Sprites/UI/Items/Boots/GuardArmor [Paint].png"
+dest_files=[ "res://.import/GuardArmor [Paint].png-b8eb5ff334366ca38d84698ffb45032d.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WoodenShield.png-f3d7891ee49feac5e83779c55f6b37c4.stex"
+path="res://.import/BanditLightArmor [Paint].png-17ef4d511f96dac051bdebe175a4bf54.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/UI/Items/Shields/WoodenShield.png"
-dest_files=[ "res://.import/WoodenShield.png-f3d7891ee49feac5e83779c55f6b37c4.stex" ]
+source_file="res://Art/Sprites/UI/Items/Gloves/BanditLightArmor [Paint].png"
+dest_files=[ "res://.import/BanditLightArmor [Paint].png-17ef4d511f96dac051bdebe175a4bf54.stex" ]
 
 [params]
 

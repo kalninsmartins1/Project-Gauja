@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SteelTowerShield.png-ed4fb6a50e975b16282eff0614e00dd5.stex"
+path="res://.import/ChainmailLightArmor [Paint].png-1dc07e367d5c71e19bc6e74b43c517ad.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/UI/Items/Shields/SteelTowerShield.png"
-dest_files=[ "res://.import/SteelTowerShield.png-ed4fb6a50e975b16282eff0614e00dd5.stex" ]
+source_file="res://Art/Sprites/UI/Items/Gloves/ChainmailLightArmor [Paint].png"
+dest_files=[ "res://.import/ChainmailLightArmor [Paint].png-1dc07e367d5c71e19bc6e74b43c517ad.stex" ]
 
 [params]
 
