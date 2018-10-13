@@ -6,21 +6,21 @@ export var _manaRecharge = 10
 export var _healthRecharge = 10
 export var _potionRechargeTime = 1.5
 
+onready var _playerParty = get_parent().get_parent()
 onready var _animationTree = get_node("AnimationTreePlayer")
-onready var _itemDatabase = get_node("../ItemDatabase")
-onready var _battleManager = get_node("../BattleManager")
 onready var _tween = get_node("PlayerUI/Tween")
 
-var _isInBattle = false
-var _upVector = Vector3(0, 1, 0)
 var _health = 100
 var _maxHealth = 100
 var _mana = 100
 var _maxMana = 100
 var _respawnPosition = null
 var _isAttackFinished = true
-var _hasTurn = false
-var _inventory = []
+var _isInBattle = false
+var _direction = Vector3(0, 0, 0)
+var _fallowTarget = null
+var _fallowDistance = 0
+var _isFallowing = false
 
 # Signals
 signal onHealthChanged
@@ -34,37 +34,26 @@ signal onBattleEnded
 
 # Public functions
 
-func getInventory():
-	return _inventory
-
-func getItemDatabase():
-	return _itemDatabase
-
-func isInBattle():
-	return _isInBattle
-	
-func setHasTurn(hasTurn):
-	_hasTurn = hasTurn
+func setIsInBattle(isInBattle):
+	_isInBattle = _isInBattle
 	pass
-	
+
+func setMoveDirection(direction):
+	_direction = direction
+	pass
+
 func setRespawnPosition(position):
 	_respawnPosition = position
 	pass
-	
-func battleStarted(enemy):
-	_isInBattle = true
-	look_at(enemy.translation, _upVector)
-	emit_signal("onBattleStarted")
+
+func startFallow(fallowTarget, fallowDistance):
+	_fallowTarget = fallowTarget
+	_fallowDistance = fallowDistance
+	_isFallowing = true
 	pass
-	
-func battleEnded(loot):
-	_isInBattle = false
-	if(loot != null):
-		emit_signal("onLootReceived", loot)
-		for itemId in loot:
-			_addInventoryItem(itemId)
-		emit_signal("onInventoryChanged")
-	emit_signal("onBattleEnded")
+
+func lookAt(position):
+	look_at(position, GameConsts.VECTOR3_UP)
 	pass
 
 func takeDamage(damage):
@@ -74,6 +63,21 @@ func takeDamage(damage):
 	
 	if(_health == 0):
 		_respawn()
+	pass
+
+func castSkill(skillId):
+	if(_isAttackFinished):		
+		match(skillId):
+			GameConsts.Skill.FIRE_BALL:
+				var target = _playerParty.getTarget()
+				_shootFireball(target)
+			GameConsts.Skill.POTION_HP:
+				_addHealth(_healthRecharge)
+				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
+			GameConsts.Skill.POTION_MP:
+				_addMana(_manaRecharge)
+				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
+				
 	pass
 
 func _consumeMana(amount):
@@ -94,25 +98,6 @@ func _addHealth(amount):
 	_health += amount
 	_health = clamp(_health, 0, _maxHealth)
 	emit_signal("onHealthChanged", _health)
-	pass
-
-func _addInventoryItem(itemId):
-	_inventory.append(itemId)	
-	pass
-
-func _castSkill(skillId):
-	if(_isAttackFinished):		
-		match(skillId):
-			GameConsts.Skill.FIRE_BALL:
-				var target = _battleManager.getTarget()
-				_shootFireball(target)
-			GameConsts.Skill.POTION_HP:
-				_addHealth(_healthRecharge)
-				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
-			GameConsts.Skill.POTION_MP:
-				_addMana(_manaRecharge)
-				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
-				
 	pass
 
 func _onPotionRechargeFinished():
@@ -157,53 +142,31 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	
+	if(_isFallowing):
+		var toTarget = (_fallowTarget.translation - translation)
+		var distanceToTargetSqr = toTarget.length_squared()
+		if distanceToTargetSqr > _fallowDistance*_fallowDistance:
+			_direction = toTarget
+		else:
+			_direction = Vector3(0, 0, 0)
 
-	# Get input - All the input probably need to be extracted to its own fuction
-	var direction = _handleInput()	 			
 	var currentAnim = _animationTree.transition_node_get_current(GameConsts.ANIM_TRANSITION_NODE)
-
-	if(_isMoving(direction) and !_isInBattle):
+	if(_isMoving(_direction) and !_isInBattle):
 		# Face the movement direction
-		look_at(translation + direction, _upVector)
+		look_at(get_global_transform().origin + _direction, GameConsts.VECTOR3_UP)
 
 		# Move player in direction and collide
-		move_and_collide(direction.normalized() * _maxSpeed * delta)
+		move_and_collide(_direction.normalized() * _maxSpeed * delta)
 
 		if(currentAnim != GameConsts.ANIM_WALK_ID):
 			_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_WALK_ID)
 	elif(currentAnim != GameConsts.ANIM_IDLE_ID):
-		# Play animation
+		# Play idle animation
 		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
-			
 	pass
 	
-func _handleInput():	
-	if(Input.is_action_just_released("open_inventory")):
-		emit_signal("onRequestInventoryOpen")
 
-	# Handle battle skills
-	if(_hasTurn):
-		if(Input.is_action_just_released("skill_1")):
-			_castSkill(GameConsts.Skill.FIRE_BALL)
-		elif(Input.is_action_just_released("skill_9")):
-			_castSkill(GameConsts.Skill.POTION_HP)
-		elif(Input.is_action_just_released("skill_0")):
-			_castSkill(GameConsts.Skill.POTION_MP)
-
-	# Handle character movement
-	var direction = Vector3(0, 0, 0)
-	var forward = Vector3(0, 0, 1)
-	
-	if (Input.is_action_pressed("move_forward")):
-		direction += -forward
-	if (Input.is_action_pressed("move_backwards")):
-		direction += forward
-	if (Input.is_action_pressed("move_left")):
-		direction += Vector3(-1, 0, 0)
-	if (Input.is_action_pressed("move_right")):
-		direction += Vector3(1, 0, 0)
-			
-	return direction
 
 
 

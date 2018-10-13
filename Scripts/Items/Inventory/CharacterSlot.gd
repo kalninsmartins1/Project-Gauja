@@ -3,7 +3,7 @@ extends TextureRect
 enum ItemType { NONE, POTION, WEAPON, HELMET, ARMOR, GLOVES, BOOTS }
 export(ItemType) var _requiredItemType
 
-onready var _inventoryPopup = get_node("/root/Spatial/Player/PlayerUI/InventoryPopup")
+onready var _inventoryPopup = get_node("/root/Spatial/PlayerParty/PlayerUI/InventoryPopup")
 onready var _slotRect = get_global_rect()
 
 var _itemInSlot = null

@@ -11,7 +11,7 @@ export var _damage = 10.0
 
 # Private vars for this script usage only
 onready var _navigationManager = get_node("../Navigation")
-onready var _player = get_node("../Player")
+onready var _playerParty = get_node("../PlayerParty")
 onready var _tweener = get_node("Tween")
 onready var _animationTree = get_node("AnimationTreePlayer")
 onready var _battleManager = get_node("../BattleManager")
@@ -52,7 +52,7 @@ func getBattlePosition():
 	return _battlePosition
 
 func getPlayer():
-	return _player	
+	return _playerParty.getActivePlayer()
 
 func hasTurn():
 	return _hasTurn
@@ -130,14 +130,14 @@ func _ready():
 
 func _physics_process(delta):
 
-	var toPlayer = _player.translation - translation
+	var toPlayer = _playerParty.getActivePlayer().translation - translation
 
 	if(isAlive() and !_isInBattle and toPlayer.length_squared() <= _battleRadius*_battleRadius):
 		_isInBattle = true
 		_isMoving = false
 		_playIdleAnimation()
 		startRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
-		_battleManager.initiateBattle(_player, self)
+		_battleManager.initiateBattle(_playerParty, self)
 		_battlePosition = translation
 
 	# Make sure we are really not moving
