@@ -1,11 +1,12 @@
 extends Node
 
-export(PackedScene) var _playerTemplate
+export(Array) var _playerTemplates
 export var _fallowDistance = 5
 
 onready var _playerContainer = get_node("PlayerList")
 onready var _itemDatabase = get_node("../ItemDatabase")
 onready var _battleManager = get_node("../BattleManager")
+onready var _playerUI = get_node("PlayerUI")
 
 var _playerList = []
 var _inventory = []
@@ -59,15 +60,51 @@ func _addInventoryItem(itemId):
 
 func _initPlayers():
 	var _previousPlayer = null
-	for index in range(0, GameConsts.MAX_PARTY_COUNT):
-		var player = _playerTemplate.instance()
+	var index = 0
+	
+	for playerTemplate in _playerTemplates:
+		var player = playerTemplate.instance()
+		player.setId(index)
+		
 		_playerContainer.add_child(player)
 		_playerList.append(player)
+		_playerUI.addCharacterProfile(player)
+		_playerUI.connect("onActivePlayerSwitchRequest", self, "_onActivePlayerSwitchRequest")
+		
 		if index == 0:
 			_activePlayer = player
+			_playerUI.onActivePlayerChanged(player.getId())
 		else:
 			player.startFallow(_previousPlayer, _fallowDistance)
 		_previousPlayer = player
+		
+		index += 1
+	pass
+
+func _onActivePlayerSwitchRequest(playerId):
+	if !_isInBattle:
+		var inactivePlayerList = []
+		
+		# Set new active player
+		for player in _playerList:
+			if player.getId() == playerId:
+				_activePlayer = player
+				player.stopFallow()
+			else:
+				inactivePlayerList.append(player)
+		
+		# Make inactive players fallow the new active player
+		var previousPlayer = null
+		for player in inactivePlayerList:
+			if previousPlayer == null:
+				player.startFallow(_activePlayer, _fallowDistance)
+			else:
+				player.startFallow(previousPlayer, _fallowDistance)
+			
+			previousPlayer = player
+		
+		# Notify UI that active player has changed
+		_playerUI.onActivePlayerChanged(playerId)
 	pass
 
 func _process(delta):

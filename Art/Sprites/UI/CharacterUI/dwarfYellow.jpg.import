@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/angry_dwarf_0.jpg-8e789a0f3416905a976e9d2b86b28bc3.stex"
+path="res://.import/dwarfYellow.jpg-5051d1852ae07c97c9d1aa42fbf5f1c9.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/UI/CharacterUI/angry_dwarf_0.jpg"
-dest_files=[ "res://.import/angry_dwarf_0.jpg-8e789a0f3416905a976e9d2b86b28bc3.stex" ]
+source_file="res://Art/Sprites/UI/CharacterUI/dwarfYellow.jpg"
+dest_files=[ "res://.import/dwarfYellow.jpg-5051d1852ae07c97c9d1aa42fbf5f1c9.stex" ]
 
 [params]
 

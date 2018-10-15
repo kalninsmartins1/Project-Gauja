@@ -1,6 +1,7 @@
 extends KinematicBody
 
 # Member variables
+export(PackedScene) var _profileTemplate
 export var _maxSpeed = 10
 export var _manaRecharge = 10
 export var _healthRecharge = 10
@@ -10,6 +11,7 @@ onready var _playerParty = get_parent().get_parent()
 onready var _animationTree = get_node("AnimationTreePlayer")
 onready var _tween = get_node("PlayerUI/Tween")
 
+var _id = -1
 var _health = 100
 var _maxHealth = 100
 var _mana = 100
@@ -34,6 +36,16 @@ signal onBattleEnded
 
 # Public functions
 
+func getProfileTemplate():
+	return _profileTemplate	
+
+func getId():
+	return _id
+
+func setId(id):
+	_id = id
+	pass
+
 func setIsInBattle(isInBattle):
 	_isInBattle = _isInBattle
 	pass
@@ -50,6 +62,12 @@ func startFallow(fallowTarget, fallowDistance):
 	_fallowTarget = fallowTarget
 	_fallowDistance = fallowDistance
 	_isFallowing = true
+	pass
+
+func stopFallow():
+	_fallowTarget = null
+	_fallowDistance = 0
+	_isFallowing = false
 	pass
 
 func lookAt(position):

@@ -1,39 +1,46 @@
 extends Container
 
-export var _animateSpeed = 10
-
-onready var _player = get_parent()
-onready var _healthBar = get_node("Profile/GridContainer/GridContainer/Health")
-onready var _manaBar = get_node("Profile/GridContainer/GridContainer/Mana")
-onready var _tween = get_node("Tween")
+onready var _playerParty = get_parent()
 onready var _inventoryPopup = get_node("InventoryPopup")
 onready var _skillSelectionPanel = get_node("SkillSelectionPanel")
+onready var _playerProfilesContainer = get_node("PlayerProfiles")
+onready var _tween = get_node("Tween")
+
+var _characterProfiles = []
+
+signal onActivePlayerSwitchRequest
 
 func getPlayer():
-	return _player
+	return _playerParty.getActivePlayer()
 
-func _ready():	
-	_player.connect("onHealthChanged", self, "_onPlayerHealthChanged")
-	_player.connect("onManaChanged", self, "_onPlayerManaChanged")
-	_player.connect("onRequestInventoryOpen", self, "_onRequestInventoryOpen")
-	_player.connect("onBattleStarted", self, "_onPlayerEnterBattle")
-	_player.connect("onBattleEnded", self, "_onPlayerExitBattle")
+func onActivePlayerChanged(playerId):
+	for profile in _characterProfiles:
+		if profile.getPlayerId() == playerId:
+			profile.setActiveState(true)
+		else:
+			profile.setActiveState(false)
+	pass
+
+func addCharacterProfile(player):
+	var profile = player.getProfileTemplate().instance()
+	profile.init(player, _tween)
+	profile.connect("onActivePlayerSwitchRequest", self, "_onActivePlayerSwitchRequest")
+	_characterProfiles.append(profile)
+	_playerProfilesContainer.add_child(profile)	
+	pass
+
+func _ready():		
+	_playerParty.connect("onRequestInventoryOpen", self, "_onRequestInventoryOpen")
+	_playerParty.connect("onBattleStarted", self, "_onPlayerEnterBattle")
+	_playerParty.connect("onBattleEnded", self, "_onPlayerExitBattle")
+	pass
+
+func _onActivePlayerSwitchRequest(playerId):
+	emit_signal("onActivePlayerSwitchRequest", playerId)
 	pass
 
 func _onRequestInventoryOpen():
 	_inventoryPopup.show()
-	pass
-
-func _onPlayerHealthChanged(newValue):
-	
-	# Animate the health bar
-	Utils.startProgressBarAnimation(_healthBar, _tween, _animateSpeed, newValue)
-	pass
-	
-func _onPlayerManaChanged(newValue):
-	
-	# Animate the mana bar
-	Utils.startProgressBarAnimation(_manaBar, _tween, _animateSpeed, newValue)
 	pass
 
 func _onPlayerEnterBattle():
