@@ -7,13 +7,6 @@ onready var _playerParty = get_parent().get_parent()
 var _inventoryItemContainer = null
 var _inventorySlots = []
 var _characterSlots = []
-var _activeInventorySlot = null
-
-func getActiveItem():
-	var item = null
-	if _activeInventorySlot != null:
-		item = _activeInventorySlot.getItem()
-	return item
 	
 func _ready():	
 	connect("about_to_show", self, "_aboutToShowPopup")
@@ -49,8 +42,7 @@ func _initInventorySlots():
 	for i in range(0, GameConsts.MAX_ITEMS):
 		var itemSlot = _slotTemplate.instance()
 		_inventorySlots.append(itemSlot)
-		itemSlot.connect("onItemDragStarted", self, "_onSlotDragStarted")
-		itemSlot.connect("onItemDragEnded", self, "_onSlotDragEnded")
+		itemSlot.connect("onEquipItem", self, "_onEquipItem")
 		_inventoryItemContainer.add_child(itemSlot)
 	pass
 
@@ -59,24 +51,12 @@ func _initCharacterSlots():
 	# Get all the character slots
 	var slots = get_node("HBoxContainer/Character").get_children()
 	for slot in slots:
-		_characterSlots.append(slot.get_children()[0])
-	
-	# Listen for item placed signal
-	for charSlot in _characterSlots:
-		charSlot.connect("onItemPlaced", self, "_onItemPlaced")	
+		_characterSlots.append(slot.get_children()[0])	
 	pass
 	
-func _onItemPlaced(item):
-	_playerParty.getActivePlayer().setEquipedItemId(item)	
-	_activeInventorySlot.getItem().set_texture(null)	
-	pass
-	
-func _onSlotDragStarted(slot):
-	_activeInventorySlot = slot
-	pass
-
-func _onSlotDragEnded(slot):
-	_activeInventorySlot = null
+func _onEquipItem(item):
+	_playerParty.getActivePlayer().setEquipedItemId(item)
+	_updateCharacterSlots()
 	pass
 
 func _updateInventorySlots():
