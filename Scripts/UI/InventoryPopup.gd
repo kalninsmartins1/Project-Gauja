@@ -2,12 +2,7 @@ extends WindowDialog
 
 export(PackedScene) var _slotTemplate
 
-onready var _player = get_parent().get_parent()
-onready var _helmetSlot = get_node("HBoxContainer/Character/HelmetSlot/Helmet")
-onready var _armorSlot = get_node("HBoxContainer/Character/ArmorSlot/Armor")
-onready var _glovesSlot = get_node("HBoxContainer/Character/GlovesSlot/Gloves")
-onready var _weaponSlot = get_node("HBoxContainer/Character/WeaponSlot/Weapon")
-onready var _bootsSlot = get_node("HBoxContainer/Character/BootsSlot/Boots")
+onready var _playerParty = get_parent().get_parent()
 
 var _inventoryItemContainer = null
 var _inventorySlots = []
@@ -21,10 +16,33 @@ func getActiveItem():
 	return item
 	
 func _ready():	
-	_player.connect("onInventoryChanged", self, "_onUpdateInventory")
+	connect("about_to_show", self, "_aboutToShowPopup")
+	_playerParty.connect("onInventoryChanged", self, "_updateInventorySlots")
+	_playerParty.connect("onActivePlayerSwitched", self, "_onActivePlayerSwitched")
 	_inventoryItemContainer = get_node("HBoxContainer/Inventory/ScrollContainer/GridContainer")
 	_initInventorySlots()
 	_initCharacterSlots()
+	pass
+	
+func _aboutToShowPopup():
+	_updateCharacterSlots()
+	pass
+	
+func _onActivePlayerSwitched():
+	_updateCharacterSlots()
+	pass
+	
+func _updateCharacterSlots():
+	var activePlayer = _playerParty.getActivePlayer()	
+	var itemDetabase = _playerParty.getItemDatabase()
+	
+	for charSlot in _characterSlots:
+		var itemId = activePlayer.getEquipedItemId(charSlot.getItemType())
+		if itemId != -1:
+			var itemTemplate = itemDetabase.getItem(itemId)		
+			charSlot.spawnItem(itemTemplate, itemId)
+		else:
+			charSlot.clear()
 	pass
 
 func _initInventorySlots():
@@ -37,15 +55,20 @@ func _initInventorySlots():
 	pass
 
 func _initCharacterSlots():
-	_helmetSlot.connect("onItemPlaced", self, "_onItemPlaced")
-	_armorSlot.connect("onItemPlaced", self, "_onItemPlaced")
-	_glovesSlot.connect("onItemPlaced", self, "_onItemPlaced")
-	_weaponSlot.connect("onItemPlaced", self, "_onItemPlaced")
-	_bootsSlot.connect("onItemPlaced", self, "_onItemPlaced")
+	
+	# Get all the character slots
+	var slots = get_node("HBoxContainer/Character").get_children()
+	for slot in slots:
+		_characterSlots.append(slot.get_children()[0])
+	
+	# Listen for item placed signal
+	for charSlot in _characterSlots:
+		charSlot.connect("onItemPlaced", self, "_onItemPlaced")	
 	pass
 	
-func _onItemPlaced():
-	_activeInventorySlot.getItem().set_texture(null)
+func _onItemPlaced(item):
+	_playerParty.getActivePlayer().setEquipedItemId(item)	
+	_activeInventorySlot.getItem().set_texture(null)	
 	pass
 	
 func _onSlotDragStarted(slot):
@@ -56,13 +79,13 @@ func _onSlotDragEnded(slot):
 	_activeInventorySlot = null
 	pass
 
-func _onUpdateInventory():
-	var inventory = _player.getInventory()
-	var itemDetabase = _player.getItemDatabase()
+func _updateInventorySlots():
+	var inventory = _playerParty.getInventory()
+	var itemDetabase = _playerParty.getItemDatabase()
 	
 	var index = 0
 	for itemId in inventory:
-		var item = itemDetabase.getItem(itemId)
-		_inventorySlots[index].spawnItem(item)
+		var itemTemplate = itemDetabase.getItem(itemId)		
+		_inventorySlots[index].spawnItem(itemTemplate, itemId)
 		index += 1
 	pass

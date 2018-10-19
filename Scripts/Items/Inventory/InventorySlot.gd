@@ -12,8 +12,9 @@ signal onItemDragEnded
 func getItem():
 	return _item
 
-func spawnItem(itemTemplate):
+func spawnItem(itemTemplate, itemId):
 	_item = itemTemplate.instance()
+	_item.setId(itemId)
 	_item.rect_min_size = rect_min_size
 	_item.rect_size = rect_size	
 	add_child(_item)

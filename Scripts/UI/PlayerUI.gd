@@ -40,7 +40,7 @@ func _onActivePlayerSwitchRequest(playerId):
 	pass
 
 func _onRequestInventoryOpen():
-	_inventoryPopup.show()
+	_inventoryPopup.popup()
 	pass
 
 func _onPlayerEnterBattle():

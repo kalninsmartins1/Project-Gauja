@@ -14,6 +14,12 @@ var _activePlayer = null
 var _isInBattle = false
 var _hasTurn = false
 
+signal onInventoryChanged
+signal onRequestInventoryOpen
+signal onBattleStarted
+signal onBattleEnded
+signal onActivePlayerSwitched
+
 func isInBattle():
 	return _isInBattle
 	
@@ -51,11 +57,20 @@ func battleEnded(loot):
 	pass
 
 func _ready():
-	_initPlayers()	
+	_initPlayers()
+	_itemDatabase.connect("onItemDatabaseInitialized", self, "_onItemDatabaseInitialized")
+	
+	pass
+
+func _onItemDatabaseInitialized():
+	# For testing purposes
+	for itemId in _itemDatabase.getItemIdList():
+		_addInventoryItem(itemId)
+	emit_signal("onInventoryChanged")	
 	pass
 
 func _addInventoryItem(itemId):
-	_inventory.append(itemId)	
+	_inventory.append(itemId)
 	pass
 
 func _initPlayers():
@@ -105,6 +120,7 @@ func _onActivePlayerSwitchRequest(playerId):
 		
 		# Notify UI that active player has changed
 		_playerUI.onActivePlayerChanged(playerId)
+		emit_signal("onActivePlayerSwitched")
 	pass
 
 func _process(delta):

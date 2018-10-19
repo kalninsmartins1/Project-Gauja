@@ -24,15 +24,15 @@ var _fallowTarget = null
 var _fallowDistance = 0
 var _isFallowing = false
 
+# -1 means no item in slot
+# First 2 slots are not used
+var _equipedItemIds = [-1, -1, -1, -1, -1, -1, -1] 
+
 # Signals
 signal onHealthChanged
 signal onManaChanged
 signal onLootReceived
 signal onTurnFinished
-signal onInventoryChanged
-signal onRequestInventoryOpen
-signal onBattleStarted
-signal onBattleEnded
 
 # Public functions
 
@@ -41,6 +41,13 @@ func getProfileTemplate():
 
 func getId():
 	return _id
+	
+func getEquipedItemId(itemType):
+	return _equipedItemIds[itemType]
+
+func setEquipedItemId(item):
+	_equipedItemIds[item.getItemType()] = item.getId()
+	pass
 
 func setId(id):
 	_id = id
