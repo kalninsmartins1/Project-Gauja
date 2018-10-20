@@ -10,9 +10,10 @@ func _ready():
 	pass
 	
 func _onLootAddedToInventory(loot):
-	var itemDatabase = _playerParty.getItemDatabase()
-	for itemId in loot:
-		var item = itemDatabase.getItem(itemId).instance()
-		_gridContainer.add_child(item)
-	show()
+	if loot.size() > 0:
+		var itemDatabase = _playerParty.getItemDatabase()
+		for itemId in loot:
+			var item = itemDatabase.getItem(itemId).instance()
+			_gridContainer.add_child(item)
+		show()
 	pass

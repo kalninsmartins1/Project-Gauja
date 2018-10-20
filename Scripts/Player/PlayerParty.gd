@@ -27,10 +27,9 @@ signal onLootReceived
 
 func isInBattle():
 	return _isInBattle
-	
-func setHasTurn(hasTurn):
-	_hasTurn = hasTurn
-	pass
+
+func hasItem(itemId):
+	return _inventory.has(itemId)	
 
 func getTarget():
 	return _battleManager.getTarget()
@@ -43,6 +42,10 @@ func getItemDatabase():
 
 func getActivePlayer():
 	return _activePlayer
+
+func setHasTurn(hasTurn):
+	_hasTurn = hasTurn
+	pass
 
 func battleStarted(enemy):
 	_isInBattle = true
