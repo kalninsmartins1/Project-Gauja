@@ -3891,7 +3891,7 @@ tracks/40/imported = true
 tracks/40/enabled = true
 tracks/40/keys = PoolRealArray( 0, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1, 2.25, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1 )
 
-[node name="Chicken" type="RigidBody"]
+[node name="Chicken" type="RigidBody" index="0"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
