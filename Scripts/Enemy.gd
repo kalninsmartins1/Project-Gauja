@@ -126,6 +126,7 @@ func playAttackAnim():
 func _ready():
 	_setupAnimations()
 	set_linear_velocity(Vector3(0, 0, 0))
+	connect("body_entered", self, "_onCollision")
 	pass
 
 func _physics_process(delta):
@@ -231,7 +232,7 @@ func _takeDamage(damage):
 		queue_free()
 	pass
 	
-func _on_Chicken_body_entered(body):
+func _onCollision(body):
 	if(body.name == "fireball"):
 		_isTakingDamage = true
 		_takeDamage(body.getDamage())

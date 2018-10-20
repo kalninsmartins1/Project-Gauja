@@ -1,7 +1,7 @@
 extends Node
 
 enum Turn { PLAYER, ENEMY }
-var _player = null
+var _playerParty = null
 var _enemy = null
 var _isBattleActive = false
 var _currentTurn = Turn.PLAYER
@@ -9,11 +9,12 @@ var _currentTurn = Turn.PLAYER
 func getTarget():
 	return _enemy
 
-func initiateBattle(var player, var enemy):
-	_player = player
-	_player.battleStarted(enemy)
-	_player.connect("onTurnFinished", self, "_turnFinished")
-	_player.connect("onHealthChanged", self, "_playerHealthChanged")
+func initiateBattle(var playerParty, var enemy):
+	_playerParty = playerParty
+	_playerParty.battleStarted(enemy)
+	_playerParty.connect("onTurnFinished", self, "_turnFinished")
+	_playerParty.connect("onHealthChanged", self, "_playerHealthChanged")
+	
 	_enemy = enemy
 	_enemy.connect("onTurnFinished", self, "_turnFinished")
 	_enemy.connect("onHealthChanged", self, "_enemyHealthChanged")
@@ -34,10 +35,10 @@ func _setCurrentTurn(turn):
 	_currentTurn = turn
 	if(_currentTurn == Turn.PLAYER):
 		_enemy.setHasTurn(false)
-		_player.setHasTurn(true)
+		_playerParty.setHasTurn(true)
 	else:
 		_enemy.setHasTurn(true)
-		_player.setHasTurn(false)
+		_playerParty.setHasTurn(false)
 	pass
 
 func _turnFinished():
@@ -60,7 +61,7 @@ func _endBattle(var shouldGiveLoot):
 	if(shouldGiveLoot):
 		lootArray = _calculateLoot()
 				
-	_player.battleEnded(lootArray)
+	_playerParty.battleEnded(lootArray)
 	_enemy.battleEnded()
 	_isBattleActive = false
 	pass

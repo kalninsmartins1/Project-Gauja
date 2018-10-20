@@ -22,6 +22,7 @@ signal onRequestInventoryOpen
 signal onBattleStarted
 signal onBattleEnded
 signal onActivePlayerSwitched
+signal onTurnFinished
 
 func isInBattle():
 	return _isInBattle
@@ -109,6 +110,7 @@ func _initPlayers():
 		var player = playerTemplate.instance()
 		player.setId(index)
 		player.connect("onMovePositionReached", self, "_onPlayerReachedPosition")
+		player.connect("onTurnFinished", self, "_playerFinishedTurn")
 		
 		_playerContainer.add_child(player)
 		_playerList.append(player)
@@ -123,6 +125,10 @@ func _initPlayers():
 		_previousPlayer = player
 		
 		index += 1
+	pass
+
+func _playerFinishedTurn(player):
+	emit_signal("onTurnFinished")
 	pass
 	
 func _onPlayerReachedPosition(player):

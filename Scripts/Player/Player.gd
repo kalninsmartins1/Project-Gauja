@@ -147,7 +147,7 @@ func _addHealth(amount):
 	pass
 
 func _onPotionRechargeFinished():
-	emit_signal("onTurnFinished")
+	emit_signal("onTurnFinished", self)
 	pass
 
 func _shootFireball(target):
@@ -167,7 +167,7 @@ func _shootFireball(target):
 	pass
 
 func _attackFinished():
-	emit_signal("onTurnFinished")
+	emit_signal("onTurnFinished", self)
 	_isAttackFinished = true
 	pass
 
