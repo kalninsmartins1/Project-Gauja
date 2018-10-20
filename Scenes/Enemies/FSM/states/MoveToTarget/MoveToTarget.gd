@@ -30,8 +30,9 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 
 	# Move to player Move closer state
 	var player = _enemy.getPlayer()
-	var toEnemy = _enemy.translation - player.translation
-	var attackPosition = player.translation + toEnemy * 0.5
+	var playerPosition = player.get_global_transform().origin
+	var toEnemy = _enemy.translation - playerPosition
+	var attackPosition = playerPosition + toEnemy * 0.5
 	_enemy.setDestination(attackPosition)
 	pass
 

@@ -1,30 +1,32 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
-[ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=1]
-[ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=2]
-[ext_resource path="res://Art/Models/Chicken/Material_001.material" type="Material" id=3]
-[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=4]
-[ext_resource path="res://addons/net.kivano.fsm/assets/ico3d.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/Enemies/FSM/states/Idle/Idle.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Enemies/FSM/states/Wonder/Wonder.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Enemies/FSM/states/Battle/Battle.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToTarget/MoveToTarget.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToBattlePos/MoveToBattlePos.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Enemies/FSM/states/TakeDamage/TakeDamage.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattle/ToBattle.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToBattlePosition/ToMoveToBattlePosition.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattleFromAttack/ToBattleFromAttack.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToTakeDamage/ToTakeDamage.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonderFromBattle/ToWonderFromBattle.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonderFromBattle/ToWonderFromBattle.gd" type="Script" id=22]
-[ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=23]
-[ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=24]
-[ext_resource path="res://Scripts/UI/EnemyUI.gd" type="Script" id=25]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenArmor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenHelmet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=4]
+[ext_resource path="res://Art/Models/Chicken/Comb.material" type="Material" id=5]
+[ext_resource path="res://Art/Models/Chicken/Material_001.material" type="Material" id=6]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=7]
+[ext_resource path="res://addons/net.kivano.fsm/assets/ico3d.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Idle/Idle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Wonder/Wonder.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Battle/Battle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToTarget/MoveToTarget.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Enemies/FSM/states/Attack/Attack.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Enemies/FSM/states/MoveToBattlePos/MoveToBattlePos.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemies/FSM/states/TakeDamage/TakeDamage.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonder/ToWonder.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToIdle/ToIdle.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattle/ToBattle.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToTarget/ToMoveToTarget.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToAttack/ToAttack.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToMoveToBattlePosition/ToMoveToBattlePosition.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToBattleFromAttack/ToBattleFromAttack.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToTakeDamage/ToTakeDamage.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Enemies/FSM/transitions/ToWonderFromBattle/ToWonderFromBattle.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=25]
+[ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=26]
+[ext_resource path="res://Scripts/UI/EnemyUI.gd" type="Script" id=27]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -42,7 +44,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98295,
 "index_count": 7956,
-"material": ExtResource( 1 ),
+"material": ExtResource( 4 ),
 "name": "Chicken",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -55,7 +57,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 98295,
 "index_count": 72,
-"material": ExtResource( 2 ),
+"material": ExtResource( 5 ),
 "name": "Comb",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -73,7 +75,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 144,
-"material": ExtResource( 3 ),
+"material": ExtResource( 6 ),
 "name": "Material.001",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -3889,7 +3891,7 @@ tracks/40/imported = true
 tracks/40/enabled = true
 tracks/40/keys = PoolRealArray( 0, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1, 2.25, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1 )
 
-[node name="RigidBody" type="RigidBody" index="0"]
+[node name="Chicken" type="RigidBody"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -3916,7 +3918,15 @@ linear_velocity = Vector3( 0, 0, 0 )
 linear_damp = -1.0
 angular_velocity = Vector3( 0, 0, 0 )
 angular_damp = -1.0
+script = ExtResource( 1 )
 _sections_unfolded = [ "Axis Lock", "Transform" ]
+_lootTable = [ ExtResource( 2 ), ExtResource( 3 ) ]
+_moveSpeed = 2.0
+_rotationSpeed = 20.0
+_activeRadius = 20.0
+_battleRadius = 5
+_health = 100.0
+_damage = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="0"]
 
@@ -4151,7 +4161,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 2 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 6 )
 material/1 = null
 _sections_unfolded = [ "material" ]
 
@@ -4243,10 +4253,10 @@ _sections_unfolded = [ "Playback Options" ]
 [node name="StateMachine" type="Spatial" parent="." index="4"]
 
 editor/display_folded = true
-script = ExtResource( 4 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
-"_editor_icon": ExtResource( 5 )
+"_editor_icon": ExtResource( 8 )
 }
 path2LogicRoot = NodePath("..")
 onlyActiveStateOnTheScene = false
@@ -4308,70 +4318,68 @@ GraphData = {
 
 [node name="States" type="Spatial" parent="StateMachine" index="0"]
 
-[node name="Idle" parent="StateMachine/States" index="0" instance=ExtResource( 6 )]
+[node name="Idle" parent="StateMachine/States" index="0" instance=ExtResource( 9 )]
 
-[node name="Wonder" parent="StateMachine/States" index="1" instance=ExtResource( 7 )]
+[node name="Wonder" parent="StateMachine/States" index="1" instance=ExtResource( 10 )]
 
-[node name="Battle" parent="StateMachine/States" index="2" instance=ExtResource( 8 )]
+[node name="Battle" parent="StateMachine/States" index="2" instance=ExtResource( 11 )]
 
-[node name="MoveToTarget" parent="StateMachine/States" index="3" instance=ExtResource( 9 )]
+[node name="MoveToTarget" parent="StateMachine/States" index="3" instance=ExtResource( 12 )]
 
-[node name="Attack" parent="StateMachine/States" index="4" instance=ExtResource( 10 )]
+[node name="Attack" parent="StateMachine/States" index="4" instance=ExtResource( 13 )]
 
-[node name="MoveToBattlePos" parent="StateMachine/States" index="5" instance=ExtResource( 11 )]
+[node name="MoveToBattlePos" parent="StateMachine/States" index="5" instance=ExtResource( 14 )]
 
-[node name="TakeDamage" parent="StateMachine/States" index="6" instance=ExtResource( 12 )]
+[node name="TakeDamage" parent="StateMachine/States" index="6" instance=ExtResource( 15 )]
 
 _damageTakingTime = 2.0
 
 [node name="Transitions" type="Spatial" parent="StateMachine" index="1"]
 
-[node name="ToWonder" parent="StateMachine/Transitions" index="0" instance=ExtResource( 13 )]
+[node name="ToWonder" parent="StateMachine/Transitions" index="0" instance=ExtResource( 16 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Wonder")
 
-[node name="ToIdle" parent="StateMachine/Transitions" index="1" instance=ExtResource( 14 )]
+[node name="ToIdle" parent="StateMachine/Transitions" index="1" instance=ExtResource( 17 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Wonder") ]
 path2TargetState = NodePath("../../States/Idle")
 
-[node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 15 )]
+[node name="ToBattle" parent="StateMachine/Transitions" index="2" instance=ExtResource( 18 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Wonder"), NodePath("../../States/TakeDamage") ]
 path2TargetState = NodePath("../../States/Battle")
 
-[node name="ToMoveToTarget" parent="StateMachine/Transitions" index="3" instance=ExtResource( 16 )]
+[node name="ToMoveToTarget" parent="StateMachine/Transitions" index="3" instance=ExtResource( 19 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
 path2TargetState = NodePath("../../States/MoveToTarget")
 
-[node name="ToAttack" parent="StateMachine/Transitions" index="4" instance=ExtResource( 17 )]
+[node name="ToAttack" parent="StateMachine/Transitions" index="4" instance=ExtResource( 20 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/MoveToTarget") ]
 path2TargetState = NodePath("../../States/Attack")
 
-[node name="ToMoveToBattlePosition" parent="StateMachine/Transitions" index="5" instance=ExtResource( 18 )]
+[node name="ToMoveToBattlePosition" parent="StateMachine/Transitions" index="5" instance=ExtResource( 21 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Attack") ]
 path2TargetState = NodePath("../../States/MoveToBattlePos")
 
-[node name="ToBattleFromAttack" parent="StateMachine/Transitions" index="6" instance=ExtResource( 19 )]
+[node name="ToBattleFromAttack" parent="StateMachine/Transitions" index="6" instance=ExtResource( 22 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/MoveToBattlePos") ]
 path2TargetState = NodePath("../../States/Battle")
 
-[node name="ToTakeDamage" parent="StateMachine/Transitions" index="7" instance=ExtResource( 20 )]
+[node name="ToTakeDamage" parent="StateMachine/Transitions" index="7" instance=ExtResource( 23 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Battle"), NodePath("../../States/MoveToTarget") ]
 path2TargetState = NodePath("../../States/TakeDamage")
 
-[node name="ToWonderFromBattle" type="Node" parent="StateMachine/Transitions" index="8" instance=ExtResource( 21 )]
+[node name="ToWonderFromBattle" parent="StateMachine/Transitions" index="8" instance=ExtResource( 24 )]
 
-script = ExtResource( 22 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Battle") ]
 path2TargetState = NodePath("../../States/Wonder")
-intervalBetweenChecks = -1.0
 
 [node name="Tween" type="Tween" parent="." index="5"]
 
@@ -4406,13 +4414,13 @@ page = 0.0
 value = 100.0
 exp_edit = false
 rounded = false
-texture_under = ExtResource( 23 )
+texture_under = ExtResource( 25 )
 texture_over = null
-texture_progress = ExtResource( 24 )
+texture_progress = ExtResource( 26 )
 radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
-script = ExtResource( 25 )
+script = ExtResource( 27 )
 _sections_unfolded = [ "Rect" ]
 _animationSpeed = 10
 

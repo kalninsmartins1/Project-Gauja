@@ -6,6 +6,7 @@ export var _fallowDistance = 5
 onready var _playerContainer = get_node("PlayerList")
 onready var _itemDatabase = get_node("../ItemDatabase")
 onready var _battleManager = get_node("../BattleManager")
+onready var _navigationManager = get_node("../Navigation")
 onready var _playerUI = get_node("PlayerUI")
 
 var _playerList = []
@@ -13,6 +14,8 @@ var _inventory = []
 var _activePlayer = null
 var _isInBattle = false
 var _hasTurn = false
+var _enemy = null
+var _waitingForPlayers = []
 
 signal onInventoryChanged
 signal onRequestInventoryOpen
@@ -41,13 +44,14 @@ func getActivePlayer():
 
 func battleStarted(enemy):
 	_isInBattle = true
-	for player in _playerList:
-		player.lookAt(enemy.translation)	
-	emit_signal("onBattleStarted")
+	_enemy = enemy
+	
+	_preparePlayersForBattle()
 	pass
 	
 func battleEnded(loot):
 	_isInBattle = false
+	_enemy = null
 	if(loot != null):
 		emit_signal("onLootReceived", loot)
 		for itemId in loot:
@@ -60,6 +64,30 @@ func _ready():
 	_initPlayers()
 	_itemDatabase.connect("onItemDatabaseInitialized", self, "_onItemDatabaseInitialized")
 	
+	pass
+	
+func _preparePlayersForBattle():
+	_activePlayer.lookAt(_enemy.get_global_transform().origin)
+	_activePlayer.setMoveDirection(Vector3(0, 0, 0))
+	
+	if _playerList.size() == 1:
+		emit_signal("onBattleStarted")
+	else:
+		var activePlayerTransform = _activePlayer.get_global_transform()	
+		var activePlayerPosition = activePlayerTransform.origin	
+		var leftPosition = activePlayerPosition - activePlayerTransform.basis.x * _fallowDistance
+		var rightPosition = activePlayerPosition + activePlayerTransform.basis.x * _fallowDistance
+		var availablePositions = [leftPosition, rightPosition]
+		
+		var index = 0
+		for player in _playerList:
+			var playerId = player.getId()
+			if playerId != _activePlayer.getId():
+				var path = _navigationManager.get_simple_path(player.get_global_transform().origin, availablePositions[index])				
+				player.stopFallow()
+				player.moveToPosition(path)
+				_waitingForPlayers.append(playerId)
+				index += 1
 	pass
 
 func _onItemDatabaseInitialized():
@@ -80,6 +108,7 @@ func _initPlayers():
 	for playerTemplate in _playerTemplates:
 		var player = playerTemplate.instance()
 		player.setId(index)
+		player.connect("onMovePositionReached", self, "_onPlayerReachedPosition")
 		
 		_playerContainer.add_child(player)
 		_playerList.append(player)
@@ -94,6 +123,14 @@ func _initPlayers():
 		_previousPlayer = player
 		
 		index += 1
+	pass
+	
+func _onPlayerReachedPosition(player):
+	if _isInBattle:
+		player.lookAt(_enemy.get_global_transform().origin)
+		_waitingForPlayers.erase(player.getId())
+		if _waitingForPlayers.size() == 0:
+			emit_signal("onBattleStarted")
 	pass
 
 func _onActivePlayerSwitchRequest(playerId):
@@ -140,18 +177,19 @@ func _handleInput():
 		elif(Input.is_action_just_released("skill_0")):
 			_activePlayer.castSkill(GameConsts.Skill.POTION_MP)
 
-	# Handle character movement
-	var direction = Vector3(0, 0, 0)
-	var forward = Vector3(0, 0, 1)
-	
-	if (Input.is_action_pressed("move_forward")):
-		direction += -forward
-	if (Input.is_action_pressed("move_backwards")):
-		direction += forward
-	if (Input.is_action_pressed("move_left")):
-		direction += Vector3(-1, 0, 0)
-	if (Input.is_action_pressed("move_right")):
-		direction += Vector3(1, 0, 0)
-	
-	_activePlayer.setMoveDirection(direction)
+	if !_isInBattle:
+		# Handle character movement
+		var direction = Vector3(0, 0, 0)
+		var forward = Vector3(0, 0, 1)
+		
+		if (Input.is_action_pressed("move_forward")):
+			direction += -forward
+		if (Input.is_action_pressed("move_backwards")):
+			direction += forward
+		if (Input.is_action_pressed("move_left")):
+			direction += Vector3(-1, 0, 0)
+		if (Input.is_action_pressed("move_right")):
+			direction += Vector3(1, 0, 0)
+		
+		_activePlayer.setMoveDirection(direction)
 	pass

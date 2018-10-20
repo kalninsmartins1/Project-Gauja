@@ -1,7 +1,7 @@
 extends RigidBody
 
 # Export vars
-export(Array, Array) var _lootTable
+export(Array) var _lootTable
 export var _moveSpeed = 20.0
 export var _rotationSpeed = 20.0
 export var _activeRadius = 100.0
@@ -130,7 +130,9 @@ func _ready():
 
 func _physics_process(delta):
 
-	var toPlayer = _playerParty.getActivePlayer().translation - translation
+	var playerPosition = _playerParty.getActivePlayer().get_global_transform().origin
+	var enemyPosition = get_global_transform().origin
+	var toPlayer =  playerPosition - enemyPosition
 
 	if(isAlive() and !_isInBattle and toPlayer.length_squared() <= _battleRadius*_battleRadius):
 		_isInBattle = true
@@ -138,7 +140,7 @@ func _physics_process(delta):
 		_playIdleAnimation()
 		startRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
 		_battleManager.initiateBattle(_playerParty, self)
-		_battlePosition = translation
+		_battlePosition = enemyPosition
 
 	# Make sure we are really not moving
 	if(!_isMoving or _isTakingDamage):
@@ -157,7 +159,7 @@ func _integrate_forces(state):
 	if(_isMoving and !_isTakingDamage):
 		if(_curPath.size() > 0 ):
 			var target = _curPath[_curIndex]
-			var toTargetInSpace = target - translation
+			var toTargetInSpace = target - get_global_transform().origin
 			var toTargetOnPlane = Vector2(toTargetInSpace.x, toTargetInSpace.z)
 
 			if(toTargetOnPlane.length_squared() > 0.25):

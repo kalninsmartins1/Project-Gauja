@@ -26,13 +26,16 @@ var _isFallowing = false
 
 # -1 means no item in slot
 # First 2 slots are not used
-var _equipedItemIds = [-1, -1, -1, -1, -1, -1, -1] 
+var _equipedItemIds = [-1, -1, -1, -1, -1, -1, -1]
+var _aiPath = null
+var _isMovingToPosition = false
 
 # Signals
 signal onHealthChanged
 signal onManaChanged
 signal onLootReceived
 signal onTurnFinished
+signal onMovePositionReached
 
 # Public functions
 
@@ -63,6 +66,11 @@ func setMoveDirection(direction):
 
 func setRespawnPosition(position):
 	_respawnPosition = position
+	pass
+	
+func moveToPosition(path):
+	_aiPath = path
+	_isMovingToPosition = true
 	pass
 
 func startFallow(fallowTarget, fallowDistance):
@@ -104,6 +112,19 @@ func castSkill(skillId):
 				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
 				
 	pass
+	
+func _moveTowardsPosition(targetPosition, maxDistance):	
+	var curPosition = get_global_transform().origin
+	var toTarget = targetPosition - curPosition
+	var hasArrived = false
+	var lengthSquared = toTarget.length_squared()
+	if toTarget.length_squared() > maxDistance*maxDistance:
+		_direction = toTarget
+	else:
+		_direction = Vector3(0, 0, 0)
+		hasArrived = true
+		
+	return hasArrived
 
 func _consumeMana(amount):
 	var hasEnoughMana = amount < _mana
@@ -165,31 +186,41 @@ func _respawn():
 func _ready():	
 	_animationTree.set_active(true)
 	pass
+	
+func _finishedMovingToPosition():
+	_aiPath = null	
+	_isMovingToPosition = false
+	emit_signal("onMovePositionReached", self)
+	pass
 
 func _physics_process(delta):
 	
-	if(_isFallowing):
-		var toTarget = (_fallowTarget.translation - translation)
-		var distanceToTargetSqr = toTarget.length_squared()
-		if distanceToTargetSqr > _fallowDistance*_fallowDistance:
-			_direction = toTarget
-		else:
-			_direction = Vector3(0, 0, 0)
+	if _isFallowing:
+		_moveTowardsPosition(_fallowTarget.get_global_transform().origin, _fallowDistance)		
+			
+	if _isMovingToPosition and _aiPath.size() > 0:
+		if _moveTowardsPosition(_aiPath[0], 0.5):
+			_aiPath.remove(0)
+		
+		if _aiPath.size() == 0:
+			_finishedMovingToPosition()
 
 	var currentAnim = _animationTree.transition_node_get_current(GameConsts.ANIM_TRANSITION_NODE)
-	if(_isMoving(_direction) and !_isInBattle):
+	if _isMoving(_direction) and !_isInBattle:
 		# Face the movement direction
 		look_at(get_global_transform().origin + _direction, GameConsts.VECTOR3_UP)
 
 		# Move player in direction and collide
 		move_and_collide(_direction.normalized() * _maxSpeed * delta)
 
-		if(currentAnim != GameConsts.ANIM_WALK_ID):
+		if currentAnim != GameConsts.ANIM_WALK_ID:
 			_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_WALK_ID)
-	elif(currentAnim != GameConsts.ANIM_IDLE_ID):
+	elif currentAnim != GameConsts.ANIM_IDLE_ID:
 		# Play idle animation
 		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
 	pass
+	
+	
 	
 
 

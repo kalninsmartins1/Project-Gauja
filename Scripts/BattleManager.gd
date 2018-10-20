@@ -74,12 +74,11 @@ func _calculateLoot():
 	var loot = []
 	var table = _enemy.getLootTable()
 	
-	for row in table:
-		for cell in row:
-			var lootEntry = cell.instance()
-			var probability = lootEntry.getProbability()
-	
-			if(Utils.isChanceHit(probability)):
-				loot.append(lootEntry.getItemId())
+	for lootEntryTemplate in table:		
+		var lootEntry = lootEntryTemplate.instance()
+		var probability = lootEntry.getProbability()
+
+		if(Utils.isChanceHit(probability)):
+			loot.append(lootEntry.getItemId())
 				
 	return loot
