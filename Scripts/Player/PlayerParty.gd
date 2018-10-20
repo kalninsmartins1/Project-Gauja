@@ -23,6 +23,7 @@ signal onBattleStarted
 signal onBattleEnded
 signal onActivePlayerSwitched
 signal onTurnFinished
+signal onLootReceived
 
 func isInBattle():
 	return _isInBattle
@@ -59,6 +60,7 @@ func battleEnded(loot):
 			_addInventoryItem(itemId)
 		emit_signal("onInventoryChanged")
 	emit_signal("onBattleEnded")
+	_startFallowingActivePlayer(_activePlayer.getId())
 	pass
 
 func _ready():
@@ -127,6 +129,28 @@ func _initPlayers():
 		index += 1
 	pass
 
+func _startFallowingActivePlayer(playerId):
+	var inactivePlayerList = []
+		
+	# Set new active player
+	for player in _playerList:
+		if player.getId() == playerId:
+			_activePlayer = player
+			player.stopFallow()
+		else:
+			inactivePlayerList.append(player)
+	
+	# Make inactive players fallow the new active player
+	var previousPlayer = null
+	for player in inactivePlayerList:
+		if previousPlayer == null:
+			player.startFallow(_activePlayer, _fallowDistance)
+		else:
+			player.startFallow(previousPlayer, _fallowDistance)
+		
+		previousPlayer = player
+	pass
+
 func _playerFinishedTurn(player):
 	emit_signal("onTurnFinished")
 	pass
@@ -141,25 +165,7 @@ func _onPlayerReachedPosition(player):
 
 func _onActivePlayerSwitchRequest(playerId):
 	if !_isInBattle:
-		var inactivePlayerList = []
-		
-		# Set new active player
-		for player in _playerList:
-			if player.getId() == playerId:
-				_activePlayer = player
-				player.stopFallow()
-			else:
-				inactivePlayerList.append(player)
-		
-		# Make inactive players fallow the new active player
-		var previousPlayer = null
-		for player in inactivePlayerList:
-			if previousPlayer == null:
-				player.startFallow(_activePlayer, _fallowDistance)
-			else:
-				player.startFallow(previousPlayer, _fallowDistance)
-			
-			previousPlayer = player
+		_startFallowingActivePlayer(playerId)
 		
 		# Notify UI that active player has changed
 		_playerUI.onActivePlayerChanged(playerId)

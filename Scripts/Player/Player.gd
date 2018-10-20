@@ -9,7 +9,7 @@ export var _potionRechargeTime = 1.5
 
 onready var _playerParty = get_parent().get_parent()
 onready var _animationTree = get_node("AnimationTreePlayer")
-onready var _tween = get_node("PlayerUI/Tween")
+onready var _tween = get_node("../PlayerUI/Tween")
 
 var _id = -1
 var _health = 100
@@ -33,7 +33,6 @@ var _isMovingToPosition = false
 # Signals
 signal onHealthChanged
 signal onManaChanged
-signal onLootReceived
 signal onTurnFinished
 signal onMovePositionReached
 
