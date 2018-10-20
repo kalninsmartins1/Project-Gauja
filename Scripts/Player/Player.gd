@@ -152,14 +152,14 @@ func _onPotionRechargeFinished():
 
 func _shootFireball(target):
 	var fireball = preload("res://Scenes/fireball.scn").instance()
-	var hasEnoughMana = _consumeMana(fireball.getManaConsumption())	
-	if(hasEnoughMana):		
-		var shootPosition = get_node("Armature/shootPosition").get_global_transform()
-		fireball.set_transform(shootPosition.orthonormalized())
+	var hasEnoughMana = true #_consumeMana(fireball.getManaConsumption())	
+	if(hasEnoughMana):
+		var startTransform = get_node("Armature/shootPosition").get_global_transform()
+		fireball.set_global_transform(startTransform)
 		fireball.connect("onDestroyed", self, "_attackFinished")
-		get_parent().add_child(fireball)
+		_playerParty.get_parent().add_child(fireball)
 	
-		var toTarget = target.translation - shootPosition.origin
+		var toTarget = target.get_global_transform().origin - startTransform.origin
 		fireball.set_linear_velocity(toTarget.normalized() * fireball.getShootSpeed())
 		fireball.add_collision_exception_with(self)
 		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_ATTACK_ID)

@@ -137,7 +137,7 @@ size = Vector2( 29, 29 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[node name="Spatial" type="Spatial" index="0"]
+[node name="Spatial" type="Spatial"]
 
 _sections_unfolded = [ "Visibility" ]
 
