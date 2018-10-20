@@ -152,7 +152,7 @@ func _onPotionRechargeFinished():
 
 func _shootFireball(target):
 	var fireball = preload("res://Scenes/fireball.scn").instance()
-	var hasEnoughMana = true #_consumeMana(fireball.getManaConsumption())	
+	var hasEnoughMana = _consumeMana(fireball.getManaConsumption())	
 	if(hasEnoughMana):
 		var startTransform = get_node("Armature/shootPosition").get_global_transform()
 		fireball.set_global_transform(startTransform)

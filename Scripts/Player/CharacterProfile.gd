@@ -25,8 +25,8 @@ func setActiveState(isActive):
 	pass
 	
 func init(player, tween):
-	player.connect("onHealthChanged", self, "_onPlayerHealthChanged")
-	player.connect("onManaChanged", self, "_onPlayerManaChanged")
+	player.connect("onHealthChanged", self, "_onHealthChanged")
+	player.connect("onManaChanged", self, "_onManaChanged")
 	_playerId = player.getId()
 	_tween = tween
 	
