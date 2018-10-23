@@ -28,12 +28,18 @@ func init(player, tween):
 	player.connect("onHealthChanged", self, "_onHealthChanged")
 	player.connect("onManaChanged", self, "_onManaChanged")
 	_playerId = player.getId()
-	_tween = tween
-	
+	_tween = tween	
 	setActiveState(false)
 	pass
 
-func _gui_input(event):
+func _unhandled_input(event):	
+	# Allows handling input while inventory is open
+	var globalRect = get_global_rect()
+	if event is InputEventMouseButton and !event.is_pressed() and globalRect.has_point(event.position):
+		emit_signal("onActivePlayerSwitchRequest", _playerId)
+	pass
+	
+func _gui_input(event):	
 	if event is InputEventMouseButton and !event.is_pressed():
 		emit_signal("onActivePlayerSwitchRequest", _playerId)
 	pass
