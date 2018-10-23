@@ -4214,15 +4214,15 @@ data = {
 "type": "output"
 }, {
 "filter": [  ],
-"from": "Pecking2",
-"id": "anim 3",
-"position": Vector2( 174, 146 ),
-"type": "animation"
-}, {
-"filter": [  ],
 "from": "Walk",
 "id": "anim 2",
 "position": Vector2( 51, 64 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Pecking2",
+"id": "anim 3",
+"position": Vector2( 174, 146 ),
 "type": "animation"
 } ]
 }
@@ -4263,7 +4263,7 @@ onlyActiveStateOnTheScene = false
 initManually = false
 updateMode = 1
 receiceSignalsOnly4ActiveStatesAndTransitions = true
-enableDebug = true
+enableDebug = false
 "Initial state:" = ""
 "Create new:/Subdirectory for FSM nodes:" = "FSM"
 "Create new:/Create state with name:" = null
