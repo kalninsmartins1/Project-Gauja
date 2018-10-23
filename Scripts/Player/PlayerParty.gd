@@ -180,8 +180,6 @@ func _process(delta):
 	pass
 	
 func _handleInput():	
-	if(Input.is_action_just_released("open_inventory")):
-		emit_signal("onRequestInventoryOpen")
 
 	# Handle battle skills
 	if(_hasTurn):
@@ -193,6 +191,10 @@ func _handleInput():
 			_activePlayer.castSkill(GameConsts.Skill.POTION_MP)
 
 	if !_isInBattle:
+		
+		if(Input.is_action_just_released("open_inventory")):
+			emit_signal("onRequestInventoryOpen")
+		
 		# Handle character movement
 		var direction = Vector3(0, 0, 0)
 		var forward = Vector3(0, 0, 1)
