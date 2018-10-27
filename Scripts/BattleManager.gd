@@ -1,26 +1,44 @@
 extends Node
 
 enum Turn { PLAYER, ENEMY }
+
+const EnemyParty = preload("res://Scripts/Enemy/EnemyParty.gd")
+
 var _playerParty = null
-var _enemy = null
+var _enemyParty = null
 var _isBattleActive = false
 var _currentTurn = Turn.PLAYER
 
-func getTarget():
-	return _enemy
+func getActiveEnemy():
+	return _enemyParty.getActiveEnemy()
+
+func getActivePlayer():
+	return _playerParty.getActivePlayer()
+
+func canEnterBattle():
+	return _enemyParty == null or !_enemyParty.isPartyFull()
 
 func initiateBattle(var playerParty, var enemy):
-	_playerParty = playerParty
-	_playerParty.battleStarted(enemy)
-	_playerParty.connect("onTurnFinished", self, "_turnFinished")
-	_playerParty.connect("onHealthChanged", self, "_playerHealthChanged")
-	
-	_enemy = enemy
-	_enemy.connect("onTurnFinished", self, "_turnFinished")
-	_enemy.connect("onHealthChanged", self, "_enemyHealthChanged")
-	
-	_setCurrentTurn(_getRandomTurn())
-	_isBattleActive = true
+	if _enemyParty == null:
+
+		# Setup player party
+		_playerParty = playerParty
+		_playerParty.onBattleStarted(enemy)
+		_playerParty.connect("onTurnFinished", self, "_onFinishedTurn")
+		_playerParty.connect("onPartyLost", self, "_partyLost")
+
+		# Setup enemy party
+		_enemyParty = EnemyParty.new() # Enemies should be in party only while in battle
+		_enemyParty.onBattleStarted(self)
+		_enemyParty.connect("onTurnFinished", self, "_onFinishedTurn")
+		_enemyParty.connect("onPartyLost", self, "_partyLost")
+		_enemyParty.addEnemy(enemy)	
+
+		_setCurrentTurn(_getRandomTurn())
+		_isBattleActive = true
+
+	elif !_enemyParty.isPartyFull():
+		_enemyParty.addEnemy(enemy)
 	pass
 
 func finishTurn():
@@ -34,25 +52,24 @@ func finishTurn():
 func _setCurrentTurn(turn):
 	_currentTurn = turn
 	if(_currentTurn == Turn.PLAYER):
-		_enemy.setHasTurn(false)
+		_enemyParty.setHasTurn(false)
 		_playerParty.setHasTurn(true)
 	else:
-		_enemy.setHasTurn(true)
+		_enemyParty.setHasTurn(true)
 		_playerParty.setHasTurn(false)
 	pass
 
-func _turnFinished():
-	finishTurn()
+func _onFinishedTurn():
+	if _isBattleActive:
+		finishTurn()
 	pass
 
-func _playerHealthChanged(health):
-	if(health <= 0):
-		_endBattle(false)
-	pass
-	
-func _enemyHealthChanged(health):
-	if(health <= 0):
-		_endBattle(true)	
+func _partyLost(partyType):
+	match partyType:
+		GameConsts.PartyType.PLAYER:
+			_endBattle(false)
+		GameConsts.PartyType.ENEMY:
+			_endBattle(true)
 	pass
 	
 func _endBattle(var shouldGiveLoot):
@@ -61,8 +78,8 @@ func _endBattle(var shouldGiveLoot):
 	if(shouldGiveLoot):
 		lootArray = _calculateLoot()
 				
-	_playerParty.battleEnded(lootArray)
-	_enemy.battleEnded()
+	_playerParty.onBattleEnded(lootArray)
+	_enemyParty.onBattleEnded()
 	_isBattleActive = false
 	pass
 
@@ -73,7 +90,7 @@ func _getRandomTurn():
 	
 func _calculateLoot():	
 	var loot = []
-	var table = _enemy.getLootTable()
+	var table = _enemyParty.getLootTable()
 	
 	for lootEntryTemplate in table:
 		var lootEntry = lootEntryTemplate.instance()

@@ -9,7 +9,7 @@ export var _potionRechargeTime = 1.5
 
 onready var _playerParty = get_parent().get_parent()
 onready var _animationTree = get_node("AnimationTreePlayer")
-onready var _tween = get_node("../PlayerUI/Tween")
+onready var _tween = get_node("Tween")
 
 var _id = -1
 var _health = 100
@@ -17,7 +17,7 @@ var _maxHealth = 100
 var _mana = 100
 var _maxMana = 100
 var _respawnPosition = null
-var _isAttackFinished = true
+var _isTurnFinished = true
 var _isInBattle = false
 var _direction = Vector3(0, 0, 0)
 var _fallowTarget = null
@@ -37,6 +37,9 @@ signal onTurnFinished
 signal onMovePositionReached
 
 # Public functions
+
+func isAlive():
+	return _health > 0
 
 func getProfileTemplate():
 	return _profileTemplate	
@@ -98,17 +101,21 @@ func takeDamage(damage):
 	pass
 
 func castSkill(skillId):
-	if(_isAttackFinished):		
+	if(_isTurnFinished):
 		match(skillId):
 			GameConsts.Skill.FIRE_BALL:
-				var target = _playerParty.getTarget()
+				var target = _playerParty.getActiveEnemy()
 				_shootFireball(target)
 			GameConsts.Skill.POTION_HP:
 				_addHealth(_healthRecharge)
 				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
+				_tween.start()
+				_isTurnFinished = false
 			GameConsts.Skill.POTION_MP:
 				_addMana(_manaRecharge)
 				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
+				_tween.start()
+				_isTurnFinished = false
 				
 	pass
 	
@@ -146,6 +153,7 @@ func _addHealth(amount):
 	pass
 
 func _onPotionRechargeFinished():
+	_isTurnFinished = true
 	emit_signal("onTurnFinished", self)
 	pass
 
@@ -162,12 +170,12 @@ func _shootFireball(target):
 		fireball.set_linear_velocity(toTarget.normalized() * fireball.getShootSpeed())
 		fireball.add_collision_exception_with(self)
 		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_ATTACK_ID)
-		_isAttackFinished = false
+		_isTurnFinished = false
 	pass
 
 func _attackFinished():
 	emit_signal("onTurnFinished", self)
-	_isAttackFinished = true
+	_isTurnFinished = true
 	pass
 
 func _isMoving(direction):

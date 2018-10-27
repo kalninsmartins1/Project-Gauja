@@ -36,8 +36,12 @@ var _isTakingDamage = false
 
 signal onTurnFinished
 signal onHealthChanged
+signal onDestinationReached
 
 	# Functions
+
+func getHealth():
+	return _health
 
 func getLootTable():
 	return _lootTable
@@ -87,13 +91,18 @@ func setHasTurn(value):
 	pass
 
 func setDestination(position):
-	_curPath = _navigationManager.get_simple_path(translation, position)
+	var curPosition = get_global_transform().origin
+	_curPath = _navigationManager.get_simple_path(curPosition, position)
 	_isMoving = true
 	_curIndex = 0
 	sleeping = false # Make sure enemy is waken up !
 	pass
 
-func battleEnded():
+func setCurPosAsBattlePos():	
+	_battlePosition = get_global_transform().origin
+	pass
+
+func onBattleEnded():
 	_isInBattle = false
 	pass
 
@@ -103,6 +112,17 @@ func damagePlayer():
 
 func attackFinished():
 	emit_signal("onTurnFinished")
+	pass
+
+func playIdleAnimation():
+	var currentAnim = _animationTree.transition_node_get_current(GameConsts.ANIM_TRANSITION_NODE)
+	if(currentAnim != GameConsts.ANIM_IDLE_ID):
+		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
+
+		# Make the set animation looping
+		var animName = _animationTree.node_get_input_source(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
+		var animation = _animationTree.animation_node_get_animation(animName)
+		animation.set_loop(true)
 	pass
 	
 func startRotationTween(var toTargetNormalized):
@@ -131,17 +151,16 @@ func _ready():
 
 func _physics_process(delta):
 
-	var playerPosition = _playerParty.getActivePlayer().get_global_transform().origin
-	var enemyPosition = get_global_transform().origin
-	var toPlayer =  playerPosition - enemyPosition
-
-	if(isAlive() and !_isInBattle and toPlayer.length_squared() <= _battleRadius*_battleRadius):
+	var enemyPos = get_global_transform().origin
+	var player = _playerParty.findClosestPlayer(enemyPos)
+	var playerPos = player.get_global_transform().origin
+	var toPlayer =  playerPos - enemyPos
+	var isPlayerInBattleRadius = toPlayer.length_squared() <= _battleRadius*_battleRadius
+	
+	if isAlive() and _battleManager.canEnterBattle() and !_isInBattle and isPlayerInBattleRadius:
 		_isInBattle = true
 		_isMoving = false
-		_playIdleAnimation()
-		startRotationTween(Vector2(toPlayer.x, toPlayer.z).normalized())
 		_battleManager.initiateBattle(_playerParty, self)
-		_battlePosition = enemyPosition
 
 	# Make sure we are really not moving
 	if(!_isMoving or _isTakingDamage):
@@ -157,13 +176,13 @@ func _handleHealthBarPosition():
 
 # This function gets called in physics update so its better to modify physics stuff here
 func _integrate_forces(state):
-	if(_isMoving and !_isTakingDamage):
-		if(_curPath.size() > 0 ):
+	if _isMoving and !_isTakingDamage:
+		if _curPath.size() > 0:
 			var target = _curPath[_curIndex]
 			var toTargetInSpace = target - get_global_transform().origin
 			var toTargetOnPlane = Vector2(toTargetInSpace.x, toTargetInSpace.z)
 
-			if(toTargetOnPlane.length_squared() > 0.25):
+			if toTargetOnPlane.length_squared() > 0.25:
 
 				# Move the agent
 				var toTargetNormalized = toTargetOnPlane.normalized()
@@ -171,7 +190,7 @@ func _integrate_forces(state):
 				state.set_linear_velocity(velocity)
 
 				# Rotate in direction of movement
-				if(!_isTweenActive):
+				if !_isTweenActive:
 					startRotationTween(toTargetNormalized)
 
 				# Play Animation
@@ -179,11 +198,12 @@ func _integrate_forces(state):
 
 			else:
 				# Movement to current point finished
-				if(_curIndex < _curPath.size()-1):
+				if _curIndex < _curPath.size() - 1:
 					_curIndex += 1
 				else:
 					_isMoving = false
-					_playIdleAnimation()
+					playIdleAnimation()
+					emit_signal("onDestinationReached", self)
 		else:
 			_isMoving = false
 			state.set_linear_velocity(Vector3(0, 0, 0))
@@ -191,17 +211,6 @@ func _integrate_forces(state):
 
 func _tweenFinished():
 	_isTweenActive = false
-	pass
-
-func _playIdleAnimation():
-	var currentAnim = _animationTree.transition_node_get_current(GameConsts.ANIM_TRANSITION_NODE)
-	if(currentAnim != GameConsts.ANIM_IDLE_ID):
-		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
-
-		# Make the set animation looping
-		var animName = _animationTree.node_get_input_source(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
-		var animation = _animationTree.animation_node_get_animation(animName)
-		animation.set_loop(true)
 	pass
 
 func _playMovingAnimation():
@@ -219,14 +228,14 @@ func _playMovingAnimation():
 
 func _setupAnimations():
 	_animationTree.set_active(true)
-	_playIdleAnimation()
+	playIdleAnimation()
 	pass
 
 func _takeDamage(damage):
 	_health -= damage
 	if(_health < 0):
 		_health = 0
-	emit_signal("onHealthChanged", _health)
+	emit_signal("onHealthChanged", self)
 	
 	if(_health == 0):
 		queue_free()

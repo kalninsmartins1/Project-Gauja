@@ -1,5 +1,18 @@
 extends Node
 
+static func getRandIntegerValInRange(a, b, excludingVal):
+	var value = excludingVal
+	var safetyCounter = 0
+	var maxIterations = 100
+
+	while value == excludingVal and safetyCounter < maxIterations:
+		value = a + randi() % b
+		safetyCounter += 1
+	
+	if safetyCounter >= maxIterations:
+		printerr("Utils: Could not randomly find value in range (" + str(a) + "," + str(b) + ")")
+	return value
+
 static func getAngleDegreesBetweenVectors(a, b):
 	var dot = a.dot(b)
 	var magnitudeA = a.length()

@@ -14,7 +14,6 @@ var _inventory = []
 var _activePlayer = null
 var _isInBattle = false
 var _hasTurn = false
-var _enemy = null
 var _waitingForPlayers = []
 
 signal onInventoryChanged
@@ -24,7 +23,14 @@ signal onBattleEnded
 signal onActivePlayerSwitched
 signal onTurnFinished
 signal onLootReceived
+signal onPartyLost
 
+func getActiveEnemy():
+	return _battleManager.getActiveEnemy()
+
+func getPartyType():
+	return GameConsts.PartyType.PLAYER
+	
 func isInBattle():
 	return _isInBattle
 
@@ -43,20 +49,28 @@ func getItemDatabase():
 func getActivePlayer():
 	return _activePlayer
 
+func findClosestPlayer(position):
+	var minDistance = 999999
+	var keyPlayer = null
+	for player in _playerList:
+		var distSq = (position - player.get_global_transform().origin).length_squared()
+		if distSq < minDistance:
+			minDistance = distSq
+			keyPlayer = player
+	return keyPlayer
+
 func setHasTurn(hasTurn):
-	_hasTurn = hasTurn
+	_hasTurn = hasTurn	
 	pass
 
-func battleStarted(enemy):
-	_isInBattle = true
-	_enemy = enemy
+func onBattleStarted(enemy):
+	_isInBattle = true	
 	
-	_preparePlayersForBattle()
+	_preparePlayersForBattle(enemy)
 	pass
 	
-func battleEnded(loot):
-	_isInBattle = false
-	_enemy = null
+func onBattleEnded(loot):
+	_isInBattle = false	
 	if(loot != null):
 		emit_signal("onLootReceived", loot)
 		for itemId in loot:
@@ -66,14 +80,34 @@ func battleEnded(loot):
 	_startFallowingActivePlayer(_activePlayer.getId())
 	pass
 
+func _isAnyAlive():
+	var aliveCount = 0
+	for player in _playerList:
+		if player.isAlive:
+			aliveCount += 1
+	return aliveCount > 0
+
+func _setActivePlayer(player):
+	_activePlayer = player
+
+	# Notify UI that active player has changed
+	_playerUI.onActivePlayerChanged(player.getId())
+	emit_signal("onActivePlayerSwitched")
+	pass
+
+func _findPlayerById(playerId):
+	var keyPlayer = null
+	for player in _playerList:
+		if player.getId() == playerId:
+			keyPlayer = player
+	return keyPlayer
+
 func _ready():
 	_initPlayers()
-	_itemDatabase.connect("onItemDatabaseInitialized", self, "_onItemDatabaseInitialized")
-	
 	pass
 	
-func _preparePlayersForBattle():
-	_activePlayer.lookAt(_enemy.get_global_transform().origin)
+func _preparePlayersForBattle(enemy):	
+	_activePlayer.lookAt(enemy.get_global_transform().origin)
 	_activePlayer.setMoveDirection(Vector3(0, 0, 0))
 	
 	if _playerList.size() == 1:
@@ -96,13 +130,6 @@ func _preparePlayersForBattle():
 				index += 1
 	pass
 
-func _onItemDatabaseInitialized():
-	# For testing purposes
-	for itemId in _itemDatabase.getItemIdList():
-		_addInventoryItem(itemId)
-	emit_signal("onInventoryChanged")	
-	pass
-
 func _addInventoryItem(itemId):
 	_inventory.append(itemId)
 	pass
@@ -116,7 +143,7 @@ func _initPlayers():
 		player.setId(index)
 		player.connect("onMovePositionReached", self, "_onPlayerReachedPosition")
 		player.connect("onTurnFinished", self, "_playerFinishedTurn")
-		
+		player.connect("onHealthChanged", self, "_onPlayerHealthChanged")
 		_playerContainer.add_child(player)
 		_playerList.append(player)
 		_playerUI.addCharacterProfile(player)
@@ -130,6 +157,12 @@ func _initPlayers():
 		_previousPlayer = player
 		
 		index += 1
+	pass
+
+func _onPlayerHealthChanged(health):
+	if health <= 0:
+		if !_isAnyAlive():
+			emit_signal("onPartyLost", getPartyType())
 	pass
 
 func _startFallowingActivePlayer(playerId):
@@ -155,12 +188,24 @@ func _startFallowingActivePlayer(playerId):
 	pass
 
 func _playerFinishedTurn(player):
-	emit_signal("onTurnFinished")
+	if _isInBattle:
+		emit_signal("onTurnFinished")	
+		_setNextActivePlayer()
+	pass
+
+func _setNextActivePlayer():
+	var _inactivePlayers = []
+	for player in _playerList:
+		if player.getId() != _activePlayer.getId():
+			_inactivePlayers.append(player)
+	var newActiveIndex = randi() % _inactivePlayers.size()
+	_setActivePlayer(_inactivePlayers[newActiveIndex])	
 	pass
 	
 func _onPlayerReachedPosition(player):
 	if _isInBattle:
-		player.lookAt(_enemy.get_global_transform().origin)
+		var enemy = _battleManager.getActiveEnemy()
+		player.lookAt(enemy.get_global_transform().origin)
 		_waitingForPlayers.erase(player.getId())
 		if _waitingForPlayers.size() == 0:
 			emit_signal("onBattleStarted")
@@ -169,10 +214,8 @@ func _onPlayerReachedPosition(player):
 func _onActivePlayerSwitchRequest(playerId):
 	if !_isInBattle:
 		_startFallowingActivePlayer(playerId)
-		
-		# Notify UI that active player has changed
-		_playerUI.onActivePlayerChanged(playerId)
-		emit_signal("onActivePlayerSwitched")
+		var newActivePlayer = _findPlayerById(playerId)
+		_setActivePlayer(newActivePlayer)		
 	pass
 
 func _process(delta):

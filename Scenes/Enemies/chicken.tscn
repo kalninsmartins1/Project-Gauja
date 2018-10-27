@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=2]
 
-[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenArmor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenHelmet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Art/Models/Chicken/Chicken.material" type="Material" id=4]
@@ -3891,7 +3891,7 @@ tracks/40/imported = true
 tracks/40/enabled = true
 tracks/40/keys = PoolRealArray( 0, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1, 2.25, 1, -1.19209e-007, 2.08616e-007, -1.54972e-006, -7.45058e-009, -2.23517e-008, 0, 1, 1, 1, 1 )
 
-[node name="Chicken" type="RigidBody"]
+[node name="Chicken" type="RigidBody" index="0"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -4214,15 +4214,15 @@ data = {
 "type": "output"
 }, {
 "filter": [  ],
-"from": "Walk",
-"id": "anim 2",
-"position": Vector2( 51, 64 ),
-"type": "animation"
-}, {
-"filter": [  ],
 "from": "Pecking2",
 "id": "anim 3",
 "position": Vector2( 174, 146 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Walk",
+"id": "anim 2",
+"position": Vector2( 51, 64 ),
 "type": "animation"
 } ]
 }

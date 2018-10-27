@@ -2,7 +2,6 @@ extends TextureProgress
 
 export var _animationSpeed = 10
 
-var _utils = preload("res://Scripts/Utility/Utils.gd")
 var _enemy = null
 var _tween = null
 
@@ -13,9 +12,10 @@ func _ready():
 	_enemy.connect("onHealthChanged", self, "_onHealthChanged")
 	pass
 	
-func _onHealthChanged(newValue):
+func _onHealthChanged(enemy):
 	
 	# Animate the health bar
-	_utils.startProgressBarAnimation(self, _tween, _animationSpeed, newValue)
+	var newHealthValue = enemy.getHealth()
+	Utils.startProgressBarAnimation(self, _tween, _animationSpeed, newHealthValue)
 	pass
 
