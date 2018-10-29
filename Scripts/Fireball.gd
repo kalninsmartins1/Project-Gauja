@@ -6,7 +6,6 @@ extends RigidBody
 export var _damage = 20
 export var _manaConsumption = 20
 export var _shootSpeed = 20
-var _isTreeExited = false
 
 signal onDestroyed
 

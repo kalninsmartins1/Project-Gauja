@@ -16,7 +16,7 @@ onready var _tweener = get_node("Tween")
 onready var _animationTree = get_node("AnimationTreePlayer")
 onready var _battleManager = get_node("../BattleManager")
 onready var _camera = get_node("../Camera")
-onready var _healthBar = get_node("TextureProgress")
+onready var _healthBar = get_node("Node2D/TextureProgress")
 
 var _curPath = null
 var _battlePosition = null

@@ -1,14 +1,12 @@
-extends TextureProgress
+extends Node2D
 
 export var _animationSpeed = 10
 
-var _enemy = null
-var _tween = null
+onready var _enemy = get_parent()
+onready var _tween = get_node("../Tween")
+onready var _healthBar = get_node("TextureProgress")
 
-func _ready():
-	_enemy = get_parent()
-	_tween = get_node("../Tween")
-	
+func _ready():	
 	_enemy.connect("onHealthChanged", self, "_onHealthChanged")
 	pass
 	
@@ -16,6 +14,6 @@ func _onHealthChanged(enemy):
 	
 	# Animate the health bar
 	var newHealthValue = enemy.getHealth()
-	Utils.startProgressBarAnimation(self, _tween, _animationSpeed, newHealthValue)
+	Utils.startProgressBarAnimation(_healthBar, _tween, _animationSpeed, newHealthValue)
 	pass
 
