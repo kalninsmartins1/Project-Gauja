@@ -80,6 +80,7 @@ func _endBattle(var shouldGiveLoot):
 				
 	_playerParty.onBattleEnded(lootArray)
 	_enemyParty.onBattleEnded()
+	_enemyParty = null
 	_isBattleActive = false
 	pass
 
