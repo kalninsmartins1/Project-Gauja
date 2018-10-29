@@ -24,7 +24,7 @@ var _curIndex = 0
 var _currentAngle = 0
 
 var _isMoving = false
-var _isTweenActive = false
+var _isRotationActive = false
 var _isInBattle = false
 var _hasTurn = false
 var _isCurrentlyAttacking = false
@@ -37,6 +37,7 @@ var _isTakingDamage = false
 signal onTurnFinished
 signal onHealthChanged
 signal onDestinationReached
+signal onFinishedRotating
 
 	# Functions
 
@@ -132,10 +133,10 @@ func startRotationTween(var toTargetNormalized):
 	if(angleDiff > 0):
 		var time = angleDiff/_rotationSpeed
 		_tweener.interpolate_property(self, "rotation", Vector3(0, _currentAngle, 0), Vector3(0, targetAngle, 0), time, Tween.TRANS_LINEAR, Tween.EASE_IN)
-		_tweener.interpolate_callback(self, time, "_tweenFinished")
+		_tweener.interpolate_callback(self, time, "_rotationFinished")
 		_tweener.start()
 		_currentAngle = targetAngle
-		_isTweenActive = true
+		_isRotationActive = true
 	pass
 
 func playAttackAnim():
@@ -171,7 +172,7 @@ func _physics_process(delta):
 
 func _handleHealthBarPosition():
 	
-	_healthBar.rect_position = _camera.unproject_position(translation) - (_healthBar.rect_size/2)
+	_healthBar.rect_position = _camera.unproject_position(translation) - (_healthBar.rect_size/4) - Vector2(0, 20)
 	pass
 
 # This function gets called in physics update so its better to modify physics stuff here
@@ -190,7 +191,7 @@ func _integrate_forces(state):
 				state.set_linear_velocity(velocity)
 
 				# Rotate in direction of movement
-				if !_isTweenActive:
+				if !_isRotationActive:
 					startRotationTween(toTargetNormalized)
 
 				# Play Animation
@@ -209,8 +210,9 @@ func _integrate_forces(state):
 			state.set_linear_velocity(Vector3(0, 0, 0))
 	pass
 
-func _tweenFinished():
-	_isTweenActive = false
+func _rotationFinished():
+	_isRotationActive = false
+	emit_signal("onFinishedRotating", self)
 	pass
 
 func _playMovingAnimation():

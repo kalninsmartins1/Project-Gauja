@@ -16,7 +16,7 @@ func getActivePlayer():
 	return _playerParty.getActivePlayer()
 
 func canEnterBattle():
-	return _enemyParty == null or !_enemyParty.isPartyFull()
+	return _enemyParty == null or (!_enemyParty.isPartyFull() and _enemyParty.IsBattlePositionsSet())
 
 func initiateBattle(var playerParty, var enemy):
 	if _enemyParty == null:

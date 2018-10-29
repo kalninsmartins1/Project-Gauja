@@ -1,6 +1,6 @@
 extends Node
 
-const _distanceBetweenEnemies = 5
+const _distanceBetweenEnemies = 3
 
 var _enemies = []
 
@@ -12,9 +12,13 @@ var _rightPosition = null
 var _activeIndex = 0
 var _hasTurn = false
 var _isLeftPositionFree = true
+var _isBattlePositionsSet = false
 
 signal onTurnFinished
 signal onPartyLost
+
+func IsBattlePositionsSet():
+	return _isBattlePositionsSet
 
 func getLootTable():
 	return _lootTable
@@ -53,8 +57,8 @@ func addEnemy(enemy):
 	if _enemies.size() > 1:
 		_moveToFreeBattlePosition(enemy) # This is not the first enemy
 		enemy.connect("onDestinationReached", self, "_onBattlePositionReached")
-	else:
-		_initBattlePositions()
+	else:		
+		enemy.connect("onFinishedRotating", self, "_onEnemyFinishedRotating")
 		_onBattlePositionReached(enemy)
 	pass
 
@@ -71,6 +75,11 @@ func _setNextActiveEnemy():
 		_activeIndex = Utils.getRandIntegerValInRange(0, numEnemies, _activeIndex)
 	else:
 		_activeIndex = 0
+	pass
+
+func _onEnemyFinishedRotating(enemy):
+	_initBattlePositions()
+	enemy.disconnect("onFinishedRotating", self, "_onEnemyFinishedRotating")
 	pass
 
 func _onBattlePositionReached(enemy):
@@ -92,6 +101,7 @@ func _initBattlePositions():
 	
 	_leftPosition = activeEnemyPosition - activeEnemyTransform.basis.x * _distanceBetweenEnemies
 	_rightPosition = activeEnemyPosition + activeEnemyTransform.basis.x * _distanceBetweenEnemies
+	_isBattlePositionsSet = true
 	pass
 
 func _moveToFreeBattlePosition(enemy):	
