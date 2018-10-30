@@ -77,13 +77,14 @@ func onBattleEnded(loot):
 			_addInventoryItem(itemId)
 		emit_signal("onInventoryChanged")
 	emit_signal("onBattleEnded")
+	_revivePlayers()
 	_startFallowingActivePlayer(_activePlayer.getId())
 	pass
 
 func _isAnyAlive():
 	var aliveCount = 0
 	for player in _playerList:
-		if player.isAlive:
+		if player.isAlive():
 			aliveCount += 1
 	return aliveCount > 0
 
@@ -93,6 +94,12 @@ func _setActivePlayer(player):
 	# Notify UI that active player has changed
 	_playerUI.onActivePlayerChanged(player.getId())
 	emit_signal("onActivePlayerSwitched")
+	pass
+
+func _revivePlayers():
+	for player in _playerList:
+		if !player.isAlive():
+			player.revive()
 	pass
 
 func _findPlayerById(playerId):
@@ -160,9 +167,17 @@ func _initPlayers():
 	pass
 
 func _onPlayerHealthChanged(health):
-	if health <= 0:
+	if health <= 0:		
 		if !_isAnyAlive():
 			emit_signal("onPartyLost", getPartyType())
+			_respawnParty()
+		else:
+			_setNextActivePlayer()
+	pass
+
+func _respawnParty():
+	for player in _playerList:
+		player.respawn()
 	pass
 
 func _startFallowingActivePlayer(playerId):
@@ -196,10 +211,13 @@ func _playerFinishedTurn(player):
 func _setNextActivePlayer():
 	var _inactivePlayers = []
 	for player in _playerList:
-		if player.getId() != _activePlayer.getId():
+		if player.getId() != _activePlayer.getId() and player.isAlive():
 			_inactivePlayers.append(player)
-	var newActiveIndex = randi() % _inactivePlayers.size()
-	_setActivePlayer(_inactivePlayers[newActiveIndex])	
+			
+	var inactivePlayerCount = _inactivePlayers.size()
+	if inactivePlayerCount > 0:
+		var newActiveIndex = randi() % _inactivePlayers.size()
+		_setActivePlayer(_inactivePlayers[newActiveIndex])	
 	pass
 	
 func _onPlayerReachedPosition(player):

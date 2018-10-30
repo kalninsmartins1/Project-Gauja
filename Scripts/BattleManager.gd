@@ -80,6 +80,7 @@ func _endBattle(var shouldGiveLoot):
 				
 	_playerParty.onBattleEnded(lootArray)
 	_enemyParty.onBattleEnded()
+	_enemyParty.queue_free() # This is how you release instanced script memory
 	_enemyParty = null
 	_isBattleActive = false
 	pass

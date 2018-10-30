@@ -87,17 +87,29 @@ func stopFallow():
 	_isFallowing = false
 	pass
 
+func respawn():
+	translation = _respawnPosition
+	revive()
+	pass
+
 func lookAt(position):
 	look_at(position, GameConsts.VECTOR3_UP)
+	pass
+
+func revive():
+	set_visible(true)
+	_health = _maxHealth
+	_mana = _maxMana
+	emit_signal("onHealthChanged", _health)
+	emit_signal("onManaChanged", _mana)
 	pass
 
 func takeDamage(damage):
 	_health -= damage
 	clamp(_health, 0, _maxHealth)	
 	emit_signal("onHealthChanged", _health)
-	
-	if(_health == 0):
-		_respawn()
+	if _health <= 0:
+		_despawn()
 	pass
 
 func castSkill(skillId):
@@ -117,6 +129,12 @@ func castSkill(skillId):
 				_tween.start()
 				_isTurnFinished = false
 				
+	pass
+	
+func _despawn():
+	set_visible(false)
+	_mana = 0
+	emit_signal("onManaChanged", _mana)
 	pass
 	
 func _moveTowardsPosition(targetPosition, maxDistance):	
@@ -180,15 +198,6 @@ func _attackFinished():
 
 func _isMoving(direction):
 	return direction.length_squared() > 0
-	
-func _respawn():
-	translation = _respawnPosition
-	_health = _maxHealth
-	_mana = _maxMana
-	
-	emit_signal("onHealthChanged", _health)
-	emit_signal("onManaChanged", _mana)
-	pass
 
 func _ready():	
 	_animationTree.set_active(true)

@@ -118,10 +118,11 @@ func _onTurnFinished():
 	pass
 
 func _onHealthChanged(enemy):
-	if !enemy.isAlive():		
+	if !enemy.isAlive():
 		_enemies.erase(enemy)
-		_setNextActiveEnemy()
 		if !_isAnyAlive():
 			_lootTable = enemy.getLootTable()
 			emit_signal("onPartyLost", getPartyType())	
+		else:
+			_setNextActiveEnemy()
 	pass

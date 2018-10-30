@@ -104,7 +104,10 @@ func setCurPosAsBattlePos():
 	pass
 
 func onBattleEnded():
-	_isInBattle = false
+	_isInBattle = false	
+	_hasTurn = false
+	_isCurrentlyAttacking = false
+	_isTakingDamage = false
 	pass
 
 func damagePlayer():
