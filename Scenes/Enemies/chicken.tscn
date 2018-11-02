@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scripts/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenArmor.tscn" type="PackedScene" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://Scripts/UI/EnemyUI.gd" type="Script" id=25]
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=26]
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=27]
+[ext_resource path="res://Scenes/WorldText/FloatingTextManager.tscn" type="PackedScene" id=28]
+
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -4214,15 +4216,15 @@ data = {
 "type": "output"
 }, {
 "filter": [  ],
-"from": "Pecking2",
-"id": "anim 3",
-"position": Vector2( 174, 146 ),
-"type": "animation"
-}, {
-"filter": [  ],
 "from": "Walk",
 "id": "anim 2",
 "position": Vector2( 51, 64 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Pecking2",
+"id": "anim 3",
+"position": Vector2( 174, 146 ),
 "type": "animation"
 } ]
 }
@@ -4263,7 +4265,7 @@ onlyActiveStateOnTheScene = false
 initManually = false
 updateMode = 1
 receiceSignalsOnly4ActiveStatesAndTransitions = true
-enableDebug = false
+enableDebug = true
 "Initial state:" = ""
 "Create new:/Subdirectory for FSM nodes:" = "FSM"
 "Create new:/Create state with name:" = null
@@ -4392,6 +4394,7 @@ playback/speed = 1.0
 
 [node name="Node2D" type="Node2D" parent="." index="6"]
 
+editor/display_folded = true
 z_index = -1
 script = ExtResource( 25 )
 _sections_unfolded = [ "Z Index" ]
@@ -4428,5 +4431,7 @@ radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
 _sections_unfolded = [ "Rect" ]
+
+[node name="FloatingTextManager" parent="." index="7" instance=ExtResource( 28 )]
 
 

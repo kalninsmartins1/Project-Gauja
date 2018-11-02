@@ -60,7 +60,7 @@ func _setCurrentTurn(turn):
 	pass
 
 func _onFinishedTurn():
-	if _isBattleActive:
+	if _isBattleActive and _enemyParty != null:
 		finishTurn()
 	pass
 

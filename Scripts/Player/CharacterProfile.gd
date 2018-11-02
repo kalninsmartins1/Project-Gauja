@@ -44,13 +44,13 @@ func _gui_input(event):
 		emit_signal("onActivePlayerSwitchRequest", _playerId)
 	pass
 
-func _onHealthChanged(newValue):
+func _onHealthChanged(newValue, delta):
 	
 	# Animate the health bar
 	Utils.startProgressBarAnimation(_healthBar, _tween, _animateSpeed, newValue)
 	pass
 	
-func _onManaChanged(newValue):
+func _onManaChanged(newValue, delta):
 	
 	# Animate the mana bar
 	Utils.startProgressBarAnimation(_manaBar, _tween, _animateSpeed, newValue)

@@ -240,7 +240,7 @@ func _takeDamage(damage):
 	_health -= damage
 	if(_health < 0):
 		_health = 0
-	emit_signal("onHealthChanged", self)
+	emit_signal("onHealthChanged", _health, -damage)
 	
 	if(_health == 0):
 		queue_free()

@@ -50,7 +50,7 @@ func getActivePlayer():
 	return _activePlayer
 
 func findClosestPlayer(position):
-	var minDistance = 999999
+	var minDistance = INF
 	var keyPlayer = null
 	for player in _playerList:
 		var distSq = (position - player.get_global_transform().origin).length_squared()
@@ -70,7 +70,8 @@ func onBattleStarted(enemy):
 	pass
 	
 func onBattleEnded(loot):
-	_isInBattle = false	
+	_isInBattle = false
+	_hasTurn = false
 	if(loot != null):
 		emit_signal("onLootReceived", loot)
 		for itemId in loot:

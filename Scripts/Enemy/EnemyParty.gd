@@ -117,12 +117,27 @@ func _onTurnFinished():
 	_setNextActiveEnemy()
 	pass
 
-func _onHealthChanged(enemy):
-	if !enemy.isAlive():
-		_enemies.erase(enemy)
-		if !_isAnyAlive():
-			_lootTable = enemy.getLootTable()
+func _removeNotAliveEnemies():
+	var notAliveIndexes= []
+	var index = 0
+	for enemy in _enemies:
+		if !enemy.isAlive():
+			notAliveIndexes.append(index)
+		index += 1
+	
+	for removeIndex in notAliveIndexes:
+		_enemies.remove(removeIndex)
+	pass
+
+
+func _onHealthChanged(health, delta):
+	if health <= 0:		
+		if _enemies.size() == 1:
+			_lootTable = _enemies[0].getLootTable()
 			emit_signal("onPartyLost", getPartyType())	
-		else:
+		
+		_removeNotAliveEnemies()
+		
+		if _enemies.size() > 0:
 			_setNextActiveEnemy()
 	pass

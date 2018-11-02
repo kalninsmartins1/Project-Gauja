@@ -98,16 +98,20 @@ func lookAt(position):
 
 func revive():
 	set_visible(true)
+	
+	var deltaHealth = _maxHealth - _health
 	_health = _maxHealth
+	emit_signal("onHealthChanged", _health, deltaHealth)
+
+	var deltaMana = _maxMana - _mana
 	_mana = _maxMana
-	emit_signal("onHealthChanged", _health)
-	emit_signal("onManaChanged", _mana)
+	emit_signal("onManaChanged", _mana, deltaMana)
 	pass
 
 func takeDamage(damage):
 	_health -= damage
 	clamp(_health, 0, _maxHealth)	
-	emit_signal("onHealthChanged", _health)
+	emit_signal("onHealthChanged", _health, -damage)
 	if _health <= 0:
 		_despawn()
 	pass
@@ -161,13 +165,13 @@ func _consumeMana(amount):
 func _addMana(amount):
 	_mana += amount
 	_mana = clamp(_mana, 0, _maxMana)
-	emit_signal("onManaChanged", _mana)
+	emit_signal("onManaChanged", _mana, amount)
 	pass
 
 func _addHealth(amount):
 	_health += amount
 	_health = clamp(_health, 0, _maxHealth)
-	emit_signal("onHealthChanged", _health)
+	emit_signal("onHealthChanged", _health, amount)
 	pass
 
 func _onPotionRechargeFinished():

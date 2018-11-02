@@ -10,10 +10,9 @@ func _ready():
 	_enemy.connect("onHealthChanged", self, "_onHealthChanged")
 	pass
 	
-func _onHealthChanged(enemy):
+func _onHealthChanged(newHealthVal, delta):
 	
 	# Animate the health bar
-	var newHealthValue = enemy.getHealth()
-	Utils.startProgressBarAnimation(_healthBar, _tween, _animationSpeed, newHealthValue)
+	Utils.startProgressBarAnimation(_healthBar, _tween, _animationSpeed, newHealthVal)
 	pass
 
