@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Items/Loot/Chicken/ChickenArmor.tscn" type="PackedScene" id=2]
@@ -28,7 +28,7 @@
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/emptyBar.png" type="Texture" id=26]
 [ext_resource path="res://Art/Sprites/UI/CharacterUI/healthFill.png" type="Texture" id=27]
 [ext_resource path="res://Scenes/WorldText/FloatingTextManager.tscn" type="PackedScene" id=28]
-
+[ext_resource path="res://Scenes/Stats/EntityStats.tscn" type="PackedScene" id=29]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -3927,7 +3927,6 @@ _moveSpeed = 2.0
 _rotationSpeed = 20.0
 _activeRadius = 20.0
 _battleRadius = 5
-_health = 100.0
 _damage = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="0"]
@@ -4433,5 +4432,9 @@ nine_patch_stretch = false
 _sections_unfolded = [ "Rect" ]
 
 [node name="FloatingTextManager" parent="." index="7" instance=ExtResource( 28 )]
+
+[node name="EntityStats" parent="." index="8" instance=ExtResource( 29 )]
+
+_speed = 15
 
 

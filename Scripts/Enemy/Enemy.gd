@@ -6,7 +6,6 @@ export var _moveSpeed = 20.0
 export var _rotationSpeed = 20.0
 export var _activeRadius = 100.0
 export var _battleRadius = 10
-export var _health = 100.0
 export var _damage = 10.0
 
 # Private vars for this script usage only
@@ -17,6 +16,7 @@ onready var _animationTree = get_node("AnimationTreePlayer")
 onready var _battleManager = get_node("../BattleManager")
 onready var _camera = get_node("../Camera")
 onready var _healthBar = get_node("Node2D/TextureProgress")
+onready var _stats = get_node("EntityStats")
 
 var _curPath = null
 var _battlePosition = null
@@ -42,7 +42,7 @@ signal onFinishedRotating
 	# Functions
 
 func getHealth():
-	return _health
+	return _stats.getHealth()
 
 func getLootTable():
 	return _lootTable
@@ -77,7 +77,7 @@ func isInBattle():
 	return _isInBattle
 	
 func isAlive():
-	return _health > 0
+	return _stats.isAlive()
 
 func setIsTakingDamage(value):
 	_isTakingDamage = value
@@ -151,6 +151,7 @@ func _ready():
 	_setupAnimations()
 	set_linear_velocity(Vector3(0, 0, 0))
 	connect("body_entered", self, "_onCollision")
+	_stats.connect("onHealthChanged", self, "_onHealthChanged")
 	pass
 
 func _physics_process(delta):
@@ -171,6 +172,13 @@ func _physics_process(delta):
 		set_linear_velocity(Vector3(0, 0, 0))
 	
 	_handleHealthBarPosition()
+	pass
+
+func _onHealthChanged(newValue, delta):	
+	emit_signal("onHealthChanged", newValue, delta)
+	
+	if !_stats.isAlive():
+		queue_free()
 	pass
 
 func _handleHealthBarPosition():
@@ -235,19 +243,9 @@ func _setupAnimations():
 	_animationTree.set_active(true)
 	playIdleAnimation()
 	pass
-
-func _takeDamage(damage):
-	_health -= damage
-	if(_health < 0):
-		_health = 0
-	emit_signal("onHealthChanged", _health, -damage)
-	
-	if(_health == 0):
-		queue_free()
-	pass
 	
 func _onCollision(body):
 	if(body.name == "fireball"):
 		_isTakingDamage = true
-		_takeDamage(body.getDamage())
+		_stats.takeDamage(body.getDamage())
 	pass

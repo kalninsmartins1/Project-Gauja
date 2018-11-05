@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Stats/PlayerStats.gd" type="Script" id=1]
+
+[node name="PlayerStats" type="Node" index="0"]
+
+script = ExtResource( 1 )
+_health = 100
+_speed = 10
+_mana = 100
+
+

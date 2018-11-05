@@ -10,12 +10,9 @@ export var _potionRechargeTime = 1.5
 onready var _playerParty = get_parent().get_parent()
 onready var _animationTree = get_node("AnimationTreePlayer")
 onready var _tween = get_node("Tween")
+onready var _stats = get_node("PlayerStats")
 
 var _id = -1
-var _health = 100
-var _maxHealth = 100
-var _mana = 100
-var _maxMana = 100
 var _respawnPosition = null
 var _isTurnFinished = true
 var _isInBattle = false
@@ -39,7 +36,7 @@ signal onMovePositionReached
 # Public functions
 
 func isAlive():
-	return _health > 0
+	return _stats.isAlive()
 
 func getProfileTemplate():
 	return _profileTemplate	
@@ -98,21 +95,13 @@ func lookAt(position):
 
 func revive():
 	set_visible(true)
-	
-	var deltaHealth = _maxHealth - _health
-	_health = _maxHealth
-	emit_signal("onHealthChanged", _health, deltaHealth)
-
-	var deltaMana = _maxMana - _mana
-	_mana = _maxMana
-	emit_signal("onManaChanged", _mana, deltaMana)
+	_stats.revive()
 	pass
 
 func takeDamage(damage):
-	_health -= damage
-	clamp(_health, 0, _maxHealth)	
-	emit_signal("onHealthChanged", _health, -damage)
-	if _health <= 0:
+	_stats.takeDamage(damage)
+
+	if !_stats.isAlive():
 		_despawn()
 	pass
 
@@ -123,23 +112,23 @@ func castSkill(skillId):
 				var target = _playerParty.getActiveEnemy()
 				_shootFireball(target)
 			GameConsts.Skill.POTION_HP:
-				_addHealth(_healthRecharge)
+				_stats.healHealth(_healthRecharge)
 				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
 				_tween.start()
 				_isTurnFinished = false
 			GameConsts.Skill.POTION_MP:
-				_addMana(_manaRecharge)
+				_stats.healMana(_manaRecharge)
 				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
 				_tween.start()
-				_isTurnFinished = false
-				
+				_isTurnFinished = false				
 	pass
+
+func _isMoving(direction):
+	return direction.length_squared() > 0
 	
 func _despawn():
 	set_visible(false)
-	var delta = -_mana
-	_mana = 0
-	emit_signal("onManaChanged", _mana, delta)
+	_stats.consumeMana(_stats.getMana())	
 	pass
 	
 func _moveTowardsPosition(targetPosition, maxDistance):	
@@ -155,26 +144,6 @@ func _moveTowardsPosition(targetPosition, maxDistance):
 		
 	return hasArrived
 
-func _consumeMana(amount):
-	var hasEnoughMana = amount < _mana
-	if(hasEnoughMana):
-		_mana -= amount
-		_mana = clamp(_mana, 0, _maxMana)
-		emit_signal("onManaChanged", _mana)
-	return hasEnoughMana
-
-func _addMana(amount):
-	_mana += amount
-	_mana = clamp(_mana, 0, _maxMana)
-	emit_signal("onManaChanged", _mana, amount)
-	pass
-
-func _addHealth(amount):
-	_health += amount
-	_health = clamp(_health, 0, _maxHealth)
-	emit_signal("onHealthChanged", _health, amount)
-	pass
-
 func _onPotionRechargeFinished():
 	_isTurnFinished = true
 	emit_signal("onTurnFinished", self)
@@ -182,7 +151,7 @@ func _onPotionRechargeFinished():
 
 func _shootFireball(target):
 	var fireball = preload("res://Scenes/fireball.scn").instance()
-	var hasEnoughMana = _consumeMana(fireball.getManaConsumption())	
+	var hasEnoughMana = _stats.consumeMana(fireball.getManaConsumption())	
 	if(hasEnoughMana):
 		var startTransform = get_node("Armature/shootPosition").get_global_transform()
 		fireball.set_global_transform(startTransform)
@@ -201,11 +170,18 @@ func _attackFinished():
 	_isTurnFinished = true
 	pass
 
-func _isMoving(direction):
-	return direction.length_squared() > 0
-
 func _ready():	
 	_animationTree.set_active(true)
+	_stats.connect("onHealthChanged", self, "_onHealthChanged")
+	_stats.connect("onManaChanged", self, "_onManaChanged")
+	pass
+
+func _onHealthChanged(newAmount, delta):
+	emit_signal("onHealthChanged", newAmount, delta)
+	pass
+
+func _onManaChanged(newAmount, delta):
+	emit_signal("onManaChanged", newAmount, delta)
 	pass
 	
 func _finishedMovingToPosition():
