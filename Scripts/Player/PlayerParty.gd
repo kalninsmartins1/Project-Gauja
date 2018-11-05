@@ -167,7 +167,7 @@ func _initPlayers():
 		index += 1
 	pass
 
-func _onPlayerHealthChanged(health):
+func _onPlayerHealthChanged(health, delta):
 	if health <= 0:		
 		if !_isAnyAlive():
 			emit_signal("onPartyLost", getPartyType())

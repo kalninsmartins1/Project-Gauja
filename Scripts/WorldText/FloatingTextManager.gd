@@ -14,16 +14,25 @@ func _animateText(text, color):
 	pass
 
 func _ready():
-	_parent.connect("onHealthChanged", self, "_onFloatingTextRequest")
-	_parent.connect("onManaChanged", self, "_onFloatingTextRequest")
+	_parent.connect("onHealthChanged", self, "_onHPFloatingTextRequest")
+	_parent.connect("onManaChanged", self, "_onMPFloatingTextRequest")
 	pass
 
-func _onFloatingTextRequest(newValue, delta):
+func _onHPFloatingTextRequest(newValue, delta):
 	if delta < 0:
 		_animateText(str(delta), Color(1, 0, 0, 1))
 	elif delta > 0:
 		_animateText("+" + str(delta), Color(0, 1, 0, 1))
 	else:
 		_animateText("Miss", Color(1, 1, 1, 1))
+	pass
+
+func _onMPFloatingTextRequest(newValue, delta):
+	if delta < 0:
+		_animateText(str(delta), Color(0, 0, 1, 1))
+	elif delta > 0:
+		_animateText("+" + str(delta), Color(0, 0, 1, 1))
+	else:
+		_animateText("Miss", Color(0, 0, 1, 1))
 	pass
 

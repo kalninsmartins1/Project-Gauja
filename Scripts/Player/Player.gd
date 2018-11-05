@@ -137,8 +137,9 @@ func castSkill(skillId):
 	
 func _despawn():
 	set_visible(false)
+	var delta = -_mana
 	_mana = 0
-	emit_signal("onManaChanged", _mana)
+	emit_signal("onManaChanged", _mana, delta)
 	pass
 	
 func _moveTowardsPosition(targetPosition, maxDistance):	
