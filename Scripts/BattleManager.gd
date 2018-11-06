@@ -34,7 +34,7 @@ func initiateBattle(var playerParty, var enemy):
 		_enemyParty.connect("onPartyLost", self, "_partyLost")
 		_enemyParty.addEnemy(enemy)	
 
-		_setCurrentTurn(_getRandomTurn())
+		_calculateNextTurn()
 		_isBattleActive = true
 
 	elif !_enemyParty.isPartyFull():
@@ -43,20 +43,36 @@ func initiateBattle(var playerParty, var enemy):
 
 func finishTurn():
 	if(_isBattleActive):
-		if(_currentTurn == Turn.PLAYER):
-			_setCurrentTurn(Turn.ENEMY)	
-		else:
-			_setCurrentTurn(Turn.PLAYER)
+		_calculateNextTurn()		
 	pass
 
 func _setCurrentTurn(turn):
 	_currentTurn = turn
-	if(_currentTurn == Turn.PLAYER):
-		_enemyParty.setHasTurn(false)
-		_playerParty.setHasTurn(true)
+	pass
+
+func _calculateNextTurn():
+	var maxSpeedEnemy = _enemyParty.findMaxBattleSpeedMember()
+	var maxSpeedPlayer = _playerParty.findMaxBattleSpeedMember()
+
+	var enemySpeed = maxSpeedEnemy.getStats().getActiveSpeed()
+	var playerSpeed = maxSpeedPlayer.getStats().getActiveSpeed()
+	var numSpeedSteps = 0
+
+	if enemySpeed > playerSpeed:
+		numSpeedSteps = GameConsts.MAX_BATTLE_SPEED - enemySpeed
+		_setCurrentTurn(Turn.ENEMY)
 	else:
-		_enemyParty.setHasTurn(true)
-		_playerParty.setHasTurn(false)
+		numSpeedSteps = GameConsts.MAX_BATTLE_SPEED - playerSpeed
+		_setCurrentTurn(Turn.PLAYER)
+	
+	_enemyParty.addActiveSpeed(numSpeedSteps)
+	_playerParty.addActiveSpeed(numSpeedSteps)
+	if _currentTurn == Turn.PLAYER:
+		_playerParty.setHasTurn(maxSpeedPlayer)
+		maxSpeedPlayer.getStats().resetActiveSpeed()
+	else:
+		_enemyParty.setHasTurn(maxSpeedEnemy)
+		maxSpeedEnemy.getStats().resetActiveSpeed()
 	pass
 
 func _onFinishedTurn():

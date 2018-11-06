@@ -1,9 +1,8 @@
-extends Node
+extends "res://Scripts/Party.gd"
 
 const _distanceBetweenEnemies = 3
 
-var _enemies = []
-
+var _enemies = null
 var _battleManager = null
 var _lootTable = null
 var _leftPosition = null
@@ -35,14 +34,16 @@ func getActiveEnemy():
 func isPartyFull():
 	return _enemies.size() > GameConsts.MAX_PARTY_COUNT
 
-func setHasTurn(hasTurn):
-	_hasTurn = hasTurn
-	if _enemies.size() > 0:
-		_enemies[_activeIndex].setHasTurn(hasTurn)
+func setHasTurn(enemy):
+	_hasTurn = true	
+	enemy.setHasTurn(true)		
+	var enemyIndex = _enemies.find(enemy)
+	_activeIndex = enemyIndex
 	pass
 
 func onBattleStarted(battleManager):
 	_battleManager = battleManager
+	_enemies = getMembers()
 	pass
 
 func onBattleEnded():
@@ -51,9 +52,10 @@ func onBattleEnded():
 	pass
 
 func addEnemy(enemy):
-	_enemies.append(enemy)
+	_enemies.append(enemy)	
+
 	enemy.connect("onTurnFinished", self, "_onTurnFinished")
-	enemy.connect("onHealthChanged", self, "_onHealthChanged") 
+	enemy.connect("onHealthChanged", self, "_onHealthChanged") 	
 	if _enemies.size() > 1:
 		_moveToFreeBattlePosition(enemy) # This is not the first enemy
 		enemy.connect("onDestinationReached", self, "_onBattlePositionReached")
@@ -68,14 +70,6 @@ func _isAnyAlive():
 		if enemy.isAlive():
 			aliveCount += 1
 	return aliveCount > 0
-
-func _setNextActiveEnemy():
-	var numEnemies = _enemies.size()
-	if numEnemies > 1:	
-		_activeIndex = Utils.getRandIntegerValInRange(0, numEnemies, _activeIndex)
-	else:
-		_activeIndex = 0
-	pass
 
 func _onEnemyFinishedRotating(enemy):
 	_initBattlePositions()
@@ -113,8 +107,7 @@ func _moveToFreeBattlePosition(enemy):
 	pass
 
 func _onTurnFinished():
-	emit_signal("onTurnFinished")
-	_setNextActiveEnemy()
+	emit_signal("onTurnFinished")	
 	pass
 
 func _removeNotAliveEnemies():
@@ -137,7 +130,4 @@ func _onHealthChanged(health, delta):
 			emit_signal("onPartyLost", getPartyType())	
 		
 		_removeNotAliveEnemies()
-		
-		if _enemies.size() > 0:
-			_setNextActiveEnemy()
 	pass

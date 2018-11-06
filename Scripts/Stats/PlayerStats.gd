@@ -1,8 +1,8 @@
 extends "res://Scripts/Stats/EntityStats.gd"
 
-export var _mana = 100
+export var _maxMana = 100
 
-var _maxMana = _mana
+var _mana = 0
 
 signal onManaChanged
 
@@ -33,3 +33,7 @@ func consumeMana(amount):
 		emit_signal("onManaChanged", _mana, -amount)
 		hasEnoughMana = true
 	return hasEnoughMana
+
+func _ready():
+	_mana = _maxMana
+	pass

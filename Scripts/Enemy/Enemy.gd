@@ -41,6 +41,9 @@ signal onFinishedRotating
 
 	# Functions
 
+func getStats():
+	return _stats
+
 func getHealth():
 	return _stats.getHealth()
 
@@ -115,6 +118,7 @@ func damagePlayer():
 	pass
 
 func attackFinished():
+	_hasTurn = false
 	emit_signal("onTurnFinished")
 	pass
 
@@ -176,7 +180,7 @@ func _physics_process(delta):
 
 func _onHealthChanged(newValue, delta):	
 	emit_signal("onHealthChanged", newValue, delta)
-	
+
 	if !_stats.isAlive():
 		queue_free()
 	pass

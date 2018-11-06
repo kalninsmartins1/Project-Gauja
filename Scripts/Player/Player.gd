@@ -35,6 +35,9 @@ signal onMovePositionReached
 
 # Public functions
 
+func getStats():
+	return _stats
+
 func isAlive():
 	return _stats.isAlive()
 

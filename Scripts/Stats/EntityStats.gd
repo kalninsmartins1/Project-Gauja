@@ -1,11 +1,15 @@
 extends Node
 
-export var _health = 100
+export var _maxHealth = 100
 export var _speed = 10
 
-var _maxHealth = _health
+var _health = 0
+var _activeSpeed = 0
 
 signal onHealthChanged
+
+func getActiveSpeed():
+	return _activeSpeed
 
 func isAlive():
 	return _health > 0
@@ -13,8 +17,14 @@ func isAlive():
 func getHealth():
 	return _health
 
-func getSpeed():
-	return _speed
+func resetActiveSpeed():
+	_activeSpeed = _speed
+	pass
+
+func addActiveSpeed(amount):
+	_activeSpeed += amount
+	_activeSpeed = clamp(_activeSpeed, 0, GameConsts.MAX_BATTLE_SPEED)
+	pass
 
 func healHealth(amount):
 	_health += amount
@@ -32,4 +42,9 @@ func revive():
 	var deltaHealth = _maxHealth - _health
 	_health = _maxHealth
 	emit_signal("onHealthChanged", _health, deltaHealth)
+	pass
+	
+func _ready():
+	_health = _maxHealth
+	_activeSpeed = _speed
 	pass

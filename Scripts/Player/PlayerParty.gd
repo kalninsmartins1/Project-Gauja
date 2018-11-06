@@ -1,4 +1,4 @@
-extends Node
+extends "res://Scripts/Party.gd"
 
 export(Array) var _playerTemplates
 export var _fallowDistance = 5
@@ -9,7 +9,7 @@ onready var _battleManager = get_node("../BattleManager")
 onready var _navigationManager = get_node("../Navigation")
 onready var _playerUI = get_node("PlayerUI")
 
-var _playerList = []
+var _players = null
 var _inventory = []
 var _activePlayer = null
 var _isInBattle = false
@@ -52,15 +52,16 @@ func getActivePlayer():
 func findClosestPlayer(position):
 	var minDistance = INF
 	var keyPlayer = null
-	for player in _playerList:
+	for player in _players:
 		var distSq = (position - player.get_global_transform().origin).length_squared()
 		if distSq < minDistance:
 			minDistance = distSq
 			keyPlayer = player
 	return keyPlayer
 
-func setHasTurn(hasTurn):
-	_hasTurn = hasTurn	
+func setHasTurn(player):
+	_hasTurn = true
+	_setActivePlayer(player)		
 	pass
 
 func onBattleStarted(enemy):
@@ -84,7 +85,7 @@ func onBattleEnded(loot):
 
 func _isAnyAlive():
 	var aliveCount = 0
-	for player in _playerList:
+	for player in _players:
 		if player.isAlive():
 			aliveCount += 1
 	return aliveCount > 0
@@ -98,19 +99,20 @@ func _setActivePlayer(player):
 	pass
 
 func _revivePlayers():
-	for player in _playerList:
+	for player in _players:
 		if !player.isAlive():
 			player.revive()
 	pass
 
 func _findPlayerById(playerId):
 	var keyPlayer = null
-	for player in _playerList:
+	for player in _players:
 		if player.getId() == playerId:
 			keyPlayer = player
 	return keyPlayer
 
 func _ready():
+	_players = getMembers()
 	_initPlayers()
 	pass
 	
@@ -118,7 +120,7 @@ func _preparePlayersForBattle(enemy):
 	_activePlayer.lookAt(enemy.get_global_transform().origin)
 	_activePlayer.setMoveDirection(Vector3(0, 0, 0))
 	
-	if _playerList.size() == 1:
+	if _players.size() == 1:
 		emit_signal("onBattleStarted")
 	else:
 		var activePlayerTransform = _activePlayer.get_global_transform()	
@@ -128,7 +130,7 @@ func _preparePlayersForBattle(enemy):
 		var availablePositions = [leftPosition, rightPosition]
 		
 		var index = 0
-		for player in _playerList:
+		for player in _players:
 			var playerId = player.getId()
 			if playerId != _activePlayer.getId():
 				var path = _navigationManager.get_simple_path(player.get_global_transform().origin, availablePositions[index])				
@@ -153,7 +155,7 @@ func _initPlayers():
 		player.connect("onTurnFinished", self, "_playerFinishedTurn")
 		player.connect("onHealthChanged", self, "_onPlayerHealthChanged")
 		_playerContainer.add_child(player)
-		_playerList.append(player)
+		_players.append(player)
 		_playerUI.addCharacterProfile(player)
 		_playerUI.connect("onActivePlayerSwitchRequest", self, "_onActivePlayerSwitchRequest")
 		
@@ -177,7 +179,7 @@ func _onPlayerHealthChanged(health, delta):
 	pass
 
 func _respawnParty():
-	for player in _playerList:
+	for player in _players:
 		player.respawn()
 	pass
 
@@ -185,7 +187,7 @@ func _startFallowingActivePlayer(playerId):
 	var inactivePlayerList = []
 		
 	# Set new active player
-	for player in _playerList:
+	for player in _players:
 		if player.getId() == playerId:
 			_activePlayer = player
 			player.stopFallow()
@@ -205,20 +207,7 @@ func _startFallowingActivePlayer(playerId):
 
 func _playerFinishedTurn(player):
 	if _isInBattle:
-		emit_signal("onTurnFinished")	
-		_setNextActivePlayer()
-	pass
-
-func _setNextActivePlayer():
-	var _inactivePlayers = []
-	for player in _playerList:
-		if player.getId() != _activePlayer.getId() and player.isAlive():
-			_inactivePlayers.append(player)
-			
-	var inactivePlayerCount = _inactivePlayers.size()
-	if inactivePlayerCount > 0:
-		var newActiveIndex = randi() % _inactivePlayers.size()
-		_setActivePlayer(_inactivePlayers[newActiveIndex])	
+		emit_signal("onTurnFinished")		
 	pass
 	
 func _onPlayerReachedPosition(player):
