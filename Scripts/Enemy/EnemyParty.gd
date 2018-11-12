@@ -34,7 +34,7 @@ func getActiveEnemy():
 func isPartyFull():
 	return _enemies.size() > GameConsts.MAX_PARTY_COUNT
 
-func setHasTurn(enemy):
+func onHasTurn(enemy):
 	_hasTurn = true	
 	enemy.setHasTurn(true)		
 	var enemyIndex = _enemies.find(enemy)

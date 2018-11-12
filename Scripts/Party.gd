@@ -15,8 +15,10 @@ func findMaxBattleSpeedMember():
 	var keyMember = null
 
 	for member in _members:
-		var curSpeed = member.getStats().getActiveSpeed()
-		if curSpeed > maxSpeed:
+		var stats = member.getStats()
+		var curSpeed = stats.getActiveSpeed()
+
+		if stats.isAlive() and curSpeed > maxSpeed:
 			maxSpeed = curSpeed 
 			keyMember = member
 	return keyMember	

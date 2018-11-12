@@ -33,15 +33,11 @@ func healHealth(amount):
 	pass
 
 func takeDamage(damage):
-	_health -= damage
-	clamp(_health, 0, _maxHealth)	
-	emit_signal("onHealthChanged", _health, -damage)
+	healHealth(-damage) # Taking damage is same as healing negative amount	
 	pass
 
 func revive():
-	var deltaHealth = _maxHealth - _health
-	_health = _maxHealth
-	emit_signal("onHealthChanged", _health, deltaHealth)
+	healHealth(_maxHealth)
 	pass
 	
 func _ready():

@@ -2,12 +2,14 @@ extends "res://Scripts/Party.gd"
 
 export(Array) var _playerTemplates
 export var _fallowDistance = 5
+export var _respawnTime = 2
 
 onready var _playerContainer = get_node("PlayerList")
 onready var _itemDatabase = get_node("../ItemDatabase")
 onready var _battleManager = get_node("../BattleManager")
 onready var _navigationManager = get_node("../Navigation")
 onready var _playerUI = get_node("PlayerUI")
+onready var _tween = get_node("PlayerUI/Tween")
 
 var _players = null
 var _inventory = []
@@ -59,7 +61,7 @@ func findClosestPlayer(position):
 			keyPlayer = player
 	return keyPlayer
 
-func setHasTurn(player):
+func onHasTurn(player):
 	_hasTurn = true
 	_setActivePlayer(player)		
 	pass
@@ -68,6 +70,11 @@ func onBattleStarted(enemy):
 	_isInBattle = true	
 	
 	_preparePlayersForBattle(enemy)
+	pass
+
+func onTurnChanged():
+	if !_activePlayer.isAlive():
+		_activePlayer = findMaxBattleSpeedMember()
 	pass
 	
 func onBattleEnded(loot):
@@ -78,8 +85,7 @@ func onBattleEnded(loot):
 		for itemId in loot:
 			_addInventoryItem(itemId)
 		emit_signal("onInventoryChanged")
-	emit_signal("onBattleEnded")
-	_revivePlayers()
+	emit_signal("onBattleEnded")	
 	_startFallowingActivePlayer(_activePlayer.getId())
 	pass
 
@@ -96,12 +102,6 @@ func _setActivePlayer(player):
 	# Notify UI that active player has changed
 	_playerUI.onActivePlayerChanged(player.getId())
 	emit_signal("onActivePlayerSwitched")
-	pass
-
-func _revivePlayers():
-	for player in _players:
-		if !player.isAlive():
-			player.revive()
 	pass
 
 func _findPlayerById(playerId):
@@ -173,9 +173,8 @@ func _onPlayerHealthChanged(health, delta):
 	if health <= 0:		
 		if !_isAnyAlive():
 			emit_signal("onPartyLost", getPartyType())
-			_respawnParty()
-		else:
-			_setNextActivePlayer()
+			_tween.interpolate_callback(self, _respawnTime, "_respawnParty")
+			_tween.start()
 	pass
 
 func _respawnParty():

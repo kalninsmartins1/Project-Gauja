@@ -166,7 +166,7 @@ func _physics_process(delta):
 	var toPlayer =  playerPos - enemyPos
 	var isPlayerInBattleRadius = toPlayer.length_squared() <= _battleRadius*_battleRadius
 	
-	if isAlive() and _battleManager.canEnterBattle() and !_isInBattle and isPlayerInBattleRadius:
+	if isAlive() and player.isAlive() and _battleManager.canEnterBattle() and !_isInBattle and isPlayerInBattleRadius:
 		_isInBattle = true
 		_isMoving = false
 		_battleManager.initiateBattle(_playerParty, self)

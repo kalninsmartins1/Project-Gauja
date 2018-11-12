@@ -43,7 +43,8 @@ func initiateBattle(var playerParty, var enemy):
 
 func finishTurn():
 	if(_isBattleActive):
-		_calculateNextTurn()		
+		_calculateNextTurn()
+		_playerParty.onTurnChanged()
 	pass
 
 func _setCurrentTurn(turn):
@@ -68,10 +69,10 @@ func _calculateNextTurn():
 	_enemyParty.addActiveSpeed(numSpeedSteps)
 	_playerParty.addActiveSpeed(numSpeedSteps)
 	if _currentTurn == Turn.PLAYER:
-		_playerParty.setHasTurn(maxSpeedPlayer)
+		_playerParty.onHasTurn(maxSpeedPlayer)
 		maxSpeedPlayer.getStats().resetActiveSpeed()
 	else:
-		_enemyParty.setHasTurn(maxSpeedEnemy)
+		_enemyParty.onHasTurn(maxSpeedEnemy)
 		maxSpeedEnemy.getStats().resetActiveSpeed()
 	pass
 
