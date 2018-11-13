@@ -42,3 +42,9 @@ static func startProgressBarAnimation(progressBar, tweener, animSpeed, newValue)
 	tweener.interpolate_property(progressBar, "value", progressBar.value, newValue, duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tweener.start()
 	pass
+
+static func setAnimationLooping(animationTree, animId):
+	var animName = animationTree.node_get_input_source(GameConsts.ANIM_TRANSITION_NODE, animId)
+	var animation = animationTree.animation_node_get_animation(animName)
+	animation.set_loop(true)
+	pass

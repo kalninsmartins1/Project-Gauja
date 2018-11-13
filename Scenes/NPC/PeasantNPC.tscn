@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Art/Models/Peasant/mudeater.dae" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/NPC/NPC.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+
+radius = 30.0
+height = 100.0
+
+[node name="NPC" index="0" instance=ExtResource( 1 )]
+
+transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="KinematicBody" type="KinematicBody" parent="." index="0"]
+
+editor/display_folded = true
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+collision/safe_margin = 0.001
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody" index="0"]
+
+transform = Transform( 0.999998, 0, 0, 0, -4.37113e-008, -0.999998, 0, 0.999998, -4.37113e-008, 1.09632, 88.5951, -5.45011 )
+shape = SubResource( 1 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="Armature" parent="." index="1"]
+
+editor/display_folded = true
+
+[node name="Skeleton" parent="Armature" index="0"]
+
+editor/display_folded = true
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="." index="2"]
+
+playback_process_mode = 1
+master_player = NodePath("../AnimationPlayer")
+base_path = NodePath("..")
+active = true
+data = {
+"active": true,
+"connections": [ "anim", "transition", 0, "anim 2", "transition", 1, "transition", "out", 0 ],
+"master": NodePath("../AnimationPlayer"),
+"nodes": [ {
+"id": "transition",
+"position": Vector2( 276, 60 ),
+"transitions": [ {
+"auto_advance": false
+}, {
+"auto_advance": false
+} ],
+"type": "transition",
+"xfade": 0.0
+}, {
+"filter": [  ],
+"from": "Idle.Submissive.003",
+"id": "anim",
+"position": Vector2( 97, 62 ),
+"type": "animation"
+}, {
+"id": "out",
+"position": Vector2( 433, 51 ),
+"type": "output"
+}, {
+"filter": [  ],
+"from": "Fight.UnarmedR.SwitchToL",
+"id": "anim 2",
+"position": Vector2( 95, 188 ),
+"type": "animation"
+} ]
+}
+
+
