@@ -89,14 +89,14 @@ func _partyLost(partyType):
 			_endBattle(true)
 	pass
 	
-func _endBattle(var shouldGiveLoot):
+func _endBattle(playerWon):
 
 	var lootArray = null
-	if(shouldGiveLoot):
+	if(playerWon):
 		lootArray = _calculateLoot()
 				
-	_playerParty.onBattleEnded(lootArray)
-	_enemyParty.onBattleEnded()
+	_playerParty.onBattleEnded(playerWon, lootArray)
+	_enemyParty.onBattleEnded(!playerWon)
 	_enemyParty.queue_free() # This is how you release instanced script memory
 	_enemyParty = null
 	_isBattleActive = false

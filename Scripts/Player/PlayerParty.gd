@@ -77,9 +77,13 @@ func onTurnChanged():
 		_activePlayer = findMaxBattleSpeedMember()
 	pass
 	
-func onBattleEnded(loot):
+func onBattleEnded(hasWon, loot):
 	_isInBattle = false
 	_hasTurn = false
+	
+	if hasWon:
+		_reviveNotAlivePartyMembers()
+
 	if(loot != null):
 		emit_signal("onLootReceived", loot)
 		for itemId in loot:
@@ -138,6 +142,12 @@ func _preparePlayersForBattle(enemy):
 				player.moveToPosition(path)
 				_waitingForPlayers.append(playerId)
 				index += 1
+	pass
+
+func _reviveNotAlivePartyMembers():
+	for player in _players:
+		if !player.isAlive():
+			player.revive()
 	pass
 
 func _addInventoryItem(itemId):

@@ -46,7 +46,7 @@ func onBattleStarted(battleManager):
 	_enemies = getMembers()
 	pass
 
-func onBattleEnded():
+func onBattleEnded(hasWon):
 	for enemy in _enemies:
 		enemy.onBattleEnded()
 	pass
