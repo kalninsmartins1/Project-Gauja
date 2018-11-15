@@ -4,6 +4,7 @@ onready var _playerParty = get_parent()
 onready var _inventoryPopup = get_node("InventoryPopup")
 onready var _skillSelectionPanel = get_node("SkillSelectionPanel")
 onready var _playerProfilesContainer = get_node("PlayerProfiles")
+onready var _dialogPanel = get_node("DialogPanel")
 onready var _tween = get_node("Tween")
 
 var _characterProfiles = []
@@ -27,6 +28,10 @@ func addCharacterProfile(player):
 	profile.connect("onActivePlayerSwitchRequest", self, "_onActivePlayerSwitchRequest")
 	_characterProfiles.append(profile)
 	_playerProfilesContainer.add_child(profile)	
+	pass
+
+func startDialog(dialog):
+	_dialogPanel.startDialog(dialog)
 	pass
 
 func _ready():		

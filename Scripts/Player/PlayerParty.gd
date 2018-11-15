@@ -61,6 +61,10 @@ func findClosestPlayer(position):
 			keyPlayer = player
 	return keyPlayer
 
+func startDialog(dialog):
+	_playerUI.startDialog(dialog)
+	pass
+
 func onHasTurn(player):
 	_hasTurn = true
 	_setActivePlayer(player)		
@@ -80,7 +84,7 @@ func onTurnChanged():
 func onBattleEnded(hasWon, loot):
 	_isInBattle = false
 	_hasTurn = false
-	
+
 	if hasWon:
 		_reviveNotAlivePartyMembers()
 

@@ -13,6 +13,7 @@ height = 100.0
 transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
+_dialog = [ "Hello !", "Whats up ?", "Not much...", "Can I help you ?", "I am glad you asked these chickens have been bothering me for ages now. I would appriciate if you could deal with them and bring me their organic meat.", "I will do my best !", "See ya!", "I want nam nam !" ]
 
 [node name="KinematicBody" type="KinematicBody" parent="." index="0"]
 
