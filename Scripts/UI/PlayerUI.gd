@@ -10,6 +10,7 @@ onready var _tween = get_node("Tween")
 var _characterProfiles = []
 
 signal onActivePlayerSwitchRequest
+signal onDialogClosed
 
 func getPlayer():
 	return _playerParty.getActivePlayer()
@@ -38,6 +39,11 @@ func _ready():
 	_playerParty.connect("onRequestInventoryOpen", self, "_onRequestInventoryOpen")
 	_playerParty.connect("onBattleStarted", self, "_onPlayerEnterBattle")
 	_playerParty.connect("onBattleEnded", self, "_onPlayerExitBattle")
+	_dialogPanel.connect("onClosed", self, "_onDialogPanelClosed")
+	pass
+
+func _onDialogPanelClosed():
+	emit_signal("onDialogClosed")
 	pass
 
 func _onActivePlayerSwitchRequest(playerId):

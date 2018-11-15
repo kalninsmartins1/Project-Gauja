@@ -6,6 +6,8 @@ onready var _okButton = get_node("VBoxContainer/Button")
 var _dialog = null
 var _curDialogIndex = 0
 
+signal onClosed
+
 func startDialog(dialog):
 	_reset()
 	_dialog = dialog
@@ -24,6 +26,7 @@ func _show():
 
 func _hide():
 	set_visible(false)
+	emit_signal("onClosed")
 	pass
 
 func _showNextDialogEntry():

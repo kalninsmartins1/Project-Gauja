@@ -17,6 +17,7 @@ var _activePlayer = null
 var _isInBattle = false
 var _hasTurn = false
 var _waitingForPlayers = []
+var _isHandlingInput = true
 
 signal onInventoryChanged
 signal onRequestInventoryOpen
@@ -63,6 +64,7 @@ func findClosestPlayer(position):
 
 func startDialog(dialog):
 	_playerUI.startDialog(dialog)
+	_isHandlingInput = false
 	pass
 
 func onHasTurn(player):
@@ -122,6 +124,11 @@ func _findPlayerById(playerId):
 func _ready():
 	_players = getMembers()
 	_initPlayers()
+	_playerUI.connect("onDialogClosed", self, "_onDialogClosed")
+	pass
+
+func _onDialogClosed():
+	_isHandlingInput = true
 	pass
 	
 func _preparePlayersForBattle(enemy):	
@@ -240,7 +247,8 @@ func _onActivePlayerSwitchRequest(playerId):
 	pass
 
 func _process(delta):
-	_handleInput()
+	if _isHandlingInput:
+		_handleInput()
 	pass
 	
 func _handleInput():	
