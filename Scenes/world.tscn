@@ -164,6 +164,7 @@ height = 18
 
 [node name="PlayerParty" type="Node" parent="." index="1"]
 
+editor/display_folded = true
 script = ExtResource( 3 )
 _playerTemplates = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
 _fallowDistance = 3
@@ -787,6 +788,7 @@ _skillId = 3
 
 [node name="DialogPanel" type="Panel" parent="PlayerParty/PlayerUI" index="6"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.5
 anchor_top = 1.0
@@ -806,6 +808,7 @@ _sections_unfolded = [ "Rect" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerParty/PlayerUI/DialogPanel" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -927,7 +930,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.38649, 0, 22.5321 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
 
-editor/display_folded = true
 environment = ExtResource( 1 )
 
 [node name="Well" parent="WorldEnvironment" index="0" instance=ExtResource( 19 )]
@@ -1085,6 +1087,7 @@ _itemDatabase = [ ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ) ]
 [node name="NPC" parent="." index="9" instance=ExtResource( 31 )]
 
 transform = Transform( -0.0143177, 0, 0.149315, 0, 0.15, 0, -0.149315, 0, -0.0143177, 5.00719, 0, 28.1952 )
+_interactDistance = 4
 
 [connection signal="body_entered" from="WorldEnvironment/Well/SafeArea" to="WorldEnvironment/Well/SafeArea" method="_on_SafeArea_body_entered"]
 
