@@ -10,7 +10,7 @@ var _characterSlots = []
 	
 func _ready():	
 	connect("about_to_show", self, "_aboutToShowPopup")
-	_playerParty.connect("onInventoryChanged", self, "_updateInventorySlots")
+	_playerParty.connect("onInventoryItemAdded", self, "_addItemToInventorySlots")
 	_playerParty.connect("onActivePlayerSwitched", self, "_onActivePlayerSwitched")
 	_inventoryItemContainer = get_node("HBoxContainer/Inventory/ScrollContainer/GridContainer")
 	_initInventorySlots()
@@ -59,13 +59,18 @@ func _onEquipItem(item):
 	_updateCharacterSlots()
 	pass
 
-func _updateInventorySlots():
-	var inventory = _playerParty.getInventory()
+func _addItemToInventorySlots(itemId):	
 	var itemDetabase = _playerParty.getItemDatabase()
-	
-	var index = 0
-	for itemId in inventory:
-		var itemTemplate = itemDetabase.getItem(itemId)		
-		_inventorySlots[index].spawnItem(itemTemplate, itemId)
-		index += 1
+	var itemTemplate = itemDetabase.getItem(itemId)
+	var slot = _findEmptyInventorySlot()
+	slot.spawnItem(itemTemplate, itemId)
 	pass
+
+func _findEmptyInventorySlot():
+	var keySlot = null
+
+	for slot in _inventorySlots:
+		if slot.isEmpty():
+			keySlot = slot
+			break
+	return keySlot

@@ -9,6 +9,9 @@ var _isFirstClick = true
 
 signal onEquipItem
 
+func isEmpty():
+	return _item == null
+
 func getItem():
 	return _item
 

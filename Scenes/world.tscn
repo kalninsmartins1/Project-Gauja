@@ -312,7 +312,6 @@ align = 1
 
 [node name="LootPopup" type="AcceptDialog" parent="PlayerParty/PlayerUI" index="3"]
 
-editor/display_folded = true
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -789,6 +788,7 @@ _skillId = 3
 
 [node name="DialogPanel" type="Panel" parent="PlayerParty/PlayerUI" index="6"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.5
 anchor_top = 1.0

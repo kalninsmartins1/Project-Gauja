@@ -21,7 +21,7 @@ var _isHandlingInput = true
 var _activeQuests = []
 var _completedQuestIds = []
 
-signal onInventoryChanged
+signal onInventoryItemAdded
 signal onRequestInventoryOpen
 signal onBattleStarted
 signal onBattleEnded
@@ -120,11 +120,10 @@ func onBattleEnded(hasWon, loot):
 	if hasWon:
 		_reviveNotAlivePartyMembers()
 
-	if(loot != null):
+	if loot != null:
 		emit_signal("onLootReceived", loot)
 		for itemId in loot:
 			_addInventoryItem(itemId)
-		emit_signal("onInventoryChanged")
 	emit_signal("onBattleEnded")	
 	_startFallowingActivePlayer(_activePlayer.getId())
 	pass
@@ -194,6 +193,7 @@ func _reviveNotAlivePartyMembers():
 
 func _addInventoryItem(itemId):
 	_inventory.append(itemId)
+	emit_signal("onInventoryItemAdded", itemId)
 	pass
 
 func _initPlayers():
