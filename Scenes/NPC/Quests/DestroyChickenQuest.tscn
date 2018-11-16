@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/NPC/Quests/DestroyQuest.gd" type="Script" id=1]
+
+[node name="DestroyChickenQuest" type="Node" index="0"]
+
+script = ExtResource( 1 )
+_startDialog = [ "Hello !", "Whats up ?", "Not much...", "Can I help you ?", "I am glad you asked these chickens have been bothering me for ages now. I would appriciate if you could deal with them and bring me their organic meat.", "I will do my best !", "See ya!", "I want nam nam !" ]
+_activeDialog = [ "Are you lazy ? C'mon the chickens will keep annoying me. Go and show them.", "I was unsure of which chickens we are talking about.", "There is only 2 in this world so you cant miss them go on and fufill your destiny.", "I will.", "That is the spirit." ]
+_endDialog = [ "Heya !", "Sup ?", "I dealt with those chickens you mentioned.", "Do you have the meat ?", "Yes, here you go.", "Sweet, nice and fresh, I will prepare my stew.... But as for you, you have done a great job and great jobs are always repaid well, so I will give you this key a pirate once gave me. Its supposedly for a treasure chest. Good luck on your endevours and thanks again ! ", "Really ? An old key ? well I guess better then nothing, thanks !" ]
+_requiredAmount = 2
+_questTitle = "Destroy 2 chickens"
+_destroyType = 1
+
+

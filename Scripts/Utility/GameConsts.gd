@@ -14,3 +14,5 @@ const MAX_BATTLE_SPEED = 50
 enum Skill { NONE, FIRE_BALL, POTION_HP, POTION_MP }
 enum ItemType { NONE, POTION, WEAPON, HELMET, ARMOR, GLOVES, BOOTS }
 enum PartyType { NONE, PLAYER, ENEMY }
+enum QuestType { NONE, COLLECT, DESTROY }
+enum EnemyType { NONE, CHICKEN }

@@ -3922,6 +3922,7 @@ angular_velocity = Vector3( 0, 0, 0 )
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Axis Lock", "Transform" ]
+_enemyType = 1
 _lootTable = [ ExtResource( 2 ), ExtResource( 3 ) ]
 _moveSpeed = 2.0
 _rotationSpeed = 20.0

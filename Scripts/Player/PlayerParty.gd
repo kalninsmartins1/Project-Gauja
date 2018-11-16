@@ -18,6 +18,8 @@ var _isInBattle = false
 var _hasTurn = false
 var _waitingForPlayers = []
 var _isHandlingInput = true
+var _activeQuests = []
+var _completedQuestIds = []
 
 signal onInventoryChanged
 signal onRequestInventoryOpen
@@ -27,6 +29,16 @@ signal onActivePlayerSwitched
 signal onTurnFinished
 signal onLootReceived
 signal onPartyLost
+signal onDialogClosed
+signal onActiveQuestAdded
+signal onActiveQuestUpdated
+signal onActiveQuestRemoved
+signal onRequestQuestPanelToggle
+signal onStartDialog
+
+
+func getCompletedQuestIds():
+	return _completedQuestIds
 
 func getActiveEnemy():
 	return _battleManager.getActiveEnemy()
@@ -63,8 +75,19 @@ func findClosestPlayer(position):
 	return keyPlayer
 
 func startDialog(dialog):
-	_playerUI.startDialog(dialog)
+	emit_signal("onStartDialog", dialog)	
 	_isHandlingInput = false
+	pass
+
+func startQuest(quest):
+	_activeQuests.append(quest)
+	emit_signal("onActiveQuestAdded", quest)
+	pass
+
+func onQuestCompleted(quest):
+	_activeQuests.erase(quest)
+	_completedQuestIds.append(quest.getId())
+	emit_signal("onActiveQuestRemoved", quest)
 	pass
 
 func onHasTurn(player):
@@ -81,6 +104,13 @@ func onBattleStarted(enemy):
 func onTurnChanged():
 	if !_activePlayer.isAlive():
 		_activePlayer = findMaxBattleSpeedMember()
+	pass
+
+func onEnemyDestroyed(enemyType):
+	for quest in _activeQuests:
+		if !quest.isCompleted() and quest.getQuestType() == GameConsts.QuestType.DESTROY and quest.getDestroyType() == GameConsts.EnemyType.CHICKEN:
+			quest.collect()
+			emit_signal("onActiveQuestUpdated", quest)
 	pass
 	
 func onBattleEnded(hasWon, loot):
@@ -129,8 +159,9 @@ func _ready():
 
 func _onDialogClosed():
 	_isHandlingInput = true
+	emit_signal("onDialogClosed")
 	pass
-	
+
 func _preparePlayersForBattle(enemy):	
 	_activePlayer.lookAt(enemy.get_global_transform().origin)
 	_activePlayer.setMoveDirection(Vector3(0, 0, 0))
@@ -254,30 +285,33 @@ func _process(delta):
 func _handleInput():	
 
 	# Handle battle skills
-	if(_hasTurn):
-		if(Input.is_action_just_released("skill_1")):
+	if _hasTurn:
+		if Input.is_action_just_released("skill_1"):
 			_activePlayer.castSkill(GameConsts.Skill.FIRE_BALL)
-		elif(Input.is_action_just_released("skill_9")):
+		elif Input.is_action_just_released("skill_9"):
 			_activePlayer.castSkill(GameConsts.Skill.POTION_HP)
-		elif(Input.is_action_just_released("skill_0")):
+		elif Input.is_action_just_released("skill_0"):
 			_activePlayer.castSkill(GameConsts.Skill.POTION_MP)
 
 	if !_isInBattle:
 		
-		if(Input.is_action_just_released("open_inventory")):
+		if Input.is_action_just_released("open_inventory"):
 			emit_signal("onRequestInventoryOpen")
+
+		if Input.is_action_just_released("open_quests"):
+			emit_signal("onRequestQuestPanelToggle")
 		
 		# Handle character movement
 		var direction = Vector3(0, 0, 0)
 		var forward = Vector3(0, 0, 1)
 		
-		if (Input.is_action_pressed("move_forward")):
+		if Input.is_action_pressed("move_forward"):
 			direction += -forward
-		if (Input.is_action_pressed("move_backwards")):
+		if Input.is_action_pressed("move_backwards"):
 			direction += forward
-		if (Input.is_action_pressed("move_left")):
+		if Input.is_action_pressed("move_left"):
 			direction += Vector3(-1, 0, 0)
-		if (Input.is_action_pressed("move_right")):
+		if Input.is_action_pressed("move_right"):
 			direction += Vector3(1, 0, 0)
 		
 		_activePlayer.setMoveDirection(direction)

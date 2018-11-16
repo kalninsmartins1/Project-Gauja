@@ -1,6 +1,9 @@
 extends RigidBody
 
+enum EnemyType { NONE, CHICKEN }
+
 # Export vars
+export(EnemyType) var _enemyType
 export(Array) var _lootTable
 export var _moveSpeed = 20.0
 export var _rotationSpeed = 20.0
@@ -182,6 +185,7 @@ func _onHealthChanged(newValue, delta):
 	emit_signal("onHealthChanged", newValue, delta)
 
 	if !_stats.isAlive():
+		_playerParty.onEnemyDestroyed(_enemyType)
 		queue_free()
 	pass
 

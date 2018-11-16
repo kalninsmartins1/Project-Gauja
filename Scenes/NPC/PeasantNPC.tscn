@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Art/Models/Peasant/mudeater.dae" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/NPC/NPC.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/NPC/Quests/DestroyChickenQuest.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -13,7 +14,9 @@ height = 100.0
 transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
-_dialog = [ "Hello !", "Whats up ?", "Not much...", "Can I help you ?", "I am glad you asked these chickens have been bothering me for ages now. I would appriciate if you could deal with them and bring me their organic meat.", "I will do my best !", "See ya!", "I want nam nam !" ]
+_defaultDialog = [ "Hello, Mate!", "Hello, dude !", "How is it going ?", "Pretty good !", "How are you ?", "Yeah, yeah... not bad, just trying to grab some water from this well !", "Nice, I just wanted to take a sip.", "Sure, no worries !" ]
+_quests = [ ExtResource( 3 ) ]
+_interactDistance = 4
 
 [node name="KinematicBody" type="KinematicBody" parent="." index="0"]
 

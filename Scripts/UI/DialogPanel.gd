@@ -17,7 +17,7 @@ func startDialog(dialog):
 	pass
 
 func _ready():
-	_okButton.connect("pressed", self, "_showNextDialogEntry")
+	_okButton.connect("pressed", self, "_showNextDialogEntry")	
 	pass
 
 func _show():
