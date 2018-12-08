@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Shell_1.obj-234642b0fdb73b7a37199b9494f24b4f.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Shell_1.obj-234642b0fdb73b7a37199b9494f24b4f.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainBeach/Prop_Shell_1.obj"
+dest_files=[ "res://.import/Prop_Shell_1.obj-234642b0fdb73b7a37199b9494f24b4f.mesh", "res://.import/Prop_Shell_1.obj-234642b0fdb73b7a37199b9494f24b4f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

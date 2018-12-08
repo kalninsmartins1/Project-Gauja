@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Roof_Accent_Ridge_End.obj-c89de72f97c4646604e5d8e1b62d0521.mesh"
+
+[deps]
+
+files=[ "res://.import/Roof_Accent_Ridge_End.obj-c89de72f97c4646604e5d8e1b62d0521.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Roof_Accent_Ridge_End.obj"
+dest_files=[ "res://.import/Roof_Accent_Ridge_End.obj-c89de72f97c4646604e5d8e1b62d0521.mesh", "res://.import/Roof_Accent_Ridge_End.obj-c89de72f97c4646604e5d8e1b62d0521.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

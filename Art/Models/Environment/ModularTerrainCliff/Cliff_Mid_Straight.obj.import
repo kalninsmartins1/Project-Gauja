@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Mid_Straight.obj-e6d5c82721c3c36d6b5c36b3fbf96a9e.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Mid_Straight.obj-e6d5c82721c3c36d6b5c36b3fbf96a9e.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainCliff/Cliff_Mid_Straight.obj"
+dest_files=[ "res://.import/Cliff_Mid_Straight.obj-e6d5c82721c3c36d6b5c36b3fbf96a9e.mesh", "res://.import/Cliff_Mid_Straight.obj-e6d5c82721c3c36d6b5c36b3fbf96a9e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

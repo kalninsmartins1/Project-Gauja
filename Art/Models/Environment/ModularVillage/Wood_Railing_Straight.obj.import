@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wood_Railing_Straight.obj-a423a4e50c095ace7c0658f47a2ffc6e.mesh"
+
+[deps]
+
+files=[ "res://.import/Wood_Railing_Straight.obj-a423a4e50c095ace7c0658f47a2ffc6e.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Wood_Railing_Straight.obj"
+dest_files=[ "res://.import/Wood_Railing_Straight.obj-a423a4e50c095ace7c0658f47a2ffc6e.mesh", "res://.import/Wood_Railing_Straight.obj-a423a4e50c095ace7c0658f47a2ffc6e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Roof_Straight_Corner_Outer_Eave.obj-1ff868c39c5fd1b28e1216a5bb7250eb.mesh"
+
+[deps]
+
+files=[ "res://.import/Roof_Straight_Corner_Outer_Eave.obj-1ff868c39c5fd1b28e1216a5bb7250eb.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Roof_Straight_Corner_Outer_Eave.obj"
+dest_files=[ "res://.import/Roof_Straight_Corner_Outer_Eave.obj-1ff868c39c5fd1b28e1216a5bb7250eb.mesh", "res://.import/Roof_Straight_Corner_Outer_Eave.obj-1ff868c39c5fd1b28e1216a5bb7250eb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

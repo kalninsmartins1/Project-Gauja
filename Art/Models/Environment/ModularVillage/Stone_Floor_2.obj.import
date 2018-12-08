@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stone_Floor_2.obj-4d1d4ab986dda99ddd160074370e697e.mesh"
+
+[deps]
+
+files=[ "res://.import/Stone_Floor_2.obj-4d1d4ab986dda99ddd160074370e697e.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Stone_Floor_2.obj"
+dest_files=[ "res://.import/Stone_Floor_2.obj-4d1d4ab986dda99ddd160074370e697e.mesh", "res://.import/Stone_Floor_2.obj-4d1d4ab986dda99ddd160074370e697e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

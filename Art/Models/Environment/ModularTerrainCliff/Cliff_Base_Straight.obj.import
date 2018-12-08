@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Base_Straight.obj-3af6a45f79c1b41bfd719b6295732f22.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Base_Straight.obj-3af6a45f79c1b41bfd719b6295732f22.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainCliff/Cliff_Base_Straight.obj"
+dest_files=[ "res://.import/Cliff_Base_Straight.obj-3af6a45f79c1b41bfd719b6295732f22.mesh", "res://.import/Cliff_Base_Straight.obj-3af6a45f79c1b41bfd719b6295732f22.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

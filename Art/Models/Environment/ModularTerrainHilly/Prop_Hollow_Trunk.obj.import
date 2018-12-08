@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Hollow_Trunk.obj-c5c44f01e38464d44a2db51a90a56e3a.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Hollow_Trunk.obj-c5c44f01e38464d44a2db51a90a56e3a.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Hollow_Trunk.obj"
+dest_files=[ "res://.import/Prop_Hollow_Trunk.obj-c5c44f01e38464d44a2db51a90a56e3a.mesh", "res://.import/Prop_Hollow_Trunk.obj-c5c44f01e38464d44a2db51a90a56e3a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

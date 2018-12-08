@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Tree_Palm_2.obj-409bc699f8cf3b99cddb37094f6020d3.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Tree_Palm_2.obj-409bc699f8cf3b99cddb37094f6020d3.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainBeach/Prop_Tree_Palm_2.obj"
+dest_files=[ "res://.import/Prop_Tree_Palm_2.obj-409bc699f8cf3b99cddb37094f6020d3.mesh", "res://.import/Prop_Tree_Palm_2.obj-409bc699f8cf3b99cddb37094f6020d3.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

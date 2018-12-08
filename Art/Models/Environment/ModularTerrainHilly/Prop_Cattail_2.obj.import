@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Cattail_2.obj-92e56e8fcf5e87fceb3478c1b9f7cda5.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Cattail_2.obj-92e56e8fcf5e87fceb3478c1b9f7cda5.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Cattail_2.obj"
+dest_files=[ "res://.import/Prop_Cattail_2.obj-92e56e8fcf5e87fceb3478c1b9f7cda5.mesh", "res://.import/Prop_Cattail_2.obj-92e56e8fcf5e87fceb3478c1b9f7cda5.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

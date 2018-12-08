@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Waterwheel_Flume_Support_Brace.obj-406cfe2c7c57e1e4c197fbad9ea09cd7.mesh"
+
+[deps]
+
+files=[ "res://.import/Waterwheel_Flume_Support_Brace.obj-406cfe2c7c57e1e4c197fbad9ea09cd7.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Waterwheel_Flume_Support_Brace.obj"
+dest_files=[ "res://.import/Waterwheel_Flume_Support_Brace.obj-406cfe2c7c57e1e4c197fbad9ea09cd7.mesh", "res://.import/Waterwheel_Flume_Support_Brace.obj-406cfe2c7c57e1e4c197fbad9ea09cd7.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

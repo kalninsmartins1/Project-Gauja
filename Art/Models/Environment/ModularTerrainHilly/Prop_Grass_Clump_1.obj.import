@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Grass_Clump_1.obj-9748c3451c13cb1a5bfcfcf2f982dd7c.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Grass_Clump_1.obj-9748c3451c13cb1a5bfcfcf2f982dd7c.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Grass_Clump_1.obj"
+dest_files=[ "res://.import/Prop_Grass_Clump_1.obj-9748c3451c13cb1a5bfcfcf2f982dd7c.mesh", "res://.import/Prop_Grass_Clump_1.obj-9748c3451c13cb1a5bfcfcf2f982dd7c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

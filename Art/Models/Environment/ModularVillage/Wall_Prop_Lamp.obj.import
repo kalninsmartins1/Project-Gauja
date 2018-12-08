@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wall_Prop_Lamp.obj-0d039237189a5db1ccbf34960674171f.mesh"
+
+[deps]
+
+files=[ "res://.import/Wall_Prop_Lamp.obj-0d039237189a5db1ccbf34960674171f.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Wall_Prop_Lamp.obj"
+dest_files=[ "res://.import/Wall_Prop_Lamp.obj-0d039237189a5db1ccbf34960674171f.mesh", "res://.import/Wall_Prop_Lamp.obj-0d039237189a5db1ccbf34960674171f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

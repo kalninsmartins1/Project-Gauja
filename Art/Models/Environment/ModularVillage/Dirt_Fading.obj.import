@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Dirt_Fading.obj-87439ccab20fd228417ee669ee7f4bd2.mesh"
+
+[deps]
+
+files=[ "res://.import/Dirt_Fading.obj-87439ccab20fd228417ee669ee7f4bd2.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Dirt_Fading.obj"
+dest_files=[ "res://.import/Dirt_Fading.obj-87439ccab20fd228417ee669ee7f4bd2.mesh", "res://.import/Dirt_Fading.obj-87439ccab20fd228417ee669ee7f4bd2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

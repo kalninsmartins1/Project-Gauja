@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Mushroom_2.obj-fca70aa00a5eeb145cca914fd765f9b2.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Mushroom_2.obj-fca70aa00a5eeb145cca914fd765f9b2.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Mushroom_2.obj"
+dest_files=[ "res://.import/Prop_Mushroom_2.obj-fca70aa00a5eeb145cca914fd765f9b2.mesh", "res://.import/Prop_Mushroom_2.obj-fca70aa00a5eeb145cca914fd765f9b2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

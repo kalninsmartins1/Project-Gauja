@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Path_Hill_Sharp_Side.obj-09537ac4791deb69b3aa2a35aa65794b.mesh"
+
+[deps]
+
+files=[ "res://.import/Path_Hill_Sharp_Side.obj-09537ac4791deb69b3aa2a35aa65794b.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Path_Hill_Sharp_Side.obj"
+dest_files=[ "res://.import/Path_Hill_Sharp_Side.obj-09537ac4791deb69b3aa2a35aa65794b.mesh", "res://.import/Path_Hill_Sharp_Side.obj-09537ac4791deb69b3aa2a35aa65794b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

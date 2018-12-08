@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Water_Slope.obj-8b90174072a8e36141977603f730b88f.mesh"
+
+[deps]
+
+files=[ "res://.import/Water_Slope.obj-8b90174072a8e36141977603f730b88f.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Water_Slope.obj"
+dest_files=[ "res://.import/Water_Slope.obj-8b90174072a8e36141977603f730b88f.mesh", "res://.import/Water_Slope.obj-8b90174072a8e36141977603f730b88f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

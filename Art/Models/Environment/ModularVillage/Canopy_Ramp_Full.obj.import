@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Canopy_Ramp_Full.obj-96b683dca4c3201daf90789e997e6a08.mesh"
+
+[deps]
+
+files=[ "res://.import/Canopy_Ramp_Full.obj-96b683dca4c3201daf90789e997e6a08.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Canopy_Ramp_Full.obj"
+dest_files=[ "res://.import/Canopy_Ramp_Full.obj-96b683dca4c3201daf90789e997e6a08.mesh", "res://.import/Canopy_Ramp_Full.obj-96b683dca4c3201daf90789e997e6a08.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

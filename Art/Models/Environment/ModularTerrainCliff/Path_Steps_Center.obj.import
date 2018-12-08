@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Path_Steps_Center.obj-c4b38654c8d8c6eb5bceca0fc394250d.mesh"
+
+[deps]
+
+files=[ "res://.import/Path_Steps_Center.obj-c4b38654c8d8c6eb5bceca0fc394250d.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainCliff/Path_Steps_Center.obj"
+dest_files=[ "res://.import/Path_Steps_Center.obj-c4b38654c8d8c6eb5bceca0fc394250d.mesh", "res://.import/Path_Steps_Center.obj-c4b38654c8d8c6eb5bceca0fc394250d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

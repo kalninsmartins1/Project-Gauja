@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Canopy_Sides_Opposite.obj-fefc26c0bdbe0f4092029039bf550ecf.mesh"
+
+[deps]
+
+files=[ "res://.import/Canopy_Sides_Opposite.obj-fefc26c0bdbe0f4092029039bf550ecf.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Canopy_Sides_Opposite.obj"
+dest_files=[ "res://.import/Canopy_Sides_Opposite.obj-fefc26c0bdbe0f4092029039bf550ecf.mesh", "res://.import/Canopy_Sides_Opposite.obj-fefc26c0bdbe0f4092029039bf550ecf.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

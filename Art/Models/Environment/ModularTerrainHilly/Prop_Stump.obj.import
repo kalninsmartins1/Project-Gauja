@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Stump.obj-1376d74c07cff7982bcb485d843f3f58.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Stump.obj-1376d74c07cff7982bcb485d843f3f58.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Stump.obj"
+dest_files=[ "res://.import/Prop_Stump.obj-1376d74c07cff7982bcb485d843f3f58.mesh", "res://.import/Prop_Stump.obj-1376d74c07cff7982bcb485d843f3f58.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

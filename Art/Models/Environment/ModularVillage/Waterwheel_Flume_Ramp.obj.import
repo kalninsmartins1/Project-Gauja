@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Waterwheel_Flume_Ramp.obj-d9bba185fbb0789bfc052541a2869665.mesh"
+
+[deps]
+
+files=[ "res://.import/Waterwheel_Flume_Ramp.obj-d9bba185fbb0789bfc052541a2869665.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Waterwheel_Flume_Ramp.obj"
+dest_files=[ "res://.import/Waterwheel_Flume_Ramp.obj-d9bba185fbb0789bfc052541a2869665.mesh", "res://.import/Waterwheel_Flume_Ramp.obj-d9bba185fbb0789bfc052541a2869665.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

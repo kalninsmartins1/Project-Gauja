@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Lamp_Street.obj-d68763f381d75823cc323a3f106cc5e1.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Lamp_Street.obj-d68763f381d75823cc323a3f106cc5e1.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Prop_Lamp_Street.obj"
+dest_files=[ "res://.import/Prop_Lamp_Street.obj-d68763f381d75823cc323a3f106cc5e1.mesh", "res://.import/Prop_Lamp_Street.obj-d68763f381d75823cc323a3f106cc5e1.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

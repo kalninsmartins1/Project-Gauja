@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Fence_Curve_2x2.obj-5d4d306195f49b2fbf27c8a03a8859f4.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Fence_Curve_2x2.obj-5d4d306195f49b2fbf27c8a03a8859f4.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Fence_Curve_2x2.obj"
+dest_files=[ "res://.import/Prop_Fence_Curve_2x2.obj-5d4d306195f49b2fbf27c8a03a8859f4.mesh", "res://.import/Prop_Fence_Curve_2x2.obj-5d4d306195f49b2fbf27c8a03a8859f4.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Art/Models/Environment/Buildings/Bar/Bar.glb" type="PackedScene" id=1]
+[ext_resource path="res://Art/Models/Environment/Buildings/Bar/61.material" type="Material" id=2]
+[ext_resource path="res://Art/Models/Environment/Buildings/Bar/57.material" type="Material" id=3]
+[ext_resource path="res://Art/Models/Environment/Buildings/Bar/58.material" type="Material" id=4]
+[ext_resource path="res://Art/Models/Environment/Buildings/Bar/56.material" type="Material" id=5]
+[ext_resource path="res://Art/Models/Environment/Buildings/Bar/60.material" type="Material" id=6]
+[ext_resource path="res://Art/Models/Environment/Buildings/Bar/62.material" type="Material" id=7]
+
+[node name="Bar" index="0" instance=ExtResource( 1 )]
+
+[node name="root" parent="." index="0"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="node_id49" parent="root" index="0"]
+
+transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 1.46114, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="node_id30" parent="root/node_id49" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="node_id31" parent="root/node_id49" index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+material/0 = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id33" parent="root/node_id49" index="2"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="node_id34" parent="root/node_id49/node_id33" index="0"]
+
+material/0 = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id36" parent="root/node_id49/node_id33" index="1"]
+
+material/0 = ExtResource( 4 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id38" parent="root/node_id49/node_id33" index="2"]
+
+material/0 = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id40" parent="root/node_id49/node_id33" index="3"]
+
+material/0 = ExtResource( 6 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id42" parent="root/node_id49/node_id33" index="4"]
+
+material/0 = ExtResource( 7 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id44" parent="root/node_id49" index="3"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+material/0 = ExtResource( 7 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id46" parent="root/node_id49" index="4"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id48" parent="root/node_id49" index="5"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+

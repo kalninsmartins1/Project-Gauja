@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wall_Prop_Windmill_1.obj-17de213ae263c041b36706e401b4f230.mesh"
+
+[deps]
+
+files=[ "res://.import/Wall_Prop_Windmill_1.obj-17de213ae263c041b36706e401b4f230.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Wall_Prop_Windmill_1.obj"
+dest_files=[ "res://.import/Wall_Prop_Windmill_1.obj-17de213ae263c041b36706e401b4f230.mesh", "res://.import/Wall_Prop_Windmill_1.obj-17de213ae263c041b36706e401b4f230.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

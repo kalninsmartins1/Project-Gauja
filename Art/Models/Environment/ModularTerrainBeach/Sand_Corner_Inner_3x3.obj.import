@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Sand_Corner_Inner_3x3.obj-ac6a40149be722c2f68565755776ee32.mesh"
+
+[deps]
+
+files=[ "res://.import/Sand_Corner_Inner_3x3.obj-ac6a40149be722c2f68565755776ee32.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainBeach/Sand_Corner_Inner_3x3.obj"
+dest_files=[ "res://.import/Sand_Corner_Inner_3x3.obj-ac6a40149be722c2f68565755776ee32.mesh", "res://.import/Sand_Corner_Inner_3x3.obj-ac6a40149be722c2f68565755776ee32.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

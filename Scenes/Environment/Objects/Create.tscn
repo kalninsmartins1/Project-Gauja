@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Art/Models/Environment/Create/create.glb" type="PackedScene" id=1]
+[ext_resource path="res://Art/Models/Environment/Create/56.material" type="Material" id=2]
+
+[node name="Create" index="0" instance=ExtResource( 1 )]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="root" parent="." index="0"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="node_id33" parent="root" index="0"]
+
+transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="node_id30" parent="root/node_id33" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+material/0 = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="node_id32" parent="root/node_id33" index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+

@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stone_Doorway_Narrow_Tall_1.obj-93c449669f75ae3f8cbc35e1d48d6d94.mesh"
+
+[deps]
+
+files=[ "res://.import/Stone_Doorway_Narrow_Tall_1.obj-93c449669f75ae3f8cbc35e1d48d6d94.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Stone_Doorway_Narrow_Tall_1.obj"
+dest_files=[ "res://.import/Stone_Doorway_Narrow_Tall_1.obj-93c449669f75ae3f8cbc35e1d48d6d94.mesh", "res://.import/Stone_Doorway_Narrow_Tall_1.obj-93c449669f75ae3f8cbc35e1d48d6d94.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

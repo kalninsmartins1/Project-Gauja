@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wood_Post_Large.obj-261eda9ebbf48a5cb8d97d30ca1b8934.mesh"
+
+[deps]
+
+files=[ "res://.import/Wood_Post_Large.obj-261eda9ebbf48a5cb8d97d30ca1b8934.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Wood_Post_Large.obj"
+dest_files=[ "res://.import/Wood_Post_Large.obj-261eda9ebbf48a5cb8d97d30ca1b8934.mesh", "res://.import/Wood_Post_Large.obj-261eda9ebbf48a5cb8d97d30ca1b8934.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

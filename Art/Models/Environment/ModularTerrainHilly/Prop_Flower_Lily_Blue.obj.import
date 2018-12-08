@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Flower_Lily_Blue.obj-4bf407273836594ef3cc6b8d29b95e33.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Flower_Lily_Blue.obj-4bf407273836594ef3cc6b8d29b95e33.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Flower_Lily_Blue.obj"
+dest_files=[ "res://.import/Prop_Flower_Lily_Blue.obj-4bf407273836594ef3cc6b8d29b95e33.mesh", "res://.import/Prop_Flower_Lily_Blue.obj-4bf407273836594ef3cc6b8d29b95e33.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

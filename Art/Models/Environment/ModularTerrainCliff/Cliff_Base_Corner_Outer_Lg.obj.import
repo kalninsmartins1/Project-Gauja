@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Base_Corner_Outer_Lg.obj-3400134e333ddf423dfaeba8ad2042d2.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Base_Corner_Outer_Lg.obj-3400134e333ddf423dfaeba8ad2042d2.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainCliff/Cliff_Base_Corner_Outer_Lg.obj"
+dest_files=[ "res://.import/Cliff_Base_Corner_Outer_Lg.obj-3400134e333ddf423dfaeba8ad2042d2.mesh", "res://.import/Cliff_Base_Corner_Outer_Lg.obj-3400134e333ddf423dfaeba8ad2042d2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

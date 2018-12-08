@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stone_Wall_4.obj-8a5398509b098382758e434c115dcd79.mesh"
+
+[deps]
+
+files=[ "res://.import/Stone_Wall_4.obj-8a5398509b098382758e434c115dcd79.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Stone_Wall_4.obj"
+dest_files=[ "res://.import/Stone_Wall_4.obj-8a5398509b098382758e434c115dcd79.mesh", "res://.import/Stone_Wall_4.obj-8a5398509b098382758e434c115dcd79.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

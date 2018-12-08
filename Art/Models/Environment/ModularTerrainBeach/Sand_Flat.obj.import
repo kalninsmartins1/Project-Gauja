@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Sand_Flat.obj-2d809db73f6ae21caa5727744fcb368d.mesh"
+
+[deps]
+
+files=[ "res://.import/Sand_Flat.obj-2d809db73f6ae21caa5727744fcb368d.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainBeach/Sand_Flat.obj"
+dest_files=[ "res://.import/Sand_Flat.obj-2d809db73f6ae21caa5727744fcb368d.mesh", "res://.import/Sand_Flat.obj-2d809db73f6ae21caa5727744fcb368d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

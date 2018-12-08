@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Grass_Flat.obj-0c7dcbe856188a4f63631169ecf8dc39.mesh"
+
+[deps]
+
+files=[ "res://.import/Grass_Flat.obj-0c7dcbe856188a4f63631169ecf8dc39.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Grass_Flat.obj"
+dest_files=[ "res://.import/Grass_Flat.obj-0c7dcbe856188a4f63631169ecf8dc39.mesh", "res://.import/Grass_Flat.obj-0c7dcbe856188a4f63631169ecf8dc39.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

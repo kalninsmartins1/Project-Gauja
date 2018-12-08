@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stucco_Block.obj-c00c5014cfdf618ad2becb9651bda2ab.mesh"
+
+[deps]
+
+files=[ "res://.import/Stucco_Block.obj-c00c5014cfdf618ad2becb9651bda2ab.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Stucco_Block.obj"
+dest_files=[ "res://.import/Stucco_Block.obj-c00c5014cfdf618ad2becb9651bda2ab.mesh", "res://.import/Stucco_Block.obj-c00c5014cfdf618ad2becb9651bda2ab.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

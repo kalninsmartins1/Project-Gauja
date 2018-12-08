@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cliff_Base_Hill_Gentle.obj-f5c2eb32c0fd0a282658883e13532bfb.mesh"
+
+[deps]
+
+files=[ "res://.import/Cliff_Base_Hill_Gentle.obj-f5c2eb32c0fd0a282658883e13532bfb.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainCliff/Cliff_Base_Hill_Gentle.obj"
+dest_files=[ "res://.import/Cliff_Base_Hill_Gentle.obj-f5c2eb32c0fd0a282658883e13532bfb.mesh", "res://.import/Cliff_Base_Hill_Gentle.obj-f5c2eb32c0fd0a282658883e13532bfb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Flower_Daisy.obj-b3f7a3744e9d88bb288d8fa8b0a8519e.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Flower_Daisy.obj-b3f7a3744e9d88bb288d8fa8b0a8519e.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Flower_Daisy.obj"
+dest_files=[ "res://.import/Prop_Flower_Daisy.obj-b3f7a3744e9d88bb288d8fa8b0a8519e.mesh", "res://.import/Prop_Flower_Daisy.obj-b3f7a3744e9d88bb288d8fa8b0a8519e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

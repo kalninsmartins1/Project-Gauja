@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Path_Steps_Grass_Edge_Top.obj-f1c1b7134a649a0d54f0d3df1b85fa9f.mesh"
+
+[deps]
+
+files=[ "res://.import/Path_Steps_Grass_Edge_Top.obj-f1c1b7134a649a0d54f0d3df1b85fa9f.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainCliff/Path_Steps_Grass_Edge_Top.obj"
+dest_files=[ "res://.import/Path_Steps_Grass_Edge_Top.obj-f1c1b7134a649a0d54f0d3df1b85fa9f.mesh", "res://.import/Path_Steps_Grass_Edge_Top.obj-f1c1b7134a649a0d54f0d3df1b85fa9f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

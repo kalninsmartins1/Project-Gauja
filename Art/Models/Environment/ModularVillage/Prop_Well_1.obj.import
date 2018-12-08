@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Well_1.obj-19a1289b1ba5a9e4abbcaf9234e8ea53.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Well_1.obj-19a1289b1ba5a9e4abbcaf9234e8ea53.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Prop_Well_1.obj"
+dest_files=[ "res://.import/Prop_Well_1.obj-19a1289b1ba5a9e4abbcaf9234e8ea53.mesh", "res://.import/Prop_Well_1.obj-19a1289b1ba5a9e4abbcaf9234e8ea53.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

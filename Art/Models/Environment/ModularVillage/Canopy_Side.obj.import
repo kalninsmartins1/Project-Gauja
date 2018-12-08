@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Canopy_Side.obj-e224f11ba4d5866463c217bb8946a3df.mesh"
+
+[deps]
+
+files=[ "res://.import/Canopy_Side.obj-e224f11ba4d5866463c217bb8946a3df.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Canopy_Side.obj"
+dest_files=[ "res://.import/Canopy_Side.obj-e224f11ba4d5866463c217bb8946a3df.mesh", "res://.import/Canopy_Side.obj-e224f11ba4d5866463c217bb8946a3df.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

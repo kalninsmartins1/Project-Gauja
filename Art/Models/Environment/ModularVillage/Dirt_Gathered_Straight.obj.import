@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Dirt_Gathered_Straight.obj-29a2696ae763862e456ae3f34cb7f496.mesh"
+
+[deps]
+
+files=[ "res://.import/Dirt_Gathered_Straight.obj-29a2696ae763862e456ae3f34cb7f496.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Dirt_Gathered_Straight.obj"
+dest_files=[ "res://.import/Dirt_Gathered_Straight.obj-29a2696ae763862e456ae3f34cb7f496.mesh", "res://.import/Dirt_Gathered_Straight.obj-29a2696ae763862e456ae3f34cb7f496.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

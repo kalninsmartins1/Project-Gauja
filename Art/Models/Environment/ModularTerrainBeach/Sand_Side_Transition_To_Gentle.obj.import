@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Sand_Side_Transition_To_Gentle.obj-5f48a337c4fc424084e22f0ebf6eabb3.mesh"
+
+[deps]
+
+files=[ "res://.import/Sand_Side_Transition_To_Gentle.obj-5f48a337c4fc424084e22f0ebf6eabb3.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainBeach/Sand_Side_Transition_To_Gentle.obj"
+dest_files=[ "res://.import/Sand_Side_Transition_To_Gentle.obj-5f48a337c4fc424084e22f0ebf6eabb3.mesh", "res://.import/Sand_Side_Transition_To_Gentle.obj-5f48a337c4fc424084e22f0ebf6eabb3.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

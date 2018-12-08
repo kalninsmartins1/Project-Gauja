@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stone_Arch.obj-764f1c4af94813f40572b8778dbc5561.mesh"
+
+[deps]
+
+files=[ "res://.import/Stone_Arch.obj-764f1c4af94813f40572b8778dbc5561.mesh" ]
+
+source_file="res://Stone_Arch.obj"
+dest_files=[ "res://.import/Stone_Arch.obj-764f1c4af94813f40572b8778dbc5561.mesh", "res://.import/Stone_Arch.obj-764f1c4af94813f40572b8778dbc5561.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

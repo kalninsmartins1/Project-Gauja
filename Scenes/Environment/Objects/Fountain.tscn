@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Art/Models/Environment/Fountain/fountain.glb" type="PackedScene" id=1]
+[ext_resource path="res://Art/Models/Environment/Fountain/79.material" type="Material" id=2]
+
+[node name="Fountain" index="0" instance=ExtResource( 1 )]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="root" parent="." index="0"]
+
+transform = Transform( 12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="node_id42" parent="root" index="0"]
+
+transform = Transform( 2.61699e-008, 0, 0.146353, 0, 0.146353, 0, -0.146353, 0, 2.61699e-008, 0, 0, 0 )
+material/0 = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "material" ]
+
+

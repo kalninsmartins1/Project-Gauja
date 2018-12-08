@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Fence_Gate_1.obj-a5a2e7bc2a2d31a9251d3dd6fa846d85.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Fence_Gate_1.obj-a5a2e7bc2a2d31a9251d3dd6fa846d85.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Fence_Gate_1.obj"
+dest_files=[ "res://.import/Prop_Fence_Gate_1.obj-a5a2e7bc2a2d31a9251d3dd6fa846d85.mesh", "res://.import/Prop_Fence_Gate_1.obj-a5a2e7bc2a2d31a9251d3dd6fa846d85.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

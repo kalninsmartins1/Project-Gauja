@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Rock_1.obj-8143b05a50ce3ad27f01084aa0be8dab.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Rock_1.obj-8143b05a50ce3ad27f01084aa0be8dab.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Rock_1.obj"
+dest_files=[ "res://.import/Prop_Rock_1.obj-8143b05a50ce3ad27f01084aa0be8dab.mesh", "res://.import/Prop_Rock_1.obj-8143b05a50ce3ad27f01084aa0be8dab.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

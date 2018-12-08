@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Tree_Pine_1.obj-1999db30f3b6bd3314a2c881b927f75b.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Tree_Pine_1.obj-1999db30f3b6bd3314a2c881b927f75b.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Tree_Pine_1.obj"
+dest_files=[ "res://.import/Prop_Tree_Pine_1.obj-1999db30f3b6bd3314a2c881b927f75b.mesh", "res://.import/Prop_Tree_Pine_1.obj-1999db30f3b6bd3314a2c881b927f75b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

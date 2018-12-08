@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Waterfall_Top.obj-cf8bdac67b077f677fde3c11629c3382.mesh"
+
+[deps]
+
+files=[ "res://.import/Waterfall_Top.obj-cf8bdac67b077f677fde3c11629c3382.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainCliff/Waterfall_Top.obj"
+dest_files=[ "res://.import/Waterfall_Top.obj-cf8bdac67b077f677fde3c11629c3382.mesh", "res://.import/Waterfall_Top.obj-cf8bdac67b077f677fde3c11629c3382.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

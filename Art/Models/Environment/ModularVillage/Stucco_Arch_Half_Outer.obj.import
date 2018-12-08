@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stucco_Arch_Half_Outer.obj-3cd5abbebc68db3ca2ba5e708d681d11.mesh"
+
+[deps]
+
+files=[ "res://.import/Stucco_Arch_Half_Outer.obj-3cd5abbebc68db3ca2ba5e708d681d11.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Stucco_Arch_Half_Outer.obj"
+dest_files=[ "res://.import/Stucco_Arch_Half_Outer.obj-3cd5abbebc68db3ca2ba5e708d681d11.mesh", "res://.import/Stucco_Arch_Half_Outer.obj-3cd5abbebc68db3ca2ba5e708d681d11.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

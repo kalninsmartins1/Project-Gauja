@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Stone_Curb_1.obj-a4589cdf3840ac2d9d485c83b58f8da1.mesh"
+
+[deps]
+
+files=[ "res://.import/Stone_Curb_1.obj-a4589cdf3840ac2d9d485c83b58f8da1.mesh" ]
+
+source_file="res://Stone_Curb_1.obj"
+dest_files=[ "res://.import/Stone_Curb_1.obj-a4589cdf3840ac2d9d485c83b58f8da1.mesh", "res://.import/Stone_Curb_1.obj-a4589cdf3840ac2d9d485c83b58f8da1.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

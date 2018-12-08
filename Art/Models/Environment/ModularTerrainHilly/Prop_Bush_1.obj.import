@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Bush_1.obj-d0120da7d10a15fbcdcdce8c12752f15.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Bush_1.obj-d0120da7d10a15fbcdcdce8c12752f15.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Bush_1.obj"
+dest_files=[ "res://.import/Prop_Bush_1.obj-d0120da7d10a15fbcdcdce8c12752f15.mesh", "res://.import/Prop_Bush_1.obj-d0120da7d10a15fbcdcdce8c12752f15.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

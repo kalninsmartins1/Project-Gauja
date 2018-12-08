@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Flower_Tulip.obj-5bc67e6a6608002d764719828a178b75.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Flower_Tulip.obj-5bc67e6a6608002d764719828a178b75.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Flower_Tulip.obj"
+dest_files=[ "res://.import/Prop_Flower_Tulip.obj-5bc67e6a6608002d764719828a178b75.mesh", "res://.import/Prop_Flower_Tulip.obj-5bc67e6a6608002d764719828a178b75.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

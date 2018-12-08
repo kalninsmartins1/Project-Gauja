@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wall_Prop_Sign_1.obj-c5e37aa832c38ba813ed902814ba91ad.mesh"
+
+[deps]
+
+files=[ "res://.import/Wall_Prop_Sign_1.obj-c5e37aa832c38ba813ed902814ba91ad.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Wall_Prop_Sign_1.obj"
+dest_files=[ "res://.import/Wall_Prop_Sign_1.obj-c5e37aa832c38ba813ed902814ba91ad.mesh", "res://.import/Wall_Prop_Sign_1.obj-c5e37aa832c38ba813ed902814ba91ad.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

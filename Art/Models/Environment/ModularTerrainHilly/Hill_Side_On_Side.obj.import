@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hill_Side_On_Side.obj-e8ad4c466fdbcf8198c444e188a74f44.mesh"
+
+[deps]
+
+files=[ "res://.import/Hill_Side_On_Side.obj-e8ad4c466fdbcf8198c444e188a74f44.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Hill_Side_On_Side.obj"
+dest_files=[ "res://.import/Hill_Side_On_Side.obj-e8ad4c466fdbcf8198c444e188a74f44.mesh", "res://.import/Hill_Side_On_Side.obj-e8ad4c466fdbcf8198c444e188a74f44.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Branch_2.obj-8b2c6b5bd1278c0d9f768691daba6adb.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Branch_2.obj-8b2c6b5bd1278c0d9f768691daba6adb.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Prop_Branch_2.obj"
+dest_files=[ "res://.import/Prop_Branch_2.obj-8b2c6b5bd1278c0d9f768691daba6adb.mesh", "res://.import/Prop_Branch_2.obj-8b2c6b5bd1278c0d9f768691daba6adb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

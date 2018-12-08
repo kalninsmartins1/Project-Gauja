@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wall_Prop_Door_Ornate.obj-3605e49ac7b7a69e43df2488eb14deec.mesh"
+
+[deps]
+
+files=[ "res://.import/Wall_Prop_Door_Ornate.obj-3605e49ac7b7a69e43df2488eb14deec.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularVillage/Wall_Prop_Door_Ornate.obj"
+dest_files=[ "res://.import/Wall_Prop_Door_Ornate.obj-3605e49ac7b7a69e43df2488eb14deec.mesh", "res://.import/Wall_Prop_Door_Ornate.obj-3605e49ac7b7a69e43df2488eb14deec.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )

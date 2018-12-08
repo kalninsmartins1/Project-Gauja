@@ -1,0 +1,17 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Path_Corner_Inner_1x1.obj-15b6e1a9e5db30dd20fcc24b45bbdcd3.mesh"
+
+[deps]
+
+files=[ "res://.import/Path_Corner_Inner_1x1.obj-15b6e1a9e5db30dd20fcc24b45bbdcd3.mesh" ]
+
+source_file="res://Art/Models/Environment/ModularTerrainHilly/Path_Corner_Inner_1x1.obj"
+dest_files=[ "res://.import/Path_Corner_Inner_1x1.obj-15b6e1a9e5db30dd20fcc24b45bbdcd3.mesh", "res://.import/Path_Corner_Inner_1x1.obj-15b6e1a9e5db30dd20fcc24b45bbdcd3.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
