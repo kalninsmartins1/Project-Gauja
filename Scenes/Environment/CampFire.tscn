@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Art/Models/Environment/CampFire/Wood.dae" type="PackedScene" id=1]
+[ext_resource path="res://Art/Models/Environment/CampFire/Material.material" type="Material" id=2]
+
+[node name="CampFire" index="0" instance=ExtResource( 1 )]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="Cylinder.003" parent="." index="0"]
+
+transform = Transform( 0.0161583, -0.681578, 0.0174932, -0.105551, -0.0739515, 0.0321601, -0.0264183, -0.121411, -0.117792, 0, 0, 0 )
+material/0 = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "material" ]
+
+
