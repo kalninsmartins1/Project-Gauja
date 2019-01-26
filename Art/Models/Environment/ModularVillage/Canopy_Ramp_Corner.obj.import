@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Canopy_Ramp_Corner.obj-931c6bf78b86b117a676d2eaa0eb8
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

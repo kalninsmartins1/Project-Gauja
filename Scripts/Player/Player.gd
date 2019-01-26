@@ -42,11 +42,11 @@ func isAlive():
 	return _stats.isAlive()
 
 func getProfileTemplate():
-	return _profileTemplate	
+	return _profileTemplate
 
 func getId():
 	return _id
-	
+
 func getEquipedItemId(itemType):
 	return _equipedItemIds[itemType]
 
@@ -69,7 +69,7 @@ func setMoveDirection(direction):
 func setRespawnPosition(position):
 	_respawnPosition = position
 	pass
-	
+
 func moveToPosition(path):
 	_aiPath = path
 	_isMovingToPosition = true
@@ -123,18 +123,18 @@ func castSkill(skillId):
 				_stats.healMana(_manaRecharge)
 				_tween.interpolate_callback(self, _potionRechargeTime, "_onPotionRechargeFinished")
 				_tween.start()
-				_isTurnFinished = false				
+				_isTurnFinished = false
 	pass
 
 func _isMoving(direction):
 	return direction.length_squared() > 0
-	
+
 func _despawn():
 	set_visible(false)
-	_stats.consumeMana(_stats.getMana())	
+	_stats.consumeMana(_stats.getMana())
 	pass
-	
-func _moveTowardsPosition(targetPosition, maxDistance):	
+
+func _moveTowardsPosition(targetPosition, maxDistance):
 	var curPosition = get_global_transform().origin
 	var toTarget = targetPosition - curPosition
 	var hasArrived = false
@@ -144,7 +144,7 @@ func _moveTowardsPosition(targetPosition, maxDistance):
 	else:
 		_direction = Vector3(0, 0, 0)
 		hasArrived = true
-		
+
 	return hasArrived
 
 func _onPotionRechargeFinished():
@@ -154,13 +154,13 @@ func _onPotionRechargeFinished():
 
 func _shootFireball(target):
 	var fireball = preload("res://Scenes/fireball.scn").instance()
-	var hasEnoughMana = _stats.consumeMana(fireball.getManaConsumption())	
+	var hasEnoughMana = _stats.consumeMana(fireball.getManaConsumption())
 	if(hasEnoughMana):
 		var startTransform = get_node("Armature/shootPosition").get_global_transform()
 		fireball.set_global_transform(startTransform)
 		fireball.connect("onDestroyed", self, "_attackFinished")
 		_playerParty.get_parent().add_child(fireball)
-	
+
 		var toTarget = target.get_global_transform().origin - startTransform.origin
 		fireball.set_linear_velocity(toTarget.normalized() * fireball.getShootSpeed())
 		fireball.add_collision_exception_with(self)
@@ -173,7 +173,7 @@ func _attackFinished():
 	_isTurnFinished = true
 	pass
 
-func _ready():	
+func _ready():
 	_animationTree.set_active(true)
 	_stats.connect("onHealthChanged", self, "_onHealthChanged")
 	_stats.connect("onManaChanged", self, "_onManaChanged")
@@ -186,22 +186,22 @@ func _onHealthChanged(newAmount, delta):
 func _onManaChanged(newAmount, delta):
 	emit_signal("onManaChanged", newAmount, delta)
 	pass
-	
+
 func _finishedMovingToPosition():
-	_aiPath = null	
+	_aiPath = null
 	_isMovingToPosition = false
 	emit_signal("onMovePositionReached", self)
 	pass
 
 func _physics_process(delta):
-	
+
 	if _isFallowing:
-		_moveTowardsPosition(_fallowTarget.get_global_transform().origin, _fallowDistance)		
-			
+		_moveTowardsPosition(_fallowTarget.get_global_transform().origin, _fallowDistance)
+
 	if _isMovingToPosition and _aiPath.size() > 0:
 		if _moveTowardsPosition(_aiPath[0], 0.5):
 			_aiPath.remove(0)
-		
+
 		if _aiPath.size() == 0:
 			_finishedMovingToPosition()
 
@@ -219,9 +219,9 @@ func _physics_process(delta):
 		# Play idle animation
 		_animationTree.transition_node_set_current(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_IDLE_ID)
 	pass
-	
-	
-	
+
+
+
 
 
 

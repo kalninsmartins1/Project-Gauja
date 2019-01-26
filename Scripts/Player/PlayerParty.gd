@@ -45,12 +45,12 @@ func getActiveEnemy():
 
 func getPartyType():
 	return GameConsts.PartyType.PLAYER
-	
+
 func isInBattle():
 	return _isInBattle
 
 func hasItem(itemId):
-	return _inventory.has(itemId)	
+	return _inventory.has(itemId)
 
 func getTarget():
 	return _battleManager.getTarget()
@@ -75,7 +75,7 @@ func findClosestPlayer(position):
 	return keyPlayer
 
 func startDialog(dialog):
-	emit_signal("onStartDialog", dialog)	
+	emit_signal("onStartDialog", dialog)
 	_isHandlingInput = false
 	pass
 
@@ -92,12 +92,12 @@ func onQuestCompleted(quest):
 
 func onHasTurn(player):
 	_hasTurn = true
-	_setActivePlayer(player)		
+	_setActivePlayer(player)
 	pass
 
 func onBattleStarted(enemy):
-	_isInBattle = true	
-	
+	_isInBattle = true
+
 	_preparePlayersForBattle(enemy)
 	pass
 
@@ -112,7 +112,7 @@ func onEnemyDestroyed(enemyType):
 			quest.collect()
 			emit_signal("onActiveQuestUpdated", quest)
 	pass
-	
+
 func onBattleEnded(hasWon, loot):
 	_isInBattle = false
 	_hasTurn = false
@@ -124,7 +124,7 @@ func onBattleEnded(hasWon, loot):
 		emit_signal("onLootReceived", loot)
 		for itemId in loot:
 			_addInventoryItem(itemId)
-	emit_signal("onBattleEnded")	
+	emit_signal("onBattleEnded")
 	_startFallowingActivePlayer(_activePlayer.getId())
 	pass
 
@@ -161,24 +161,24 @@ func _onDialogClosed():
 	emit_signal("onDialogClosed")
 	pass
 
-func _preparePlayersForBattle(enemy):	
+func _preparePlayersForBattle(enemy):
 	_activePlayer.lookAt(enemy.get_global_transform().origin)
 	_activePlayer.setMoveDirection(Vector3(0, 0, 0))
-	
+
 	if _players.size() == 1:
 		emit_signal("onBattleStarted")
 	else:
-		var activePlayerTransform = _activePlayer.get_global_transform()	
-		var activePlayerPosition = activePlayerTransform.origin	
+		var activePlayerTransform = _activePlayer.get_global_transform()
+		var activePlayerPosition = activePlayerTransform.origin
 		var leftPosition = activePlayerPosition - activePlayerTransform.basis.x * _fallowDistance
 		var rightPosition = activePlayerPosition + activePlayerTransform.basis.x * _fallowDistance
 		var availablePositions = [leftPosition, rightPosition]
-		
+
 		var index = 0
 		for player in _players:
 			var playerId = player.getId()
 			if playerId != _activePlayer.getId():
-				var path = _navigationManager.get_simple_path(player.get_global_transform().origin, availablePositions[index])				
+				var path = _navigationManager.get_simple_path(player.get_global_transform().origin, availablePositions[index])
 				player.stopFallow()
 				player.moveToPosition(path)
 				_waitingForPlayers.append(playerId)
@@ -199,7 +199,7 @@ func _addInventoryItem(itemId):
 func _initPlayers():
 	var _previousPlayer = null
 	var index = 0
-	
+
 	for playerTemplate in _playerTemplates:
 		var player = playerTemplate.instance()
 		player.setId(index)
@@ -210,19 +210,19 @@ func _initPlayers():
 		_players.append(player)
 		_playerUI.addCharacterProfile(player)
 		_playerUI.connect("onActivePlayerSwitchRequest", self, "_onActivePlayerSwitchRequest")
-		
+
 		if index == 0:
 			_activePlayer = player
 			_playerUI.onActivePlayerChanged(player.getId())
 		else:
 			player.startFallow(_previousPlayer, _fallowDistance)
 		_previousPlayer = player
-		
+
 		index += 1
 	pass
 
 func _onPlayerHealthChanged(health, delta):
-	if health <= 0:		
+	if health <= 0:
 		if !_isAnyAlive():
 			emit_signal("onPartyLost", getPartyType())
 			_tween.interpolate_callback(self, _respawnTime, "_respawnParty")
@@ -236,7 +236,7 @@ func _respawnParty():
 
 func _startFallowingActivePlayer(playerId):
 	var inactivePlayerList = []
-		
+
 	# Set new active player
 	for player in _players:
 		if player.getId() == playerId:
@@ -244,7 +244,7 @@ func _startFallowingActivePlayer(playerId):
 			player.stopFallow()
 		else:
 			inactivePlayerList.append(player)
-	
+
 	# Make inactive players fallow the new active player
 	var previousPlayer = null
 	for player in inactivePlayerList:
@@ -252,15 +252,15 @@ func _startFallowingActivePlayer(playerId):
 			player.startFallow(_activePlayer, _fallowDistance)
 		else:
 			player.startFallow(previousPlayer, _fallowDistance)
-		
+
 		previousPlayer = player
 	pass
 
 func _playerFinishedTurn(player):
 	if _isInBattle:
-		emit_signal("onTurnFinished")		
+		emit_signal("onTurnFinished")
 	pass
-	
+
 func _onPlayerReachedPosition(player):
 	if _isInBattle:
 		var enemy = _battleManager.getActiveEnemy()
@@ -274,15 +274,15 @@ func _onActivePlayerSwitchRequest(playerId):
 	if !_isInBattle:
 		_startFallowingActivePlayer(playerId)
 		var newActivePlayer = _findPlayerById(playerId)
-		_setActivePlayer(newActivePlayer)		
+		_setActivePlayer(newActivePlayer)
 	pass
 
 func _process(delta):
 	if _isHandlingInput:
 		_handleInput()
 	pass
-	
-func _handleInput():	
+
+func _handleInput():
 
 	# Handle battle skills
 	if _hasTurn:
@@ -294,17 +294,17 @@ func _handleInput():
 			_activePlayer.castSkill(GameConsts.Skill.POTION_MP)
 
 	if !_isInBattle:
-		
+
 		if Input.is_action_just_released("open_inventory"):
 			emit_signal("onRequestInventoryOpen")
 
 		if Input.is_action_just_released("open_quests"):
 			emit_signal("onRequestQuestPanelToggle")
-		
+
 		# Handle character movement
 		var direction = Vector3(0, 0, 0)
 		var forward = Vector3(0, 0, 1)
-		
+
 		if Input.is_action_pressed("move_forward"):
 			direction += -forward
 		if Input.is_action_pressed("move_backwards"):
@@ -313,6 +313,6 @@ func _handleInput():
 			direction += Vector3(-1, 0, 0)
 		if Input.is_action_pressed("move_right"):
 			direction += Vector3(1, 0, 0)
-		
+
 		_activePlayer.setMoveDirection(direction)
 	pass

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Path_Steps_Grass_Edge_Top.obj-f1c1b7134a649a0d54f0d3
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

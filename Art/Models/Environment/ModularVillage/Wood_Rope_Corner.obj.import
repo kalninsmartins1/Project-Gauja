@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wood_Rope_Corner.obj-e1553ff3ca3f369e6b2f67e7f72e2ce
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Fence_Post_1.obj-ddd10cea48d57f8773753cd63d5d28
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

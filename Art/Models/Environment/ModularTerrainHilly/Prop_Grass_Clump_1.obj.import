@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Grass_Clump_1.obj-9748c3451c13cb1a5bfcfcf2f982d
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

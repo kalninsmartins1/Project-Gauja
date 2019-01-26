@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Roof_Convex_Corner_Inner.obj-1d80c8caf4cfcb8400b4fad
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

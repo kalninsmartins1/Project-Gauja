@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Hill_Side_Transition_To_Gentle.obj-f0873783e10c21cd0
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

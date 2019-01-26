@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Stump.obj-1376d74c07cff7982bcb485d843f3f58.mesh
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

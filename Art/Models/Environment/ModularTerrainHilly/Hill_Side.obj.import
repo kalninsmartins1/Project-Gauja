@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Hill_Side.obj-9c5c6179fdf9fe2335b2e7049b0b1165.mesh"
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

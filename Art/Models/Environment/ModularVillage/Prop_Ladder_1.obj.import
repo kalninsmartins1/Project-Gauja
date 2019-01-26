@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Ladder_1.obj-fa81137ebab1a5d0616b00228937ef22.m
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

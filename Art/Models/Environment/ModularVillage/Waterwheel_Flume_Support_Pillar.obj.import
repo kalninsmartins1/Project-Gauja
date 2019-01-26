@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Waterwheel_Flume_Support_Pillar.obj-9cb3dbdc8b17d597
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

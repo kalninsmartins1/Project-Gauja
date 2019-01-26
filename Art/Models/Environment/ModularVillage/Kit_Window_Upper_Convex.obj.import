@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Kit_Window_Upper_Convex.obj-3fc717ea8fd6d614411383ab
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

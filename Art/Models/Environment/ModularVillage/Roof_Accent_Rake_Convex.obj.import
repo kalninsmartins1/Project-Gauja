@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Roof_Accent_Rake_Convex.obj-da76248165008e323bd83d35
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

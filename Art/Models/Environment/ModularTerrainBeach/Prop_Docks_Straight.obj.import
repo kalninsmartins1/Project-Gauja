@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Docks_Straight.obj-a065db406389a3722dd7a591d689
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

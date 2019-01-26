@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Path_Hill_Sharp_Center.obj-540a6dffe78a060c8ee5c7a12
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Rock_3.obj-8161fc5d593a6c0ded5cb3f0ecf171b1.mes
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

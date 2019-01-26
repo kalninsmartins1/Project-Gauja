@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Path_Steps_Edge.obj-5f219f9a40872fa55638ac943320c986
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

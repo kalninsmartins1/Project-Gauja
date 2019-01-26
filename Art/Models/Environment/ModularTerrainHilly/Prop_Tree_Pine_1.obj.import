@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Tree_Pine_1.obj-1999db30f3b6bd3314a2c881b927f75
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Roof_Accent_Ridge_End.obj-c89de72f97c4646604e5d8e1b6
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

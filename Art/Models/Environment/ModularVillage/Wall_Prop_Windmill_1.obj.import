@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wall_Prop_Windmill_1.obj-17de213ae263c041b36706e401b
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

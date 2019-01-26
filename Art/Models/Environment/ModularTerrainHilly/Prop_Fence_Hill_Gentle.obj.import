@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Fence_Hill_Gentle.obj-c16bcfb30acef92ae77347c84
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

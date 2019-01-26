@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Branch_3.obj-90e0ddbeed490f53bb8e81daa1ec271f.m
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

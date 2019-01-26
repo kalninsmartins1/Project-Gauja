@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Waterwheel_Flume_End.obj-d08ac28121ae2f1e5e23885039d
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

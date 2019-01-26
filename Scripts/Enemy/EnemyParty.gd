@@ -29,14 +29,14 @@ func getPartyType():
 	return GameConsts.PartyType.ENEMY
 
 func getActiveEnemy():
-	return _enemies[_activeIndex]    
+	return _enemies[_activeIndex]
 
 func isPartyFull():
 	return _enemies.size() > GameConsts.MAX_PARTY_COUNT
 
 func onHasTurn(enemy):
-	_hasTurn = true	
-	enemy.setHasTurn(true)		
+	_hasTurn = true
+	enemy.setHasTurn(true)
 	var enemyIndex = _enemies.find(enemy)
 	_activeIndex = enemyIndex
 	pass
@@ -52,14 +52,14 @@ func onBattleEnded(hasWon):
 	pass
 
 func addEnemy(enemy):
-	_enemies.append(enemy)	
+	_enemies.append(enemy)
 
 	enemy.connect("onTurnFinished", self, "_onTurnFinished")
-	enemy.connect("onHealthChanged", self, "_onHealthChanged") 	
+	enemy.connect("onHealthChanged", self, "_onHealthChanged")
 	if _enemies.size() > 1:
 		_moveToFreeBattlePosition(enemy) # This is not the first enemy
 		enemy.connect("onDestinationReached", self, "_onBattlePositionReached")
-	else:		
+	else:
 		enemy.connect("onFinishedRotating", self, "_onEnemyFinishedRotating")
 		_onBattlePositionReached(enemy)
 	pass
@@ -90,15 +90,15 @@ func _onBattlePositionReached(enemy):
 	pass
 
 func _initBattlePositions():
-	var activeEnemyTransform = _enemies[_activeIndex].get_global_transform()	
-	var activeEnemyPosition = activeEnemyTransform.origin	
-	
+	var activeEnemyTransform = _enemies[_activeIndex].get_global_transform()
+	var activeEnemyPosition = activeEnemyTransform.origin
+
 	_leftPosition = activeEnemyPosition - activeEnemyTransform.basis.x * _distanceBetweenEnemies
 	_rightPosition = activeEnemyPosition + activeEnemyTransform.basis.x * _distanceBetweenEnemies
 	_isBattlePositionsSet = true
 	pass
 
-func _moveToFreeBattlePosition(enemy):	
+func _moveToFreeBattlePosition(enemy):
 	if _isLeftPositionFree:
 		enemy.setDestination(_leftPosition)
 		_isLeftPositionFree = false
@@ -107,7 +107,7 @@ func _moveToFreeBattlePosition(enemy):
 	pass
 
 func _onTurnFinished():
-	emit_signal("onTurnFinished")	
+	emit_signal("onTurnFinished")
 	pass
 
 func _removeNotAliveEnemies():
@@ -117,17 +117,17 @@ func _removeNotAliveEnemies():
 		if !enemy.isAlive():
 			notAliveIndexes.append(index)
 		index += 1
-	
+
 	for removeIndex in notAliveIndexes:
 		_enemies.remove(removeIndex)
 	pass
 
 
 func _onHealthChanged(health, delta):
-	if health <= 0:		
+	if health <= 0:
 		if _enemies.size() == 1:
 			_lootTable = _enemies[0].getLootTable()
-			emit_signal("onPartyLost", getPartyType())	
-		
+			emit_signal("onPartyLost", getPartyType())
+
 		_removeNotAliveEnemies()
 	pass

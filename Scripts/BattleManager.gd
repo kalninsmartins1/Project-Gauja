@@ -32,7 +32,7 @@ func initiateBattle(var playerParty, var enemy):
 		_enemyParty.onBattleStarted(self)
 		_enemyParty.connect("onTurnFinished", self, "_onFinishedTurn")
 		_enemyParty.connect("onPartyLost", self, "_partyLost")
-		_enemyParty.addEnemy(enemy)	
+		_enemyParty.addEnemy(enemy)
 
 		_calculateNextTurn()
 		_isBattleActive = true
@@ -65,7 +65,7 @@ func _calculateNextTurn():
 	else:
 		numSpeedSteps = GameConsts.MAX_BATTLE_SPEED - playerSpeed
 		_setCurrentTurn(Turn.PLAYER)
-	
+
 	_enemyParty.addActiveSpeed(numSpeedSteps)
 	_playerParty.addActiveSpeed(numSpeedSteps)
 	if _currentTurn == Turn.PLAYER:
@@ -88,13 +88,13 @@ func _partyLost(partyType):
 		GameConsts.PartyType.ENEMY:
 			_endBattle(true)
 	pass
-	
+
 func _endBattle(playerWon):
 
 	var lootArray = null
 	if(playerWon):
 		lootArray = _calculateLoot()
-				
+
 	_playerParty.onBattleEnded(playerWon, lootArray)
 	_enemyParty.onBattleEnded(!playerWon)
 	_enemyParty.queue_free() # This is how you release instanced script memory
@@ -106,11 +106,11 @@ func _getRandomTurn():
 	randomize()
 	var turn = randi() % 2 # Random value 0 or 1
 	return turn
-	
-func _calculateLoot():	
+
+func _calculateLoot():
 	var loot = []
 	var table = _enemyParty.getLootTable()
-	
+
 	for lootEntryTemplate in table:
 		var lootEntry = lootEntryTemplate.instance()
 		var itemId = lootEntry.getItemId()

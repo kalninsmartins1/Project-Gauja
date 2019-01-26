@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Cliff_Mid_Corner_Outer_Lg.obj-e87619c11808ef7866dc36
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

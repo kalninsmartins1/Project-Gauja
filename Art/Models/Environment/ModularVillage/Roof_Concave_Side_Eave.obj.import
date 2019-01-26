@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Roof_Concave_Side_Eave.obj-15e794d384fb2555e5656d0df
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

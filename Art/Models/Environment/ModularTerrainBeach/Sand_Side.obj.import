@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Sand_Side.obj-3305ae584cd69a238343251dabe64fa1.mesh"
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

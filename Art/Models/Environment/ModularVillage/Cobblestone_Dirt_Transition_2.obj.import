@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Cobblestone_Dirt_Transition_2.obj-ef271a0a9d4f40cc4e
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

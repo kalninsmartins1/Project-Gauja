@@ -1,7 +1,7 @@
 extends Spatial
 
 onready var _animationTree = get_node("AnimationTreePlayer")
-onready var _physicsBody = get_node("KinematicBody") 
+onready var _physicsBody = get_node("KinematicBody")
 onready var _playerParty = get_node("../PlayerParty")
 
 export(Array, String) var _defaultDialog
@@ -20,7 +20,7 @@ func _ready():
 func _onMouseEvent(camera, event, click_position, click_normal, shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
 		var activePlayer = _playerParty.getActivePlayer()
-		var toPlayer = activePlayer.get_global_transform().origin - get_global_transform().origin 
+		var toPlayer = activePlayer.get_global_transform().origin - get_global_transform().origin
 		if toPlayer.length_squared() < _interactDistance * _interactDistance:
 			_onInteract()
 	pass
@@ -31,16 +31,16 @@ func _onDialogClosed():
 		_activeQuest.queue_free()
 		_activeQuest = null
 		_isFinishingQuest = false
-		
+
 	elif _activeQuest != null:
 		_playerParty.startQuest(_activeQuest)
 	pass
 
 func _onInteract():
 	if _activeQuest != null:
-		
+
 		# A quest is currently active
-		_handleActiveQuest()		
+		_handleActiveQuest()
 	else:
 		_tryToBeginNewQuest()
 	pass
@@ -60,13 +60,13 @@ func _handleActiveQuest():
 func _tryToBeginNewQuest():
 	var startQuest = _findNextNotCompletedQuest()
 	if startQuest != null:
-		
+
 		# We have uncompleted quests
 		_activeQuest = startQuest.instance()
 		_activeQuest.setId(startQuest.get_path().hash())
 		_playerParty.startDialog(_activeQuest.getStartDialog())
 	else:
-	
+
 		# All quests have been completed
 		_playerParty.startDialog(_defaultDialog)
 	pass

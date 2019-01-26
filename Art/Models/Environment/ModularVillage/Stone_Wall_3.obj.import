@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Stone_Wall_3.obj-7f04af3a4448be7fb0def0e7808f50ae.me
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

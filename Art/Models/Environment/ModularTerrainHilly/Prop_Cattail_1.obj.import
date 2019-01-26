@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Cattail_1.obj-c36e38086f266afd9f2f72cda550164b.
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

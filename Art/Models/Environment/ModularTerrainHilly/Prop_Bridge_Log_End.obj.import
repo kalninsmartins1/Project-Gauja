@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Bridge_Log_End.obj-793dea7e531dafe15e60cc3feb35
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

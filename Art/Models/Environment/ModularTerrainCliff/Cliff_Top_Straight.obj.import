@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Cliff_Top_Straight.obj-29640ac128605de432a1dbfe0dc1c
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

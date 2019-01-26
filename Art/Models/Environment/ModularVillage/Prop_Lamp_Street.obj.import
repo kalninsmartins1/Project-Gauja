@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Lamp_Street.obj-d68763f381d75823cc323a3f106cc5e
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

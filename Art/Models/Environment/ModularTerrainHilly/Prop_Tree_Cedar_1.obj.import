@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Tree_Cedar_1.obj-ed89abf46133d7a35212dd431f6857
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

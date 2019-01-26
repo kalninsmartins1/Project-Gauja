@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Well_Dirt.obj-b8c1dd51a482b8d92d970aadad801230.
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

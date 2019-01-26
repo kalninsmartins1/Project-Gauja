@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Stone_Pillar_Base.obj-38aefdb9e4f929af299886b9c161de
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

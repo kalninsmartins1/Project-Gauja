@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Cliff_Mid_Waterfall.obj-92518a6376777126b22e39b03159
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

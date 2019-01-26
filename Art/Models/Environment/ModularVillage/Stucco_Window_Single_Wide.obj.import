@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Stucco_Window_Single_Wide.obj-9c9b08ad5c605cf504cdef
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

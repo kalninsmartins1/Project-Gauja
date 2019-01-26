@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Roof_Concave_Corner_Outer_Eave.obj-8dcce75d3a4ff2b85
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

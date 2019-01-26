@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Mushroom_1.obj-e93411333692bdec3e8c153e9911f5b4
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wood_Railing_Straight.obj-a423a4e50c095ace7c0658f47a
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

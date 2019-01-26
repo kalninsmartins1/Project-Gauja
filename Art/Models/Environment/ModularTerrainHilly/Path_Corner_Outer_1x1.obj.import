@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Path_Corner_Outer_1x1.obj-ee662a8ca0e61b7b1b749a95c7
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

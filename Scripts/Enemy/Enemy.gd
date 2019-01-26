@@ -34,7 +34,7 @@ var _isCurrentlyAttacking = false
 var _isTakingDamage = false
 
 # Public Interface
-	
+
 	# Signals
 
 signal onTurnFinished
@@ -55,7 +55,7 @@ func getLootTable():
 
 func isCurrentlyAttacking():
 	return _isCurrentlyAttacking
-	
+
 func isTakingDamage():
 	return _isTakingDamage
 
@@ -69,7 +69,7 @@ func hasTurn():
 	return _hasTurn
 
 func getActiveRadius():
-	return _activeRadius	
+	return _activeRadius
 
 func getAttackAnimLength():
 	var animName = _animationTree.node_get_input_source(GameConsts.ANIM_TRANSITION_NODE, GameConsts.ANIM_ATTACK_ID)
@@ -77,11 +77,11 @@ func getAttackAnimLength():
 	return animation.length
 
 func isMoving():
-	return _isMoving	
+	return _isMoving
 
 func isInBattle():
 	return _isInBattle
-	
+
 func isAlive():
 	return _stats.isAlive()
 
@@ -105,12 +105,12 @@ func setDestination(position):
 	sleeping = false # Make sure enemy is waken up !
 	pass
 
-func setCurPosAsBattlePos():	
+func setCurPosAsBattlePos():
 	_battlePosition = get_global_transform().origin
 	pass
 
 func onBattleEnded():
-	_isInBattle = false	
+	_isInBattle = false
 	_hasTurn = false
 	_isCurrentlyAttacking = false
 	_isTakingDamage = false
@@ -135,11 +135,11 @@ func playIdleAnimation():
 		var animation = _animationTree.animation_node_get_animation(animName)
 		animation.set_loop(true)
 	pass
-	
+
 func startRotationTween(var toTargetNormalized):
 	var targetAngle = -Vector2(0, 1).angle_to(toTargetNormalized)
 	var angleDiff = abs(abs(_currentAngle) - abs(targetAngle))
-	
+
 	if(angleDiff > 0):
 		var time = angleDiff/_rotationSpeed
 		_tweener.interpolate_property(self, "rotation", Vector3(0, _currentAngle, 0), Vector3(0, targetAngle, 0), time, Tween.TRANS_LINEAR, Tween.EASE_IN)
@@ -168,7 +168,7 @@ func _physics_process(delta):
 	var playerPos = player.get_global_transform().origin
 	var toPlayer =  playerPos - enemyPos
 	var isPlayerInBattleRadius = toPlayer.length_squared() <= _battleRadius*_battleRadius
-	
+
 	if isAlive() and player.isAlive() and _battleManager.canEnterBattle() and !_isInBattle and isPlayerInBattleRadius:
 		_isInBattle = true
 		_isMoving = false
@@ -177,11 +177,11 @@ func _physics_process(delta):
 	# Make sure we are really not moving
 	if(!_isMoving or _isTakingDamage):
 		set_linear_velocity(Vector3(0, 0, 0))
-	
+
 	_handleHealthBarPosition()
 	pass
 
-func _onHealthChanged(newValue, delta):	
+func _onHealthChanged(newValue, delta):
 	emit_signal("onHealthChanged", newValue, delta)
 
 	if !_stats.isAlive():
@@ -190,7 +190,7 @@ func _onHealthChanged(newValue, delta):
 	pass
 
 func _handleHealthBarPosition():
-	
+
 	_healthBar.rect_position = _camera.unproject_position(translation) - (_healthBar.rect_size/4) - Vector2(0, 20)
 	pass
 
@@ -251,7 +251,7 @@ func _setupAnimations():
 	_animationTree.set_active(true)
 	playIdleAnimation()
 	pass
-	
+
 func _onCollision(body):
 	if(body.name == "fireball"):
 		_isTakingDamage = true

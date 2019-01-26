@@ -15,3 +15,4 @@ dest_files=[ "res://.import/tree_snow.obj-45d9318dc15c3a15cf2089a2e3e71ca7.mesh"
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

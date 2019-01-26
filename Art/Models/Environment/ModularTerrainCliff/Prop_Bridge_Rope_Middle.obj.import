@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Bridge_Rope_Middle.obj-14228ef5898525cf5c285dd3
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Bush_3.obj-2570f86a92f3d1f8da1be2dd0942c710.mes
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Sand_Flat.obj-2d809db73f6ae21caa5727744fcb368d.mesh"
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Stone_Arch_Outer.obj-3173c686af28bd68870ce0bb93ae044
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

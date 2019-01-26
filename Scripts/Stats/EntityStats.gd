@@ -33,13 +33,13 @@ func healHealth(amount):
 	pass
 
 func takeDamage(damage):
-	healHealth(-damage) # Taking damage is same as healing negative amount	
+	healHealth(-damage) # Taking damage is same as healing negative amount
 	pass
 
 func revive():
 	healHealth(_maxHealth)
 	pass
-	
+
 func _ready():
 	_health = _maxHealth
 	_activeSpeed = _speed

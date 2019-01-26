@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Stone_Curb_2.obj-b762dd05608f260a6b1160d16378e690.me
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

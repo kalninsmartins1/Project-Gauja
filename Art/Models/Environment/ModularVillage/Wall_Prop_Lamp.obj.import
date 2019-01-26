@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wall_Prop_Lamp.obj-0d039237189a5db1ccbf34960674171f.
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

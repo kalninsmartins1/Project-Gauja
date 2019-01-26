@@ -35,7 +35,7 @@ func getRequiredAmount():
 
 func isCompleted():
 	return _curAmount == _requiredAmount
-	
+
 func setId(id):
 	_id = id
 	pass

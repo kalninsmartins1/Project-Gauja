@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Dirt_Fading_from_Gathered.obj-b2b188fc0ba31e77f9f58d
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

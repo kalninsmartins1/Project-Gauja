@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Sand_Side_Overlap_Side.obj-c9aeafccf1b31eccdd18b7893
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

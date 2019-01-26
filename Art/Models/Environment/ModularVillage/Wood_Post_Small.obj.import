@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wood_Post_Small.obj-8a1584d6e0b3ac7053477b33e36d14a0
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

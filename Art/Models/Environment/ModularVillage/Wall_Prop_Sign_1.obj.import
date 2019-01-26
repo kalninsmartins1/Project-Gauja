@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wall_Prop_Sign_1.obj-c5e37aa832c38ba813ed902814ba91a
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

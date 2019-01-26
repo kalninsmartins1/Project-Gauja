@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Sand_Side_Transition_From_Gentle.obj-ec2dce36b330140
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

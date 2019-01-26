@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Canopy_Side.obj-e224f11ba4d5866463c217bb8946a3df.mes
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

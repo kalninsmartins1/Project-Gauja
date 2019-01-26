@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wood_Steps_Stucco.obj-562d0ccf61b11314221bbfc165c525
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

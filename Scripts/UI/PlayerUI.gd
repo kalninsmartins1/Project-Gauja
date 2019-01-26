@@ -29,10 +29,10 @@ func addCharacterProfile(player):
 	profile.init(player, _tween)
 	profile.connect("onActivePlayerSwitchRequest", self, "_onActivePlayerSwitchRequest")
 	_characterProfiles.append(profile)
-	_playerProfilesContainer.add_child(profile)	
+	_playerProfilesContainer.add_child(profile)
 	pass
 
-func _ready():		
+func _ready():
 	_playerParty.connect("onRequestInventoryOpen", self, "_onRequestInventoryOpen")
 	_playerParty.connect("onBattleStarted", self, "_onPlayerEnterBattle")
 	_playerParty.connect("onBattleEnded", self, "_onPlayerExitBattle")

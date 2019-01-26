@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Prop_Barrel_1_Open.obj-ab25e420d11adb1347e69e845b1a2
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

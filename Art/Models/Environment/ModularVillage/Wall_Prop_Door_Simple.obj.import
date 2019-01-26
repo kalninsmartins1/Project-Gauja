@@ -15,3 +15,4 @@ dest_files=[ "res://.import/Wall_Prop_Door_Simple.obj-1a814be84c0c02f1b1c54c5dc9
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
