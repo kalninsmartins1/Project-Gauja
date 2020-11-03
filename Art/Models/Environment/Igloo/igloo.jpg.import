@@ -4,6 +4,10 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/igloo.jpg-8442438872b9bd683a6bd91ec1be830e.s3tc.stex"
 path.etc2="res://.import/igloo.jpg-8442438872b9bd683a6bd91ec1be830e.etc2.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
+}
 
 [deps]
 

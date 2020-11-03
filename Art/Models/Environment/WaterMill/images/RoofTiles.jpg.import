@@ -4,6 +4,10 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/RoofTiles.jpg-fb2d7eec3038943f8abbbbff54c3bc47.s3tc.stex"
 path.etc2="res://.import/RoofTiles.jpg-fb2d7eec3038943f8abbbbff54c3bc47.etc2.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
+}
 
 [deps]
 

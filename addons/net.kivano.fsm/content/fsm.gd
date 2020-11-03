@@ -241,13 +241,6 @@ func initHolderNodes():
 		transitionsNode.set_owner(get_tree().get_edited_scene_root());
 
 func createEmptyHolderNode():
-	if(self is Node2D):
-		return Node2D.new();
-	elif(self is Spatial):
-		return Spatial.new();
-	elif(self is Control):
-		return Control.new();
-	else:
 		return Node.new();
 
 
@@ -367,7 +360,7 @@ func removeConnection2TransitionFromState(inStateID, inTransitionID):
 func addTransitionBetweenStatesIDs(inSourceStateID, inTargetStateID, inTransitionID):
 	#assert: you should create transition from inspector first! (don't make a lot of sense to create it from code:
 	#you will need to implement custom transition logic anyway)
-	assert allTransitions.has(inTransitionID);
+	assert(allTransitions.has(inTransitionID));
 	var transitionNode = allTransitions[inTransitionID];
 	transitionNode.addSourceStateNode(statesNode.get_node(inSourceStateID));
 	transitionNode.setTargetStateNode(statesNode.get_node(inTargetStateID));
@@ -559,7 +552,7 @@ func _get_property_list():
 		{
             "hint": PROPERTY_HINT_ENUM,
             "usage": PROPERTY_USAGE_DEFAULT,
- 			"hint_string":statesListString,
+			"hint_string":statesListString,
             "name": INSP_INIT_STATE,
             "type": TYPE_STRING
         },

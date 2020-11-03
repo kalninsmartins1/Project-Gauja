@@ -26,7 +26,7 @@ Utils="*res://Scripts/Utility/Utils.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "net.kivano.fsm", "procedural_low_poly_env" )
+enabled=PoolStringArray( "net.kivano.fsm" )
 
 [gdnative]
 
